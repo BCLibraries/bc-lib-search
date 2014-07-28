@@ -66,7 +66,7 @@ def normalize(lc, bottom=False):
         return None
 
     if alpha and not (num or dec or c1alpha or c1num or c2alpha \
-                          or c2num or c3alpha or c3num):
+                              or c2num or c3alpha or c3num):
         if extra:
             return None
         if bottomout:
@@ -119,7 +119,6 @@ def normalize(lc, bottom=False):
 
 
 class LC(object):
-
     def __init__(self, callno):
         try:
             self.denormalized = callno.upper()

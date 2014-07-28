@@ -5,7 +5,8 @@ from scrapy.http.request import Request
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 import re
 
-class LibServicesSpider(CrawlSpider): 
+
+class LibServicesSpider(CrawlSpider):
     name = "LibServices"
     allowed_domains = ["bc.edu"]
     start_urls = ["http://bc.edu/libraries"]
@@ -23,16 +24,16 @@ class LibServicesSpider(CrawlSpider):
             for link in links:
                 r = Request(url=link.url, callback=self.parse_url)
                 r.meta.update(rule=n, link_text=link.text)  # store page's href text
-                r.meta.update(rule=n, link=response.url)    # store page's "parent"
+                r.meta.update(rule=n, link=response.url)  # store page's "parent"
                 yield rule.process_request(r)
-    
+
         # process reponse
         yield self.process_data(response)
 
     def process_data(self, response):
         sel = Selector(response)
         item = LibservicesItem()
-        
+
         if "link_text" in response.meta and "link" in response.meta:
             item["hrefTitle"] = self.makeTitle(response.meta["link_text"])
             item["refURL"] = response.meta["link"]
@@ -42,7 +43,8 @@ class LibServicesSpider(CrawlSpider):
         item["text"] = self.merge_text(sel.xpath('//text()').extract())
         return item
 
-    catchWords = ["function", "font-family", "/*", "var", "}"] # look into scrapy remove markup modules
+    catchWords = ["function", "font-family", "/*", "var", "}"]  # look into scrapy remove markup modules
+
     def merge_text(self, textList):
         temp = []
         for txt in textList:

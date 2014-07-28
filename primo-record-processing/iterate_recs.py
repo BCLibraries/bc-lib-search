@@ -1,109 +1,117 @@
 import os, json
-from pymarc import MARCReader
-from pymarc import marcxml
-from record import Record
 from pnx_to_json import PNXtoJSON
 from categorizer import Categorizer
-import xml.etree.cElementTree as ET # cElementTree vs. the slower ElementTree (same API)
+import xml.etree.cElementTree as ET  # cElementTree vs. the slower ElementTree (same API)
 import gzip
+import argparse
 
-class RecordIterator:	
-	def __init__(self, directory, saveDirectory, recordType, matchExp, languageMapperJSON=""):
-		"""
-			:type directory: basestring
-			:param directory: where to load files from
 
-			:type saveDirectory: basestring
-			:param saveDirectory: save file location
+class RecordIterator:
+    def __init__(self, src_dir, save_dir, record_type, match_exp, lang_map="", lcc_map=""):
+        """
+        :type src_dir: str
+        :param src_dir: where to load files from
 
-			:type recordType: basestring
-			:param recordType: whether input is Marc binary, MarcXML, or PNX
+        :type save_dir: str
+        :param save_dir: save file location
 
-			:type matchExp: basestring
-			:param matchExp: ????? IGNORE
+        :type record_type: str
+        :param record_type: whether input is Marc binary, MarcXML, or PNX
 
-			:type languageMapperJSON: dict
-			:param languageMapperJSON: maps Marc language codes in PNX
-		"""
-		self.saveDirectory = saveDirectory
-		self.directory = directory
-		self.categorizer = Categorizer('categories/lcc_flat.json') # for class look-up
-		self.languageMapper = json.load(open(languageMapperJSON)) if languageMapperJSON else None	
-		self.fileNumber = 0
-		self.recordType = recordType
-		self.matchExp = matchExp
+        :type match_exp: str
+        :param match_exp: ????? IGNORE
 
-	def run(self):
-		count = 0; data = []; saveNIncrements = 1000000
-		for mrcFilePath in self.getAllFiles(self.directory, self.matchExp):
-			#records = self.records(mrcFilePath)	# record iterator
-			#xml = []
-			
-			# caching parsed xml is much faster
-			#for i,record in enumerate(records):	
-			#	if i % 10000 == 0: print i
-			
-			# iterate through cached records	
-			print mrcFilePath
-			for records in self.chunk(gzip.GzipFile(fileobj=open(mrcFilePath, 'rb')), increments=50000):
-				for record in records:
-					if "pnx" in self.recordType.lower():
-						data.append(PNXtoJSON(record, self.categorizer, self.languageMapper))	
+        :type lang_map: str
+        :param lang_map: maps Marc language codes in PNX
 
-					count += 1
-					if count % 10000 == 0:
-						print str(count) + " records processed."
-				self.save(data)	
-				#print "Chunking..."
-		self.save(data)	# final write
+        :type  lcc_map: str
+        :param lcc_map: maps lcc range to taxonomy category
+        """
+        self.lcc_map = lcc_map
+        self.save_dir = save_dir
+        self.directory = src_dir
+        self.categorizer = Categorizer(lcc_map)  # for class look-up
+        self.lang_map = json.load(open(lang_map)) if lang_map else None
+        self.file_num = 0
+        self.rec_type = record_type
+        self.match_exp = match_exp
 
-	def records(self, mrcFilePath):
-		if "pnx" in self.recordType.lower():
-			return self.xmlSplit(gzip.GzipFile(fileobj=open(mrcFilePath, 'rb'))) # assumes gzipped file
+    def run(self):
+        count = 0
+        data = []
+        for marc_file_path in self.get_all_files(self.directory, self.match_exp):
+            # iterate through cached records
+            print marc_file_path
+            for records in self.chunk(gzip.GzipFile(fileobj=open(marc_file_path, 'rb')), increments=10000):
+                for record in records:
+                    if "pnx" in self.rec_type.lower():
+                        data.append(PNXtoJSON(record, self.categorizer, self.lang_map))
 
-	def xmlSplit(self, handle, separator=lambda x: x.startswith('<?xml')):
-		buff = []
-		for line in handle:
-			if separator(line):
-				if buff:
-					yield ''.join(buff)
-					buff[:] = []
-			buff.append(line)
-		yield ''.join(buff)
+                    count += 1
+                    if count % 10000 == 0:
+                        print str(count) + " records processed."
+                self.save(data)
+        self.save(data)  # final write
 
-	def chunk(self, handle, increments=50000):
-		data = []
-		#print "Chunking..."		
-		for i in self.xmlSplit(handle):
-			try: data.append(ET.fromstring(i))
-			except: print "Bad XML"
-			if len(data) == increments:
-				yield data
-				data[:] = []
-			if len(data) % 10000 == 0:
-				print str(len(data)) + " chunked."
-		yield data
+    def records(self, mrcFilePath):
+        if "pnx" in self.rec_type.lower():
+            return self.split_xml(gzip.GzipFile(fileobj=open(mrcFilePath, 'rb')))  # assumes gzipped file
 
-	def save(self, data):
-		with open(self.saveDirectory + str(self.fileNumber) + '.json', 'w+') as f:
-                        json.dump(data, f)
-                        print str(len(data)) + " records written.\n" + self.saveDirectory + str(self.fileNumber) + ".json write completed"	
-                        del data[:] # delete contents after write
-			self.fileNumber += 1
+    def split_xml(self, handle, separator=lambda x: x.startswith('<?xml')):
+        buff = []
+        for line in handle:
+            if separator(line):
+                if buff:
+                    yield ''.join(buff)
+                    buff[:] = []
+            buff.append(line)
+        yield ''.join(buff)
 
-	def getAllFiles(self, directory, file_extension=""):
-                """path of all files with given extension
-                   in the tree under a given directory
-                """
-                for root, dirs, files in os.walk(directory):
-                        for file in files:
-                                if file_extension in file:
-                                        yield os.path.join(root, file)
+    def chunk(self, handle, increments=50000):
+        data = []
+        for i in self.split_xml(handle):
+            try:
+                data.append(ET.fromstring(i))
+            except:
+                print "Bad XML"
+            if len(data) == increments:
+                yield data
+                data[:] = []
+            if len(data) % 10000 == 0:
+                print str(len(data)) + " chunked."
+        yield data
+
+    def save(self, data):
+        with open(self.save_dir + str(self.file_num) + '.json', 'w+') as f:
+            json.dump(data, f)
+            print str(len(data)) + " records written.\n" + self.save_dir + str(
+                self.file_num) + ".json write completed"
+            del data[:]  # delete contents after write
+            self.file_num += 1
+            exit(0)
+
+    def get_all_files(self, directory, file_extension=""):
+        """
+        path of all files with given extension
+        in the tree under a given directory
+        """
+        for root, dirs, files in os.walk(directory):
+            for file in files:
+                if file_extension in file:
+                    yield os.path.join(root, file)
 
 # Run
-if __name__=='__main__':
-	mrcDirectory = '../../data/split-marc/'
-	#r = RecordIterator(mrcDirectory, "./esPrimoRecords", "marc_binary", "mrc")
-	#r = RecordIterator('../../data/Marc_Binary/', './esPrimoRecords', 'TMP')
-	r = RecordIterator('../../data/Marc_Binary/', '../data/es/esPrimoRecords', recordType='pnx', matchExp='pnx', languageMapperJSON='language_mapping.json')
-	r.run()
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Convert MARC records to JSON for export to ElasticSearch')
+
+    parser.add_argument('--src', type=str, help='source directory')
+    parser.add_argument('--dest', type=str, help='destination directory')
+    parser.add_argument('--type', type=str, choices=['pnx'], help='file type')
+    parser.add_argument('--lang', type=str, help='language mapper file (JSON)')
+    parser.add_argument('--lcc', type=str, help='lcc mapping file (JSON)')
+
+    args = parser.parse_args()
+
+    r = RecordIterator(args.src, args.dest, record_type=args.type, match_exp=args.type, lang_map=args.lang,
+                       lcc_map=args.lcc)
+    r.run()
