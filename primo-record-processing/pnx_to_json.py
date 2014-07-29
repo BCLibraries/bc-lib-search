@@ -50,9 +50,6 @@ class PNXtoJSON(dict):
         # ISSN
         self["issn"] = self.get_field(xpath="./search/issn")
 
-        # Place of pub.
-        self["placeOfPub"] = self.get_field(xpath="./search/lsr09")
-
         # Name of pub.
         self["nameOfPub"] = self.get_field(xpath="./search/lsr08")
 

@@ -37,24 +37,17 @@ class RecordIterator:
         self.match_exp = match_exp
 
     def run(self):
-        count = 0
         data = []
         for marc_file_path in self.get_all_files(self.directory, self.match_exp):
             # iterate through cached records
             print marc_file_path
             for records in self.chunk(gzip.GzipFile(fileobj=open(marc_file_path, 'rb')), increments=10000):
                 for record in records:
-                    if "pnx" in self.rec_type.lower():
-                        data.append(PNXtoJSON(record, self.categorizer, self.lang_map))
-
-                    count += 1
-                    if count % 10000 == 0:
-                        print str(count) + " records processed."
+                    data.append(PNXtoJSON(record, self.categorizer, self.lang_map))
                 self.save(data)
         self.save(data)  # final write
 
     def records(self, marc_file_path):
-        if "pnx" in self.rec_type.lower():
             return self.split_xml(gzip.GzipFile(fileobj=open(marc_file_path, 'rb')))  # assumes gzipped file
 
     def split_xml(self, handle, separator=lambda x: x.startswith('<?xml')):
@@ -77,8 +70,6 @@ class RecordIterator:
             if len(data) == increments:
                 yield data
                 data[:] = []
-            if len(data) % 10000 == 0:
-                print str(len(data)) + " chunked."
         yield data
 
     def save(self, data):
