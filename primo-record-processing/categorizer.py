@@ -1,41 +1,101 @@
 import json
-import sys
-import bisect
+from interval_node import IntervalNode
+from category import Category
 
 
 class Categorizer:
-    def __init__(self, lcc_dir):
-        self.total_count = 0;
-        lcc_cat = json.load(open(lcc_dir))
-        self.lcc_cat = []
-        for e in lcc_cat:
-            self.lcc_cat.append((e["startNorm"], e["endNorm"], e))
-        self.lcc_cat.sort()
-        self.lower_bounds = [lower for lower, _, _ in self.lcc_cat]
-
     """
-    def categorize(self, normalizedLCC):
-        index = bisect.bisect(self.lower_bounds, normalizedLCC) - 1
-        if index < 0:
-            return None
-        #print self.lccCat[index], normalizedLCC
-        lower, upper, country = self.lccCat[index]
-        data = []
-        while(normalizedLCC >= lower):
-            if normalizedLCC <= upper:
-                    data.append(self.lccCat[index])
-            index += 1
-            lower, upper, _ = self.lccCat[index]
-        print data, self.categorize2(normalizedLCC)
-        return [d[2] for d in data]
+    Converts normalized LCC call numbers to taxonomy categories
+
+    The categorizer is based on an interval tree (http://en.wikipedia.org/wiki/Interval_tree)
     """
 
-    def categorize(self,
-                   norm_lcc):  # very slow increases processing time from tens of minutes to hours, possibly sort and do binary search
-        self.total_count += 1
-        if self.total_count == 1000:
-            sys.stdout.write('.')
-            self.total_count = 0
+    def __init__(self, lcc_map):
+        cat_list = json.load(open(lcc_map))
+        categories = self.build_category_list(cat_list)
+        self.root = self.add_node(categories)
+        self.results = []
 
-        return [d for d in self.lcc_cat if d[1] >= norm_lcc >= d[0] and d[1] and d[0]]
-	
+    def build_category_list(self, cat_list):
+        """
+        :param cat_list: a list of categories pulled from the JSON file
+        :type cat_list: list
+        :returns a list of categories in lower bound order
+        :rtype : list of [Category]
+        """
+        categories = []
+        for cat in cat_list:
+            if cat["startNorm"] is not None and cat["endNorm"] is not None:
+                terms = [cat['1'], cat['2']]
+                try:
+                    terms.append(cat['3'])
+                except KeyError:
+                    pass
+
+                category = Category(cat['startNorm'], cat['endNorm'], terms)
+                categories.append(category)
+        categories = sorted(categories, key=lambda category: category.min_lcc)
+        return categories
+
+
+    def add_node(self, categories):
+        """
+        :type categories: list
+
+        :returns an IntervalNode with categories and sub-nodes assigned
+        :rtype IntervalNode
+        """
+        left_cats = []
+        spanned_cats = []
+        right_cats = []
+
+        center = categories[len(categories) // 2].min_lcc
+
+        node = IntervalNode(center)
+
+        i = 0
+        for cat in categories:
+            if cat.max_lcc < center:
+                left_cats.append(cat)
+            elif cat.min_lcc <= center <= cat.max_lcc:
+                spanned_cats.append(cat)
+            else:
+                right_cats = categories[i:]
+                break
+            i += 1
+
+        for cat in spanned_cats:
+            node.add_category(cat)
+
+        if len(left_cats) > 0:
+            node.left = self.add_node(left_cats)
+
+        if len(right_cats) > 0:
+            node.right = self.add_node(right_cats)
+
+        return node
+
+    def categorize(self, norm_lcc):
+        """
+        Get taxonomy terms for an LC call number
+
+        :type norm_lcc: str
+        :param norm_lcc: a normalized LC call number
+        :returns a list of relevant categories
+        :rtype: Category[]
+        """
+        self.results = []
+        self.find(self.root, norm_lcc)
+        return self.results
+
+    def find(self, node, lcc):
+        """
+        :type node: IntervalNode
+        :type lcc: str
+        """
+        self.results.extend(node.get_matches(lcc))
+
+        if node.value >= lcc and node.left is not None:
+            self.find(node.left, lcc)
+        elif node.value < lcc and node.right is not None:
+            self.find(node.right, lcc)

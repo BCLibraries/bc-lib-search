@@ -26,6 +26,13 @@ class LCCCatParse:
                 a['startNorm'] = LC(a['start']).normalized
                 a['endNorm'] = LC(a['end']).normalized
 
+                # fix bad start-end pairs
+                if a['startNorm'] > a['endNorm']:
+                    temp = a['startNorm']
+                    a['startNorm'] = a['endNorm']
+                    a['endNorm'] = temp
+                    print "switch"
+
                 self.table.append(a)
             else:
                 a = ancestors.copy()

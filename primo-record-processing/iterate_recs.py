@@ -53,9 +53,9 @@ class RecordIterator:
                 self.save(data)
         self.save(data)  # final write
 
-    def records(self, mrcFilePath):
+    def records(self, marc_file_path):
         if "pnx" in self.rec_type.lower():
-            return self.split_xml(gzip.GzipFile(fileobj=open(mrcFilePath, 'rb')))  # assumes gzipped file
+            return self.split_xml(gzip.GzipFile(fileobj=open(marc_file_path, 'rb')))  # assumes gzipped file
 
     def split_xml(self, handle, separator=lambda x: x.startswith('<?xml')):
         buff = []
@@ -88,7 +88,6 @@ class RecordIterator:
                 self.file_num) + ".json write completed"
             del data[:]  # delete contents after write
             self.file_num += 1
-            exit(0)
 
     def get_all_files(self, directory, file_extension=""):
         """

@@ -19,7 +19,7 @@ class PNXtoJSON(dict):
 
     def build(self):
         # Record ID, some have subfields, most don't
-        text = self.get_field(xPath="./control/sourcerecordid", force_unique=True)
+        text = self.get_field(xpath="./control/sourcerecordid", force_unique=True)
         if self.has_subfields(text):
             rID = self.get_subfields(text)["V"]
         else:
@@ -27,66 +27,66 @@ class PNXtoJSON(dict):
         self["id"] = rID
 
         # Title
-        self["title"] = self.get_field(xPath="./search/title", force_unique=True)
+        self["title"] = self.get_field(xpath="./search/title", force_unique=True)
 
         # Other titles
-        self["otherTitles"] = self.get_field(xPath="./search/alttitle")
+        self["otherTitles"] = self.get_field(xpath="./search/alttitle")
 
         # Subjects
-        self["subjects"] = self.get_field(xPath="./search/subject")
+        self["subjects"] = self.get_field(xpath="./search/subject")
 
         # Authors
-        self["authors"] = self.get_field(xPath="./search/creatorcontrib")
+        self["authors"] = self.get_field(xpath="./search/creatorcontrib")
 
         # Description
-        self["description"] = self.get_field(xPath="./display/description")
+        self["description"] = self.get_field(xpath="./display/description")
 
         # Table of Contents
-        self["toc"] = self.get_field(xPath="./search/toc")
+        self["toc"] = self.get_field(xpath="./search/toc")
 
         # ISBN
-        self["isbn"] = self.get_field(xPath="./search/isbn")
+        self["isbn"] = self.get_field(xpath="./search/isbn")
 
         # ISSN
-        self["issn"] = self.get_field(xPath="./search/issn")
+        self["issn"] = self.get_field(xpath="./search/issn")
 
         # Place of pub.
-        self["placeOfPub"] = self.get_field(xPath="./search/lsr09")
+        self["placeOfPub"] = self.get_field(xpath="./search/lsr09")
 
         # Name of pub.
-        self["nameOfPub"] = self.get_field(xPath="./search/lsr08")
+        self["nameOfPub"] = self.get_field(xpath="./search/lsr08")
 
         # Series
-        self["series"] = self.get_field(xPath="./search/lsr11")
+        self["series"] = self.get_field(xpath="./search/lsr11")
 
         # Language
-        marcLang = self.get_field(xPath="./facets/language")
+        marcLang = self.get_field(xpath="./facets/language")
         self["language"] = [self.lang_map[lang] for lang in marcLang if
                             lang in self.lang_map] if marcLang else None
 
         # Collection
-        self["collection"] = self.get_field(xPath="./search/lsr30")
+        self["collection"] = self.get_field(xpath="./search/lsr30")
 
         # Resource type
-        self["rsrcType"] = self.get_field(xPath="./facets/rsrctype")
+        self["rsrcType"] = self.get_field(xpath="./facets/rsrctype")
 
         # Library
-        self["libraryHeld"] = self.get_field(xPath="./facets/library")
+        self["libraryHeld"] = self.get_field(xpath="./facets/library")
 
         # Genre
-        self["genre"] = self.get_field(xPath="./facets/genre")
+        self["genre"] = self.get_field(xpath="./facets/genre")
 
         # Metalib ID
-        self["metaLibID"] = self.get_field(xPath="./search/lsr01")
+        self["metaLibID"] = self.get_field(xpath="./search/lsr01")
 
         # Course #
-        self["courseNum"] = self.get_field(xPath="./search/lsr02")
+        self["courseNum"] = self.get_field(xpath="./search/lsr02")
 
         # OCLC #
-        self["oclcNum"] = self.get_field(xPath="./search/lsr05")
+        self["oclcNum"] = self.get_field(xpath="./search/lsr05")
 
         # Call #
-        lcc = self.get_field(xPath="./display/availlibrary", force_unique=True)
+        lcc = self.get_field(xpath="./display/availlibrary", force_unique=True)
         subfields = self.get_subfields(lcc) if lcc else None
         self["LCC"] = re.sub("[\(\)]", "", subfields["2"], 0, 0) if subfields and "2" in subfields else None
 
@@ -108,18 +108,11 @@ class PNXtoJSON(dict):
             categories = self.categorizer.categorize(self["LCCNorm"])
             if categories:
                 for c in categories:
-                    c = c[2]
-                    branch = ""
-                    for i in range(1, 4):
-                        i = str(i)
-                        if i in c:
-                            if c[i] not in self["LCCDep" + i]:
-                                self["LCCDep" + i].append(c[i])
-                            branch += c[i] + "|"
-                    self["LCCByBranch"].append(branch)
+                    for i in range(0, len(c.terms)):
+                        self["LCCDep" + str(i + 1)].append(c.terms[i])
 
-    def get_field(self, xPath, force_unique=False):
-        data = [e.text for e in self.root.findall(xPath) if e is not None]
+    def get_field(self, xpath, force_unique=False):
+        data = [e.text for e in self.root.findall(xpath) if e is not None]
 
         if len(data) == 0:
             return None
