@@ -4,3 +4,4 @@ no-version
 *.prof
 .project
 .pydevproject
+lcc_flat.json

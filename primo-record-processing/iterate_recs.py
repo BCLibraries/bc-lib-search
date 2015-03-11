@@ -4,6 +4,7 @@ from categorizer import Categorizer
 import xml.etree.cElementTree as ET  # cElementTree vs. the slower ElementTree (same API)
 import gzip
 import argparse
+from argparse import PARSER
 
 
 class RecordIterator:
@@ -102,6 +103,9 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    r = RecordIterator(args.src, args.dest, record_type=args.type, match_exp=args.type, lang_map=args.lang,
+    if (args.src and args.dest and args.typ and args.lang and args.lcc):
+        r = RecordIterator(args.src, args.dest, record_type=args.type, match_exp=args.type, lang_map=args.lang,
                        lcc_map=args.lcc)
-    r.run()
+        r.run()
+    else:
+        parser.print_help()
