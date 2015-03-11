@@ -7762,7 +7762,7 @@
                 <call-numbers start="knx 2219.3" end="knx 2219.3"/>
                 <call-numbers start="kz 4335" end="kz 4335"/>
                 <call-numbers start="l 961 e18" end="l 961 e18"/>
-                <call-numbers start="l. 0 e18" end="l. 0 e18"/>
+                <call-numbers start="l 0 e18" end="l 0 e18"/>
                 <call-numbers start="la 66 e18" end="la 66 e18"/>
                 <call-numbers start="la 1140" end="la 1144"/>
                 <call-numbers start="lb 1438 e18" end="lb 1438 e18"/>
@@ -20001,8 +20001,8 @@
                 <call-numbers start="j 385" end="j 385"/>
                 <call-numbers start="jn 5001" end="jn 5191"/>
                 <call-numbers start="js 5601" end="js 5638"/>
-                <call-numbers start="jv 93" end="93"/>
-                <call-numbers start="jv 8110" end="8119"/>
+                <call-numbers start="jv 93" end="jv 93"/>
+                <call-numbers start="jv 8110" end="jv 8119"/>
                 <call-numbers start="jx 1550" end="jx 1550"/>
                 <call-numbers start="jx 1797" end="jx 1798"/>
                 <call-numbers start="jx 2011" end="jx 2014"/>
