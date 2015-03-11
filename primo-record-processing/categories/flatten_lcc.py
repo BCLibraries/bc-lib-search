@@ -13,7 +13,7 @@ class LCCCatParse:
         self.flatten(root, {}, 0)
 
         with open('lcc_flat.json', 'w+') as f:
-            print str(len(self.table)) + ' call # pairs'
+            print(str(len(self.table)) + ' call # pairs')
             json.dump(self.table, f)
 
     def flatten(self, element, ancestors, level):
@@ -31,7 +31,7 @@ class LCCCatParse:
                     temp = a['startNorm']
                     a['startNorm'] = a['endNorm']
                     a['endNorm'] = temp
-                    print "switch"
+                    print("switch")
 
                 self.table.append(a)
             else:

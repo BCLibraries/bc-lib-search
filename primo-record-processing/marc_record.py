@@ -107,7 +107,7 @@ class Record(dict):
         for f in fields:
             data.append(
                 filt(' '.join([self.mrc[f[0]][f[i]] for i in range(1, len(f)) if self.subfield_exists(f[0], f[i])])))
-        data = filter(None, data)
+        data = [_f for _f in data if _f]
 
         if len(data) == 0:
             return None

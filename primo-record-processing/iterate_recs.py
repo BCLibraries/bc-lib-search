@@ -41,7 +41,7 @@ class RecordIterator:
         data = []
         for marc_file_path in self.get_all_files(self.directory, self.match_exp):
             # iterate through cached records
-            print marc_file_path
+            print(marc_file_path)
             for records in self.chunk(gzip.GzipFile(fileobj=open(marc_file_path, 'rb')), increments=10000):
                 for record in records:
                     data.append(PNXtoJSON(record, self.categorizer, self.lang_map))
@@ -67,7 +67,7 @@ class RecordIterator:
             try:
                 data.append(ET.fromstring(i))
             except:
-                print "Bad XML"
+                print("Bad XML")
             if len(data) == increments:
                 yield data
                 data[:] = []
@@ -76,8 +76,7 @@ class RecordIterator:
     def save(self, data):
         with open(self.save_dir + str(self.file_num) + '.json', 'w+') as f:
             json.dump(data, f)
-            print str(len(data)) + " records written.\n" + self.save_dir + str(
-                self.file_num) + ".json write completed"
+            print((str(len(data)) + " records written.\n" + self.save_dir + str(self.file_num) + ".json write completed"))
             del data[:]  # delete contents after write
             self.file_num += 1
 

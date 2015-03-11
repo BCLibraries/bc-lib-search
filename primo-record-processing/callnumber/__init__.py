@@ -108,7 +108,7 @@ def normalize(lc, bottom=False):
     topnorm.pop()
     bottomnorm.pop()
 
-    inds = range(1, 9)
+    inds = list(range(1, 9))
     inds.reverse()
     for i in inds:
         end = topnorm.pop()
@@ -123,7 +123,7 @@ class LC(object):
         try:
             self.denormalized = callno.upper()
         except AttributeError:
-            print "*** ERROR: '%s' not a string?" % (callno)
+            print(("*** ERROR: '%s' not a string?" % (callno)))
         self.normalized = normalize(callno)
 
     def __unicode__(self):
