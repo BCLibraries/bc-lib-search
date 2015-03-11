@@ -2,3 +2,5 @@
 no-version
 *.pyc
 *.prof
+.project
+.pydevproject

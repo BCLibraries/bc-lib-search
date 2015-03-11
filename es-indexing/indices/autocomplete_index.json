@@ -1,19 +1,21 @@
-{	
-        "index": "autocomp",
-	"settings": 	{ 
-                                "number_of_shards": 10, 
-                                "number_of_replicas": 0,
-				"refresh_interval": "-1"
-        	  	},
-	"mappings": 	{
-				"primo": {
-					"properties": {
-						"text": { "type": "string" },
-						"name_suggest": {
-									"type": "completion",
-									"payloads": true
-								}
-						}
-					}
+{
+	"index":"autocomp",
+	"settings":{
+		"number_of_shards":10,
+		"number_of_replicas":0,
+		"refresh_interval":"-1"
+	},
+	"mappings":{
+		"primo":{
+			"properties":{
+				"text":{
+					"type":"string"
+				},
+				"name_suggest":{
+					"type":"completion",
+					"payloads":true
+				}
 			}
+		}
+	}
 }

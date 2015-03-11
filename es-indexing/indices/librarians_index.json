@@ -1,37 +1,37 @@
 {
-        "index": "librarians",
-	"settings": {
-		"number_of_shards": 2,
-		"number_of_replicas": 1
+	"index":"librarians",
+	"settings":{
+		"number_of_shards":2,
+		"number_of_replicas":1
 	},
-	"mappings": {
-		"docs":      {
-				"properties":   {
-							"name":            	{
-											"type": "string"
-										},
-							"profileURL":  		{
-											"type": "string"
-										},
-							"email":  		{
-											"type": "string"
-										},
-							"subjects":         	{
-											"type": "string"
-										},
-							"phone":           	{
-											"type": "string"
-										},
-							"location":             {
-											"type": "string"
-										},
-							"imageSrc":             {
-											"type": "string"
-										},
-							"tags":     		{
-											"type": "string"
-										}
-						}
-				}
+	"mappings":{
+		"docs":{
+			"properties":{
+				"name":{
+					"type":"string"
+				},
+				"profileURL":{
+					"type":"string"
+				},
+				"email":{
+					"type":"string"
+				},
+				"subjects":{
+					"type":"string"
+				},
+				"phone":{
+					"type":"string"
+				},
+				"location":{
+					"type":"string"
+				},
+				"imageSrc":{
+					"type":"string"
+				},
+				"tags":{
+					"type":"string"
+				}	
+			}
+		}
 	}
 }
