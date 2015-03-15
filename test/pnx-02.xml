@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record>
+    <control>
+        <sourcerecordid>227088</sourcerecordid>
+        <sourceid>bc_digitool_mods</sourceid>
+        <recordid>bc_digitool_mods227088</recordid>
+        <originalsourceid>BCD01</originalsourceid>
+        <sourceformat>XML</sourceformat>
+        <sourcesystem>Digitool</sourcesystem>
+    </control>
+    <display>
+        <type>image</type>
+        <title>[Members of the Boston College Class of 1956 studying, possibly at Bapst].</title>
+        <creator>Boston College. University Archives</creator>
+        <creationdate>[ca. 1956]</creationdate>
+        <format>1 black-and-white print (photograph) : 10.1 x 7.2 cm.</format>
+        <ispartof>University Archives (Boston College)</ispartof>
+        <description>Source of title: Supplied by cataloger.</description>
+        <description></description>
+        <description>BC99-171</description>
+        <source>bc_digitool_mods</source>
+        <rights>This image is licensed under a Creative Commons Attribution-Noncommercial-No Derivative Works 3.0 United
+            States License.
+        </rights>
+        <lds30>Boston College Digital Collections</lds30>
+    </display>
+    <links>
+        <backlink>$$Uhttp://dcollections.bc.edu/R/?func=dbin-jump-full&amp;object_id=227088&amp;local_base=GEN01-BCD01$$Tdigitool_pds$$DThis
+            item in Digital Collections
+        </backlink>
+        <linktorsrc>$$Uhttp://dcollections.bc.edu/webclient/DeliveryManager?pid=227088&amp;custom_att_2=simple_viewer&amp;local_base=GEN01-BCD01$$DDisplay
+            Item
+        </linktorsrc>
+        <thumbnail>$$Uhttp://dcollections.bc.edu/webclient/DeliveryManager?pid=227092$$Tdigitool_pds</thumbnail>
+    </links>
+    <search>
+        <creatorcontrib>Boston College. University Archives</creatorcontrib>
+        <creatorcontrib>Boston College</creatorcontrib>
+        <creatorcontrib>University Archives</creatorcontrib>
+        <title>[Members of the Boston College Class of 1956 studying, possibly at Bapst].</title>
+        <description>Source of title: Supplied by cataloger. Number on item: 401-34643 BC. BC99-171</description>
+        <general>image/jpeg</general>
+        <general>image/tiff</general>
+        <isbn>123456789</isbn>
+        <issn>1234-5678</issn>
+        <sourceid>bc_digitool_mods</sourceid>
+        <recordid>bc_digitool_mods227088</recordid>
+        <rsrctype>image</rsrctype>
+        <creationdate>1956</creationdate>
+        <searchscope>BCL</searchscope>
+        <searchscope>bc_digitool_mods</searchscope>
+        <searchscope>BCD01</searchscope>
+        <scope>BCL</scope>
+        <scope>bc_digitool_mods</scope>
+        <scope>BCD01</scope>
+        <toc>1. The first picture; 2. The second picture</toc>
+        <lsr02>ART1030</lsr02>
+        <lsr02>ART1541</lsr02>
+        <lsr11>Pictures of life at Boston College</lsr11>
+        <lsr30>Boston College Digital Collections</lsr30>
+    </search>
+    <sort>
+        <title>[Members of the Boston College Class of 1956 studying, possibly at Bapst].</title>
+        <creationdate>[ca. 1956]</creationdate>
+        <author>Boston College. University Archives</author>
+    </sort>
+    <facets>
+        <creationdate>1956</creationdate>
+        <library>Burns</library>
+        <library>Bapst</library>
+        <collection>BCD01</collection>
+        <toplevel>online_resources</toplevel>
+        <prefilter>images</prefilter>
+        <rsrctype>images</rsrctype>
+        <creatorcontrib>Boston College. University Archives</creatorcontrib>
+        <genre>black-and-white prints (photographs)</genre>
+        <lfc01>Boston College Digital Collections</lfc01>
+    </facets>
+    <frbr>
+        <t>1</t>
+    </frbr>
+    <delivery>
+        <institution>BCD01</institution>
+        <delcategory>Online Resource</delcategory>
+    </delivery>
+    <ranking>
+        <booster1>1</booster1>
+        <booster2>1</booster2>
+    </ranking>
+    <addata>
+        <aucorp>Boston College. University Archives</aucorp>
+        <btitle>[Members of the Boston College Class of 1956 studying, possibly at Bapst].</btitle>
+        <date>1956</date>
+    </addata>
+</record>

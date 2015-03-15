@@ -121,7 +121,7 @@ class Record(dict):
         data = []
         if self.mrc[field]:
             for subject in self.mrc.get_fields(field):
-                for subfield in subject.get_subfields(*subfields):
+                for subfield in subject._get_subfields(*subfields):
                     data.append(filt(subfield))
             return list(set(data))
 

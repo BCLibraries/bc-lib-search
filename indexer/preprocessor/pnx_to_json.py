@@ -104,6 +104,7 @@ class PNXtoJSON(dict):
         if self["LCCNorm"]:
             categories = self.categorizer.categorize(self["LCCNorm"])
             if categories:
+
                 for c in categories:
                     for i in range(0, len(c.terms)):
                         self["LCCDep" + str(i + 1)].append(c.terms[i])
