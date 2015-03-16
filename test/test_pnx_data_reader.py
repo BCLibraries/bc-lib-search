@@ -1,13 +1,14 @@
 from unittest import TestCase
+from indexer.preprocessor.pnx_data_reader import PNXDataReader
 from indexer.preprocessor.pnx_reader import PNXReader
 import xml.etree.cElementTree as ET
 
 
 class TestPNXReader(TestCase):
     def setUp(self):
-        self.reader = PNXReader()
-        self.pnx = self._load_pnx('pnx-01.xml')
-        self.reader.read(self.pnx)
+        self.pnx_reader = PNXReader()
+        self.reader = PNXDataReader(self.pnx_reader)
+        self._load_pnx('pnx-01.xml')
 
     def test_title(self):
         expected = '[Members of the Boston College Class of 1956 studying, possibly at Bapst].'
@@ -66,18 +67,17 @@ class TestPNXReader(TestCase):
         self.assertEqual(expected, self.reader.languages)
 
     def test_missing_field_yields_empty_list(self):
-        pnx = self._load_pnx('pnx-02.xml')
-        self.reader.read(pnx)
+        self._load_pnx('pnx-02.xml')
         self.assertEqual([], self.reader.languages)
 
     def test_empty_field_yields_no_value(self):
         expected = ['Source of title: Supplied by cataloger.',
                     'BC99-171']
-        pnx = self._load_pnx('pnx-02.xml')
-        self.reader.read(pnx)
+        self._load_pnx('pnx-02.xml')
         self.assertEqual(expected, self.reader.descriptions)
 
     def _load_pnx(self, filename):
         with open(filename, "r") as myfile:
             data = myfile.read().replace('\n', '')
-            return ET.fromstring(data)
+            pnx = ET.fromstring(data)
+        self.pnx_reader.read(pnx)
