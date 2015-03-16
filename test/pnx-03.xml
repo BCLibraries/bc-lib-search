@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record>
+    <control>
+        <almaid>$$V01BC_INST:21322109880001021$$O01BC_INST:21322109880001021</almaid>
+        <almaid>$$V01BC_INST:21329874380001021$$O01BC_INST:21329874380001021</almaid>
+        <sourcerecordid>$$V21322109880001021$$OALMA-BC21322109880001021</sourcerecordid>
+        <sourcerecordid>$$V21329874380001021$$OALMA-BC21329874380001021</sourcerecordid>
+        <sourceid>$$VALMA-BC$$OALMA-BC21322109880001021</sourceid>
+        <sourceid>$$VALMA-BC$$OALMA-BC21329874380001021</sourceid>
+        <recordid>dedupmrg18207184</recordid>
+        <originalsourceid>$$V01BC_INST$$OALMA-BC21322109880001021</originalsourceid>
+        <originalsourceid>$$V01BC_INST$$OALMA-BC21329874380001021</originalsourceid>
+        <sourceformat>$$VMARC21$$OALMA-BC21322109880001021</sourceformat>
+        <sourceformat>$$VMARC21$$OALMA-BC21329874380001021</sourceformat>
+        <sourcesystem>$$VAlma$$OALMA-BC21322109880001021</sourcesystem>
+        <sourcesystem>$$VAlma$$OALMA-BC21329874380001021</sourcesystem>
+        <ilsapiid>$$V01BC_INST21322109880001021$$OALMA-BC21322109880001021</ilsapiid>
+        <ilsapiid>$$V01BC_INST21329874380001021$$OALMA-BC21329874380001021</ilsapiid>
+    </control>
+    <display>
+        <type>book</type>
+        <title>The letters of John</title>
+        <creator>Colin G. Kruse</creator>
+        <publisher>Grand Rapids, Mich. : W.B. Eerdmans ; Leicester, England : Apollos</publisher>
+        <creationdate>2000.</creationdate>
+        <format>xxii, 255 p. ; 24 cm.</format>
+        <identifier>ISBN: 080283728X (alk. paper)</identifier>
+        <subject>Bible. N.T. Epistles of John -- Commentaries</subject>
+        <description>Includes bibliographical references (p. xvii-xxii) and indexes.</description>
+        <language>eng</language>
+        <relation>$$Cseries $$VThe Pillar New Testament commentary $$VBrandom, Ann-Marie</relation>
+        <lds31>The Pillar New Testament commentary</lds31>
+        <source>$$VALMA-BC$$OALMA-BC21322109880001021</source>
+        <source>$$VALMA-BC$$OALMA-BC21329874380001021</source>
+        <availlibrary>$$IBCL$$LONL$$1Stacks (STACK)$$2(BS2805.3 .K78 2000
+            )$$Sunavailable$$X01BC_INST$$YONL$$ZSTACK$$OALMA-BC21322109880001021
+        </availlibrary>
+        <availlibrary>$$IBCL$$LTML$$1Stacks$$2(BS2805.3 .K78 2000
+            )$$Sunavailable$$X01BC_INST$$YTML$$ZSTACK$$OALMA-BC21329874380001021
+        </availlibrary>
+        <availinstitution>$$IBCL$$Sunavailable</availinstitution>
+        <availpnx>unavailable</availpnx>
+        <lds01>ONL Stacks (STACK) BS2805.3 .K78 2000</lds01>
+        <lds01>TML Stacks BS2805.3 .K78 2000</lds01>
+        <lds07>Grand Rapids, Mich. : Leicester, England</lds07>
+        <lds07>Grand Rapids, Mich.</lds07>
+        <lds09>W.B. Eerdmans ; Apollos</lds09>
+        <lds09>W.B. Eerdmans</lds09>
+        <lds10>BS2805.3 .K78 2000</lds10>
+        <lds11>BCL01000000000000001569064 ; 99102216760001021</lds11>
+        <lds11>99105044950001021</lds11>
+        <lds12>The Pillar New Testament commentary</lds12>
+        <lds13>ONL BS2805.3 .K78 2000</lds13>
+        <lds14>001569064</lds14>
+        <lds14>002447049</lds14>
+    </display>
+    <links>
+        <openurl>$$V$$Topenurl_journal$$OALMA-BC21322109880001021</openurl>
+        <openurl>$$V$$Topenurl_journal$$OALMA-BC21329874380001021</openurl>
+        <openurlfulltext>$$V$$Topenurlfull_journal$$OALMA-BC21322109880001021</openurlfulltext>
+        <openurlfulltext>$$V$$Topenurlfull_journal$$OALMA-BC21329874380001021</openurlfulltext>
+        <linktotoc>$$Tsyndetics_index$$DCheck Here for Additional Information</linktotoc>
+        <linktouc>$$Tworldcat_isbn$$DThis item in WorldCat®</linktouc>
+        <linktouc>$$Tamazon_uc$$DThis item in Amazon.com</linktouc>
+        <linktouc>$$Tworldcat_isbn$$DThis item in WorldCat®</linktouc>
+        <linktouc>$$Tamazon_uc$$DThis item in Amazon.com</linktouc>
+        <thumbnail>$$Tamazon_thumb</thumbnail>
+        <thumbnail>$$Tsyndetics_thumb</thumbnail>
+        <lln02>$$Tpermalink$$DPermalink to this record</lln02>
+    </links>
+    <search>
+        <creatorcontrib>Colin G. Kruse</creatorcontrib>
+        <creatorcontrib>Kruse, Colin G.</creatorcontrib>
+        <creatorcontrib>Kruse, C</creatorcontrib>
+        <creatorcontrib>Colin G. Kruse.</creatorcontrib>
+        <title>The letters of John /</title>
+        <subject>Bible. N.T. Epistles of John Commentaries.</subject>
+        <sourceid>ALMA-BC</sourceid>
+        <recordid>ALMA-BC21322109880001021</recordid>
+        <isbn>080283728X</isbn>
+        <isbn>9780802837288</isbn>
+        <rsrctype>book</rsrctype>
+        <format>book</format>
+        <creationdate>2000</creationdate>
+        <startdate>20000101</startdate>
+        <enddate>20001231</enddate>
+        <searchscope>ONL</searchscope>
+        <searchscope>ALMA-BC</searchscope>
+        <searchscope>BCL</searchscope>
+        <scope>ONL</scope>
+        <scope>ALMA-BC</scope>
+        <scope>BCL</scope>
+        <lsr05>43317794</lsr05>
+        <lsr05>(OCoLC)ocm43317794</lsr05>
+        <lsr06>BS2805.3 .K78 2000</lsr06>
+        <lsr06>BS2805.3.K782000</lsr06>
+        <lsr06>BS2805.3</lsr06>
+        <lsr06>.K78 2000</lsr06>
+        <lsr06>.K782000</lsr06>
+        <lsr08>W.B. Eerdmans ; Apollos,</lsr08>
+        <lsr11>The Pillar New Testament commentary</lsr11>
+        <lsr11>Brandom, Ann-Marie</lsr11>
+        <lsr14>ONL</lsr14>
+        <lsr16>The Pillar New Testament commentary</lsr16>
+        <lsr20>001569064</lsr20>
+        <lsr20>bc_aleph001569064</lsr20>
+        <lsr20>BCL01000000000000001569064 ; 99102216760001021</lsr20>
+        <lsr31>The Pillar New Testament commentary</lsr31>
+        <lsr09>Grand Rapids, Mich. : Leicester, England</lsr09>
+        <recordid>ALMA-BC21329874380001021</recordid>
+        <searchscope>TML</searchscope>
+        <scope>TML</scope>
+        <lsr08>W.B. Eerdmans,</lsr08>
+        <lsr14>TML</lsr14>
+        <lsr20>002447049</lsr20>
+        <lsr20>bc_aleph002447049</lsr20>
+        <lsr20>99105044950001021</lsr20>
+        <lsr09>Grand Rapids, Mich.</lsr09>
+    </search>
+    <sort>
+        <title>letters of john</title>
+        <creationdate>2000</creationdate>
+        <author>kruse colin g</author>
+    </sort>
+    <facets>
+        <language>eng</language>
+        <creationdate>2000</creationdate>
+        <topic>Bible. N.T. Epistles of John–Commentaries</topic>
+        <collection>ONL</collection>
+        <toplevel>available</toplevel>
+        <rsrctype>books</rsrctype>
+        <creatorcontrib>Kruse, Colin G</creatorcontrib>
+        <genre>Commentaries</genre>
+        <library>ONL</library>
+        <atoz>L</atoz>
+        <lfc08>The Pillar New Testament commentary</lfc08>
+        <prefilter>books</prefilter>
+        <collection>TML</collection>
+        <library>TML</library>
+    </facets>
+    <dedup>
+        <t>1</t>
+        <c1>00020305</c1>
+        <c2>080283728X</c2>
+        <c3>lettersofjohn</c3>
+        <c4>2000</c4>
+        <c10>BCL01000000000000001569064</c10>
+        <f1>00020305</f1>
+        <f5>lettersofjohn</f5>
+        <f6>2000</f6>
+        <f7>letters of john</f7>
+        <f8>miu</f8>
+        <f9>xxii, 255 p. ;</f9>
+        <f10>w b eerdmans</f10>
+        <f11>kruse colin g</f11>
+        <f20>BCL01000000000000001569064</f20>
+    </dedup>
+    <frbr>
+        <t>1</t>
+        <k1>$$Kkruse colin g$$AA</k1>
+        <k3>$$Kletters of john$$AT</k3>
+    </frbr>
+    <delivery>
+        <institution>$$VBCL$$OALMA-BC21322109880001021</institution>
+        <delcategory>$$VAlma-P$$OALMA-BC21322109880001021</delcategory>
+        <institution>$$VBCL$$OALMA-BC21329874380001021</institution>
+        <delcategory>$$VAlma-P$$OALMA-BC21329874380001021</delcategory>
+    </delivery>
+    <enrichment>
+        <classificationlcc>BS2805.3</classificationlcc>
+    </enrichment>
+    <ranking>
+        <booster1>1</booster1>
+        <booster2>1</booster2>
+    </ranking>
+    <addata>
+        <aulast>Kruse</aulast>
+        <aufirst>Colin G.</aufirst>
+        <au>Kruse, Colin G</au>
+        <btitle>The letters of John</btitle>
+        <seriestitle>The Pillar New Testament commentary</seriestitle>
+        <seriestitle>Brandom, Ann-Marie</seriestitle>
+        <date>2000</date>
+        <risdate>2000.</risdate>
+        <isbn>080283728X</isbn>
+        <format>book</format>
+        <genre>book</genre>
+        <ristype>BOOK</ristype>
+        <notes>Includes bibliographical references (p. xvii-xxii) and indexes.</notes>
+        <cop>Grand Rapids, Mich. : Leicester, England</cop>
+        <pub>W.B. Eerdmans ; Apollos</pub>
+        <oclcid>43317794</oclcid>
+        <lccn>00020305</lccn>
+        <lad04>080283728X</lad04>
+        <notes>Includes bibliographical references and index.</notes>
+        <cop>Grand Rapids, Mich.</cop>
+        <pub>W.B. Eerdmans</pub>
+    </addata>
+    <browse/>
+</record>

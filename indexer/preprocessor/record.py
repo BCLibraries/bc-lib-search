@@ -1,6 +1,9 @@
 class Record:
     def __init__(self):
         self.id = ''
+        self.source_record_id = ''
+        self.record_id = ''
+        self.mms = ''
         self.title = ''
         self.other_titles = []
         self.subjects = []
