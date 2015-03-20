@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <ListRecords>
+        <record>
+            <header status="new">
+                <identifier>urm_publish:61441201100001021</identifier>
+            </header>
+            <metadata>
+                <record xmlns="http://www.loc.gov/MARC21/slim" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">
+                    <leader>01495cai a2200397Ia 4500</leader>
+                    <controlfield tag="005">20150211154021.0</controlfield>
+                    <controlfield tag="006">m o d</controlfield>
+                    <controlfield tag="007">cr mn|||||||||</controlfield>
+                    <controlfield tag="008">051031c20009999nyuuu dso 0 2eng d</controlfield>
+                    <controlfield tag="001">99137675894001021</controlfield>
+                    <datafield tag="035" ind1=" " ind2=" ">
+                        <subfield code="a">(OCoLC)62189553</subfield>
+                    </datafield>
+                    <datafield tag="035" ind1=" " ind2=" ">
+                        <subfield code="a">(OCoLC)ocm62189553</subfield>
+                    </datafield>
+                    <datafield tag="040" ind1=" " ind2=" ">
+                        <subfield code="a">HBS</subfield>
+                        <subfield code="b">eng</subfield>
+                        <subfield code="c">HBS</subfield>
+                        <subfield code="d">COO</subfield>
+                        <subfield code="d">OCLCQ</subfield>
+                        <subfield code="d">ZCU</subfield>
+                        <subfield code="d">OCLCO</subfield>
+                    </datafield>
+                    <datafield tag="049" ind1=" " ind2=" ">
+                        <subfield code="a">BXMM</subfield>
+                    </datafield>
+                    <datafield tag="050" ind1=" " ind2="4">
+                        <subfield code="a">HG4001</subfield>
+                    </datafield>
+                    <datafield tag="245" ind1="0" ind2="0">
+                        <subfield code="a">Capital IQ</subfield>
+                        <subfield code="h">[electronic resource].</subfield>
+                    </datafield>
+                    <datafield tag="246" ind1=" " ind2=" ">
+                        <subfield code="a">S&amp;P Capital IQ.</subfield>
+                    </datafield>
+                    <datafield tag="246" ind1=" " ind2=" ">
+                        <subfield code="a">Standard &amp; Poor's Capital IQ.</subfield>
+                    </datafield>
+                    <datafield tag="260" ind1=" " ind2=" ">
+                        <subfield code="a">New York :</subfield>
+                        <subfield code="b">Capital IQ</subfield>
+                    </datafield>
+                    <datafield tag="362" ind1="1" ind2=" ">
+                        <subfield code="a">Began in 2000.</subfield>
+                    </datafield>
+                    <datafield tag="500" ind1=" " ind2=" ">
+                        <subfield code="a">Title from home screen (viewed Feb. 11, 2015).</subfield>
+                    </datafield>
+                    <datafield tag="506" ind1=" " ind2=" ">
+                        <subfield code="a">Access restricted to subscribers.</subfield>
+                    </datafield>
+                    <datafield tag="520" ind1=" " ind2=" ">
+                        <subfield code="a">A unique platform combing detailed information on investment banking, private
+                            equity, corporations, investment management, professional services, and brokerage.
+                        </subfield>
+                    </datafield>
+                    <datafield tag="538" ind1=" " ind2=" ">
+                        <subfield code="a">Mode of access: Internet.</subfield>
+                    </datafield>
+                    <datafield tag="650" ind1=" " ind2="0">
+                        <subfield code="a">Business enterprises</subfield>
+                        <subfield code="x">Finance</subfield>
+                        <subfield code="v">Databases.</subfield>
+                    </datafield>
+                    <datafield tag="650" ind1=" " ind2="0">
+                        <subfield code="a">Industrial statistics</subfield>
+                        <subfield code="v">Databases.</subfield>
+                    </datafield>
+                    <datafield tag="650" ind1=" " ind2="0">
+                        <subfield code="a">Corporations</subfield>
+                        <subfield code="v">Databases.</subfield>
+                    </datafield>
+                    <datafield tag="650" ind1=" " ind2="0">
+                        <subfield code="a">Corporations</subfield>
+                        <subfield code="x">Finance</subfield>
+                        <subfield code="v">Databases.</subfield>
+                    </datafield>
+                    <datafield tag="650" ind1=" " ind2="0">
+                        <subfield code="a">International business enterprises</subfield>
+                        <subfield code="v">Databases.</subfield>
+                    </datafield>
+                    <datafield tag="650" ind1=" " ind2="0">
+                        <subfield code="a">International business enterprises</subfield>
+                        <subfield code="x">Finance</subfield>
+                        <subfield code="v">Databases.</subfield>
+                    </datafield>
+                    <datafield tag="650" ind1=" " ind2="0">
+                        <subfield code="a">Consolidation and merger of corporations</subfield>
+                        <subfield code="v">Databases.</subfield>
+                    </datafield>
+                    <datafield tag="650" ind1=" " ind2="0">
+                        <subfield code="a">Private equity</subfield>
+                        <subfield code="v">Databases.</subfield>
+                    </datafield>
+                    <datafield tag="650" ind1=" " ind2="0">
+                        <subfield code="a">Marketing research</subfield>
+                        <subfield code="v">Databases.</subfield>
+                    </datafield>
+                    <datafield tag="655" ind1=" " ind2="7">
+                        <subfield code="a">Electronic reference sources.</subfield>
+                        <subfield code="2">lcsh</subfield>
+                    </datafield>
+                    <datafield tag="710" ind1="2" ind2=" ">
+                        <subfield code="a">Capital IQ (Firm)</subfield>
+                    </datafield>
+                    <datafield tag="994" ind1=" " ind2=" ">
+                        <subfield code="a">C0</subfield>
+                        <subfield code="b">BXM</subfield>
+                    </datafield>
+                    <datafield tag="INT" ind1=" " ind2=" ">
+                        <subfield code="a">E</subfield>
+                    </datafield>
+                    <datafield tag="INST" ind1=" " ind2=" ">
+                        <subfield code="a">01BC_INST</subfield>
+                    </datafield>
+                    <datafield tag="ECT" ind1=" " ind2=" ">
+                        <subfield code="a">database</subfield>
+                    </datafield>
+                    <datafield tag="AVE" ind1=" " ind2=" ">
+                        <subfield code="i">01BC_INST</subfield>
+                        <subfield code="c">WESTON</subfield>
+                    </datafield>
+                    <datafield tag="AVE" ind1=" " ind2=" ">
+                        <subfield code="i">01BC_INST</subfield>
+                        <subfield code="c">NEWTON</subfield>
+                    </datafield>
+                    <datafield tag="AVE" ind1=" " ind2=" ">
+                        <subfield code="i">01BC_INST</subfield>
+                        <subfield code="c">MAIN</subfield>
+                    </datafield>
+                    <datafield tag="AVE" ind1=" " ind2=" ">
+                        <subfield code="i">01BC_INST</subfield>
+                        <subfield code="c">BRIGHTON</subfield>
+                    </datafield>
+                    <datafield tag="AVE" ind1=" " ind2=" ">
+                        <subfield code="i">01BC_INST</subfield>
+                        <subfield code="c">ALL</subfield>
+                    </datafield>
+                    <datafield tag="AVE" ind1=" " ind2=" ">
+                        <subfield code="i">01BC_INST</subfield>
+                        <subfield code="l">ALL</subfield>
+                    </datafield>
+                </record>
+            </metadata>
+        </record>
+    </ListRecords>
+</OAI-PMH>
