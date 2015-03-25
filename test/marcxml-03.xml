@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<record xmlns="http://www.loc.gov/MARC21/slim" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">
+    <leader>01568cam 2200397 a 4500</leader>
+    <controlfield tag="005">20130816104442.0</controlfield>
+    <controlfield tag="008">130627s2012 maua b 000 0 eng</controlfield>
+    <controlfield tag="001">99134792810001021</controlfield>
+    <datafield tag="010" ind1=" " ind2=" ">
+        <subfield code="a">2011008199</subfield>
+    </datafield>
+    <datafield tag="020" ind1=" " ind2=" ">
+        <subfield code="a">9780132690065 (alk. paper)</subfield>
+    </datafield>
+    <datafield tag="020" ind1=" " ind2=" ">
+        <subfield code="a">0132690063 (alk. paper)</subfield>
+    </datafield>
+    <datafield tag="035" ind1=" " ind2=" ">
+        <subfield code="a">(OCoLC)ocn706677575</subfield>
+    </datafield>
+    <datafield tag="040" ind1=" " ind2=" ">
+        <subfield code="a">DLC</subfield>
+        <subfield code="b">eng</subfield>
+        <subfield code="c">DLC</subfield>
+        <subfield code="d">YDX</subfield>
+        <subfield code="d">YDXCP</subfield>
+        <subfield code="d">BWX</subfield>
+        <subfield code="d">CDX</subfield>
+        <subfield code="d">DEBBG</subfield>
+        <subfield code="d">BDX</subfield>
+    </datafield>
+    <datafield tag="042" ind1=" " ind2=" ">
+        <subfield code="a">pcc</subfield>
+    </datafield>
+    <datafield tag="049" ind1=" " ind2=" ">
+        <subfield code="a">BXMM</subfield>
+    </datafield>
+    <datafield tag="050" ind1="0" ind2="0">
+        <subfield code="a">LB1576</subfield>
+        <subfield code="b">.N845 2012</subfield>
+    </datafield>
+    <datafield tag="082" ind1="0" ind2="0">
+        <subfield code="a">372.6/044</subfield>
+        <subfield code="2">22</subfield>
+    </datafield>
+    <datafield tag="084" ind1=" " ind2=" ">
+        <subfield code="a">5,3</subfield>
+        <subfield code="2">ssgn</subfield>
+    </datafield>
+    <datafield tag="084" ind1=" " ind2=" ">
+        <subfield code="a">DN 2000</subfield>
+        <subfield code="2">rvk</subfield>
+    </datafield>
+    <datafield tag="100" ind1="1" ind2=" ">
+        <subfield code="a">Norton, Terry L.,</subfield>
+        <subfield code="d">1952-</subfield>
+    </datafield>
+    <datafield tag="245" ind1="1" ind2="0">
+        <subfield code="a">50 literacy strategies for beginning teachers, 1-8 /</subfield>
+        <subfield code="c">Terry L. Norton, Betty Lou Jackson Land.</subfield>
+    </datafield>
+    <datafield tag="246" ind1="3" ind2=" ">
+        <subfield code="a">Fifty literacy strategies for beginning teachers, 1-8</subfield>
+    </datafield>
+    <datafield tag="250" ind1=" " ind2=" ">
+        <subfield code="a">3rd ed.</subfield>
+    </datafield>
+    <datafield tag="260" ind1=" " ind2=" ">
+        <subfield code="a">Boston :</subfield>
+        <subfield code="b">Pearson,</subfield>
+        <subfield code="c">c2012.</subfield>
+    </datafield>
+    <datafield tag="300" ind1=" " ind2=" ">
+        <subfield code="a">vii, 180 p. :</subfield>
+        <subfield code="b">ill. ;</subfield>
+        <subfield code="c">28 cm.</subfield>
+    </datafield>
+    <datafield tag="504" ind1=" " ind2=" ">
+        <subfield code="a">Includes bibliographical references.</subfield>
+    </datafield>
+    <datafield tag="505" ind1="2" ind2=" ">
+        <subfield code="a">Includes bibliographical references.</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+        <subfield code="a">Language arts (Elementary)</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+        <subfield code="a">Language arts (Middle school)</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+        <subfield code="a">First year teachers.</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2=" ">
+        <subfield code="a">Land, Betty Lou Jackson.</subfield>
+    </datafield>
+    <datafield tag="938" ind1=" " ind2=" ">
+        <subfield code="a">YBP Library Services</subfield>
+        <subfield code="b">YANK</subfield>
+        <subfield code="n">3632881</subfield>
+    </datafield>
+    <datafield tag="938" ind1=" " ind2=" ">
+        <subfield code="a">Blackwell Book Service</subfield>
+        <subfield code="b">BBUS</subfield>
+        <subfield code="n">3632881</subfield>
+    </datafield>
+    <datafield tag="938" ind1=" " ind2=" ">
+        <subfield code="a">Coutts Information Services</subfield>
+        <subfield code="b">COUT</subfield>
+        <subfield code="n">17149592</subfield>
+    </datafield>
+    <datafield tag="938" ind1=" " ind2=" ">
+        <subfield code="a">Brodart</subfield>
+        <subfield code="b">BROD</subfield>
+        <subfield code="n">13482998</subfield>
+        <subfield code="c">$29.99</subfield>
+    </datafield>
+    <datafield tag="994" ind1=" " ind2=" ">
+        <subfield code="a">C0</subfield>
+        <subfield code="b">BXM</subfield>
+    </datafield>
+    <datafield tag="INT" ind1=" " ind2=" ">
+        <subfield code="a">P</subfield>
+    </datafield>
+    <datafield tag="INST" ind1=" " ind2=" ">
+        <subfield code="a">01BC_INST</subfield>
+    </datafield>
+    <datafield tag="AVA" ind1=" " ind2=" ">
+        <subfield code="a">01BC_INST</subfield>
+        <subfield code="b">ERC</subfield>
+        <subfield code="c">Stacks</subfield>
+        <subfield code="d">LB1576 .N845 2012</subfield>
+        <subfield code="e">available</subfield>
+        <subfield code="f">1</subfield>
+        <subfield code="g">0</subfield>
+        <subfield code="j">STACK</subfield>
+        <subfield code="k">0</subfield>
+        <subfield code="p">1</subfield>
+    </datafield>
+    <datafield tag="AVA" ind1=" " ind2=" ">
+        <subfield code="a">01BC_INST</subfield>
+        <subfield code="b">ONL</subfield>
+        <subfield code="c">Offsite Collection</subfield>
+        <subfield code="d">@350344</subfield>
+        <subfield code="e">available</subfield>
+        <subfield code="f">1</subfield>
+        <subfield code="g">0</subfield>
+        <subfield code="j">KC_STACK</subfield>
+        <subfield code="k"></subfield>
+        <subfield code="p">1</subfield>
+    </datafield>
+    <datafield tag="AVA" ind1=" " ind2=" ">
+        <subfield code="a">01BC_INST</subfield>
+        <subfield code="b">ARCH</subfield>
+        <subfield code="c">Reading Room Use Only</subfield>
+        <subfield code="d">M019/2006-1 CD045</subfield>
+        <subfield code="e">available</subfield>
+        <subfield code="f">1</subfield>
+        <subfield code="g">0</subfield>
+        <subfield code="j">IRMA</subfield>
+        <subfield code="k">8</subfield>
+        <subfield code="p">1</subfield>
+    </datafield>
+</record>

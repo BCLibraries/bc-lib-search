@@ -1,0 +1,23 @@
+<record xmlns="http://www.loc.gov/MARC21/slim" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">
+    <leader>00565nam--22001817a-4500</leader>
+    <controlfield tag="001">9998956080001021</controlfield>
+    <datafield tag="035" ind1=" " ind2=" ">
+        <subfield code="a">(Aleph)000097058BCL30</subfield>
+    </datafield>
+    <datafield tag="999" ind1=" " ind2=" ">
+        <subfield code="a">CR_RESTRICTED</subfield>
+    </datafield>
+    <datafield tag="NT1" ind1=" " ind2=" ">
+        <subfield code="a">PDF file (740KB) requires Adobe Acrobat Reader</subfield>
+    </datafield>
+    <datafield tag="SID" ind1=" " ind2=" ">
+        <subfield code="a">BCL30-000059233-TH584.01</subfield>
+    </datafield>
+    <datafield tag="INT" ind1=" " ind2=" ">
+        <subfield code="a">P</subfield>
+    </datafield>
+    <datafield tag="INST" ind1=" " ind2=" ">
+        <subfield code="a">01BC_INST</subfield>
+    </datafield>
+</record>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record xmlns="http://www.loc.gov/MARC21/slim" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">
+    <leader>03360cjm 2200601Ia 4500</leader>
+    <controlfield tag="005">20130111135201.0</controlfield>
+    <controlfield tag="007">sd fsngnnmmned</controlfield>
+    <controlfield tag="007">sd fzngnnmmned</controlfield>
+    <controlfield tag="008">130108s2012 fr munn defi n lat d</controlfield>
+    <controlfield tag="001">99132692820001021</controlfield>
+    <datafield tag="024" ind1="7" ind2=" ">
+        <subfield code="a">00093046755560</subfield>
+        <subfield code="2">gtin-14</subfield>
+    </datafield>
+    <datafield tag="024" ind1="1" ind2=" ">
+        <subfield code="a">093046755560</subfield>
+    </datafield>
+    <datafield tag="028" ind1="0" ind2="1">
+        <subfield code="a">HMU 807555</subfield>
+        <subfield code="b">Harmonia Mundi</subfield>
+    </datafield>
+    <datafield tag="033" ind1="0" ind2="0">
+        <subfield code="a">201202--</subfield>
+        <subfield code="b">5754</subfield>
+        <subfield code="c">L7</subfield>
+    </datafield>
+    <datafield tag="035" ind1=" " ind2=" ">
+        <subfield code="a">(OCoLC)ocn815389630</subfield>
+    </datafield>
+    <datafield tag="040" ind1=" " ind2=" ">
+        <subfield code="a">BTCTA</subfield>
+        <subfield code="b">eng</subfield>
+        <subfield code="c">BTCTA</subfield>
+        <subfield code="d">TDF</subfield>
+        <subfield code="d">CIN</subfield>
+        <subfield code="d">MNU</subfield>
+    </datafield>
+    <datafield tag="041" ind1="0" ind2=" ">
+        <subfield code="d">eng</subfield>
+        <subfield code="d">lat</subfield>
+        <subfield code="e">eng</subfield>
+        <subfield code="e">lat</subfield>
+        <subfield code="e">fre</subfield>
+        <subfield code="e">ger</subfield>
+        <subfield code="n">eng</subfield>
+        <subfield code="n">lat</subfield>
+        <subfield code="g">eng</subfield>
+        <subfield code="g">fre</subfield>
+        <subfield code="g">ger</subfield>
+    </datafield>
+    <datafield tag="047" ind1=" " ind2=" ">
+        <subfield code="a">mo</subfield>
+        <subfield code="a">an</subfield>
+    </datafield>
+    <datafield tag="049" ind1=" " ind2=" ">
+        <subfield code="a">BXMM</subfield>
+    </datafield>
+    <datafield tag="099" ind1=" " ind2=" ">
+        <subfield code="a">M</subfield>
+        <subfield code="a">5.1</subfield>
+        <subfield code="a">.S85</subfield>
+        <subfield code="a">P37</subfield>
+        <subfield code="a">2012</subfield>
+    </datafield>
+    <datafield tag="110" ind1="2" ind2=" ">
+        <subfield code="a">Stile Antico (Musical group)</subfield>
+        <subfield code="4">prf</subfield>
+    </datafield>
+    <datafield tag="245" ind1="1" ind2="0">
+        <subfield code="a">Passion &amp; Resurrection</subfield>
+        <subfield code="h">[sound recording].</subfield>
+    </datafield>
+    <datafield tag="246" ind1="3" ind2=" ">
+        <subfield code="a">Passion and Resurrection</subfield>
+    </datafield>
+    <datafield tag="260" ind1=" " ind2=" ">
+        <subfield code="a">Arles, France :</subfield>
+        <subfield code="b">Harmonia Mundi ;</subfield>
+        <subfield code="a">Burbank, Calif. :</subfield>
+        <subfield code="b">Production USA,</subfield>
+        <subfield code="c">p2012.</subfield>
+    </datafield>
+    <datafield tag="300" ind1=" " ind2=" ">
+        <subfield code="a">1 sound disc :</subfield>
+        <subfield code="b">digital, SACD ;</subfield>
+        <subfield code="c">4 3/4 in.</subfield>
+    </datafield>
+    <datafield tag="500" ind1=" " ind2=" ">
+        <subfield code="a">"Music inspired by Holy Week"--Container.</subfield>
+    </datafield>
+    <datafield tag="500" ind1=" " ind2=" ">
+        <subfield code="a">Super audio CD (hybrid); multi-channel and stereo sound; playable on CD and SACD players.
+        </subfield>
+    </datafield>
+    <datafield tag="500" ind1=" " ind2=" ">
+        <subfield code="a">Program notes in English, German and French, and texts with English, French and German
+            translations (42 p. : col. ill.) in container.
+        </subfield>
+    </datafield>
+    <datafield tag="505" ind1="0" ind2=" ">
+        <subfield code="a">Woefully arrayed / William Cornysh (7:37)</subfield>
+    </datafield>
+    <datafield tag="511" ind1="0" ind2=" ">
+        <subfield code="a">Stile Antico.</subfield>
+    </datafield>
+    <datafield tag="518" ind1=" " ind2=" ">
+        <subfield code="a">Recorded Feb. 2012, All Hallows Church, Gospel Oak, London.</subfield>
+    </datafield>
+    <datafield tag="546" ind1=" " ind2=" ">
+        <subfield code="a">Sung in English and Latin.</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+        <subfield code="a">Choruses, Sacred (Mixed voices), Unaccompanied.</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+        <subfield code="a">Anthems.</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+        <subfield code="a">Motets.</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+        <subfield code="a">Passion music.</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+        <subfield code="a">Easter music.</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2="2">
+        <subfield code="a">Cornysh, William,</subfield>
+        <subfield code="d">-1523.</subfield>
+        <subfield code="t">Woffully araid</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2="2">
+        <subfield code="a">Gibbons, Orlando,</subfield>
+        <subfield code="d">1583-1625.</subfield>
+        <subfield code="t">Hosanna to the Son of David.</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2="2">
+        <subfield code="a">Tallis, Thomas,</subfield>
+        <subfield code="d">approximately 1505-1585.</subfield>
+        <subfield code="t">I call and cry to Thee</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2="2">
+        <subfield code="a">Lasso, Orlando di,</subfield>
+        <subfield code="d">1532-1594.</subfield>
+        <subfield code="t">In monte Oliveti.</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2="2">
+        <subfield code="a">Morales, Cristóbal de,</subfield>
+        <subfield code="d">approximately 1500-1553.</subfield>
+        <subfield code="t">O crux, ave, spes unica</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2="2">
+        <subfield code="a">Victoria, Tomás Luis de,</subfield>
+        <subfield code="d">approximately 1548-1611.</subfield>
+        <subfield code="t">Motets</subfield>
+        <subfield code="n">(1572).</subfield>
+        <subfield code="p">O vos omnes, qui transitis per viam</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2="2">
+        <subfield code="a">McCabe, John,</subfield>
+        <subfield code="d">1939-2015.</subfield>
+        <subfield code="t">Woefully arrayed.</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2="2">
+        <subfield code="a">Taverner, John,</subfield>
+        <subfield code="d">approximately 1490-1545.</subfield>
+        <subfield code="t">Dum transisset Sabbatum,</subfield>
+        <subfield code="n">no. 1</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2="2">
+        <subfield code="a">Guerrero, Francisco,</subfield>
+        <subfield code="d">1528?-1599.</subfield>
+        <subfield code="t">Motets,</subfield>
+        <subfield code="n">book 1.</subfield>
+        <subfield code="p">Maria Magdalena.</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2="2">
+        <subfield code="a">Byrd, William,</subfield>
+        <subfield code="d">1539 or 1540-1623.</subfield>
+        <subfield code="t">Cantiones sacrae,</subfield>
+        <subfield code="n">liber 1.</subfield>
+        <subfield code="p">In resurrectione tua</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2="2">
+        <subfield code="a">Lhéritier, Jean.</subfield>
+        <subfield code="t">Surrexit pastor bonus.</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2="2">
+        <subfield code="a">Gibbons, Orlando,</subfield>
+        <subfield code="d">1583-1625.</subfield>
+        <subfield code="t">I am the resurrection and the life.</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2="2">
+        <subfield code="a">Crecquillon, Thomas,</subfield>
+        <subfield code="d">-1557?.</subfield>
+        <subfield code="t">Congratulamini mihi omnes</subfield>
+    </datafield>
+    <datafield tag="938" ind1=" " ind2=" ">
+        <subfield code="a">Baker and Taylor</subfield>
+        <subfield code="b">BTCP</subfield>
+        <subfield code="n">BECDHMD HMU807555</subfield>
+    </datafield>
+    <datafield tag="938" ind1=" " ind2=" ">
+        <subfield code="a">Theodore Front Musical Literature</subfield>
+        <subfield code="b">TFRT</subfield>
+        <subfield code="n">TF330112</subfield>
+    </datafield>
+    <datafield tag="994" ind1=" " ind2=" ">
+        <subfield code="a">C0</subfield>
+        <subfield code="b">BXM</subfield>
+    </datafield>
+    <datafield tag="INT" ind1=" " ind2=" ">
+        <subfield code="a">P</subfield>
+    </datafield>
+    <datafield tag="INST" ind1=" " ind2=" ">
+        <subfield code="a">01BC_INST</subfield>
+    </datafield>
+    <datafield tag="AVA" ind1=" " ind2=" ">
+        <subfield code="a">01BC_INST</subfield>
+        <subfield code="b">ONL</subfield>
+        <subfield code="c">Media 7 day</subfield>
+        <subfield code="e">available</subfield>
+        <subfield code="f">1</subfield>
+        <subfield code="g">0</subfield>
+        <subfield code="j">MED_7D</subfield>
+        <subfield code="k">0</subfield>
+        <subfield code="p">1</subfield>
+    </datafield>
+</record>
