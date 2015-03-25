@@ -62,19 +62,6 @@ class OAIReader(object):
         return self.doc.find(xpath).attrib['status']
 
     @property
-    def restricted(self):
-        """
-        True if record is restricted for publication
-
-        :rtype: bool
-        :return: is the OAI restricted for publication?
-        """
-        xpath = OAIReader._marc_xpath + '/{1}datafield[@tag="999"]/{1}subfield'
-        xpath = self._format_xpath(xpath)
-        restriction_node = self.doc.find(xpath)
-        return restriction_node is not None and restriction_node.text == 'CR_RESTRICTED'
-
-    @property
     def record(self):
         """
         The MARC record attached to the OAI record
