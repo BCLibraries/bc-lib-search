@@ -23,7 +23,7 @@ class TestPNXReader(TestCase):
 
     def test_id(self):
         self.oai_reader.read(self.create_oai)
-        self.assertEqual('urm_publish:61441201100001021', self.oai_reader.id)
+        self.assertEqual('urm_publish-61441201100001021', self.oai_reader.id)
 
     def test_record(self):
         self.oai_reader.read(self.create_oai)

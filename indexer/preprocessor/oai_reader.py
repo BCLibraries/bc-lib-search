@@ -45,7 +45,7 @@ class OAIReader(object):
         :return: the OAI-PMH record id
         """
         xpath = self._format_xpath('{0}ListRecords/{0}record/{0}header/{0}identifier')
-        return self.doc.find(xpath).text
+        return self.doc.find(xpath).text.replace(':','-')
 
     @property
     def status(self):
