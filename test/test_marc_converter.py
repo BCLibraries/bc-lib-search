@@ -58,7 +58,7 @@ class TestMARCConverter(unittest.TestCase):
         self.assertEqual(['1234-5678'], self.marc_converter.issn)
 
     def test_isbn(self):
-        self.assertEqual(['12345678910'], self.marc_converter.isbn)
+        self.assertEqual('12345678910', self.marc_converter.isbn)
 
     def test_restricted(self):
         self.assertFalse(self.marc_converter.restricted)

@@ -16,7 +16,7 @@
         "authors": {
           "type": "string"
         },
-        "collection": {
+        "collections": {
           "type": "string",
           "index": "not_analzyed"
         },

@@ -14,7 +14,7 @@ class TestPNXReader(TestCase):
 
     def test_delete_status(self):
         self.oai_reader.read(self.delete_oai)
-        self.assertEqual('delete', self.oai_reader.status)
+        self.assertEqual('deleted', self.oai_reader.status)
 
     def test_bad_status(self):
         self.oai_reader.read(self._load_oai('oai-03.xml'))

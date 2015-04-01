@@ -38,7 +38,7 @@ class MARCConverter(object):
 
     @property
     def isbn(self):
-        return [self.marc_record.isbn()]
+        return self.marc_record.isbn()
 
     @property
     def restricted(self):
@@ -50,7 +50,11 @@ class MARCConverter(object):
 
     @property
     def call_number(self):
-        return self._get_subfields('AVA', 'd')
+        callnum = self._get_subfields('AVA', 'd')
+        if not any(callnum):
+            return []
+        else:
+            return callnum
 
     @property
     def location(self):
@@ -58,7 +62,11 @@ class MARCConverter(object):
 
     @property
     def table_of_contents(self):
-        return self._get_subfields('505', 'a')
+        toc = self._get_subfields('505', 'a')
+        if not any(toc):
+            return []
+        else:
+            return toc
 
     @property
     def notes(self):

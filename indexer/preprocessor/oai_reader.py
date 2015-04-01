@@ -20,9 +20,9 @@ class OAIReader(object):
         status          The OAI-PMH record status ("new" or "delete")
 
     """
-    _marc_xpath = '{0}ListRecords/{0}record/{0}metadata/{1}record'
+    _marc_xpath = '{http://www.openarchives.org/OAI/2.0/}ListRecords/{http://www.openarchives.org/OAI/2.0/}record/{http://www.openarchives.org/OAI/2.0/}metadata/{http://www.loc.gov/MARC21/slim}record'
 
-    _valid_statuses = ['new', 'delete']
+    _valid_statuses = ['new', 'deleted', 'updated']
 
     def __init__(self):
         self.handler = XmlHandler()
@@ -45,7 +45,7 @@ class OAIReader(object):
         :return: the OAI-PMH record id
         """
         xpath = self._format_xpath('{0}ListRecords/{0}record/{0}header/{0}identifier')
-        return self.doc.find(xpath).text.replace(':','-')
+        return self.doc.find(xpath).text.replace(':', '-')
 
     @property
     def status(self):
@@ -53,7 +53,7 @@ class OAIReader(object):
         The OAI-PMH command
 
         :rtype: str
-        :return: one of "new" or "delete"
+        :return: one of "new", "deleted", or "updated"
         """
         xpath = self._format_xpath('{0}ListRecords/{0}record/{0}header')
         status = self.doc.find(xpath).attrib['status']
@@ -69,14 +69,18 @@ class OAIReader(object):
         :rtype: pymarc.Record
         :return: The MARC record
         """
-        xpath = OAIReader._format_xpath(OAIReader._marc_xpath)
-        xml = ET.tostring(self.doc.find(xpath)).decode("utf-8")
-        parse_xml(StringIO(xml), self.handler)
-        return self.handler.records[0]
+        results = self.doc.find(self._marc_xpath)
+        if results:
+            xml = ET.tostring(results).decode("utf-8")
+            parse_xml(StringIO(xml), self.handler)
+            return self.handler.records.pop()
+        else:
+            return None
 
     @staticmethod
     def _format_xpath(xpath):
         return xpath.format("{http://www.openarchives.org/OAI/2.0/}", "{http://www.loc.gov/MARC21/slim}")
+
 
 class OAIError(Exception):
     def __init__(self, value):

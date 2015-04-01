@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
     <ListRecords>
         <record>
-            <header status="delete">
+            <header status="deleted">
                 <identifier>urm_publish:71313312750001021</identifier>
             </header>
             <metadata></metadata>

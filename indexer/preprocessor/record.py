@@ -16,7 +16,7 @@ class Record:
         self.series = []
         self.language = []
         self.collection = []
-        self.library = []
+        self.location = []
         self.rtype = ''
         self.genre = []
         self.course = []
