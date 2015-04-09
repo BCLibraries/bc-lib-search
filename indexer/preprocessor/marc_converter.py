@@ -76,5 +76,14 @@ class MARCConverter(object):
     def publisher(self):
         return self.marc_record.publisher().rstrip(',.')
 
+    @property
+    def type(self):
+        if self.marc_record.leader[7] == 'm':
+            return 'book'
+        elif self.marc_record.leader[7] == 's':
+            return 'serial'
+        else:
+            return 'other'
+
     def _get_subfields(self, field, subfield):
         return [x[subfield] for x in self.marc_record.get_fields(field)]

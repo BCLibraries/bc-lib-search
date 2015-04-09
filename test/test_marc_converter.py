@@ -27,6 +27,11 @@ class TestMARCConverter(unittest.TestCase):
         pymarc.parse_xml(io.StringIO(xml), handler)
         marc_toc = handler.records.pop()
 
+    with open('marcxml-05.xml', "r") as f:
+        xml = f.read().replace('\n', '')
+        pymarc.parse_xml(io.StringIO(xml), handler)
+        marc_journal = handler.records.pop()
+
     def setUp(self):
         self.marc_converter = MARCConverter()
         self.marc_converter.read(TestMARCConverter.marc_basic)
@@ -88,3 +93,13 @@ class TestMARCConverter(unittest.TestCase):
     def test_publisher(self):
         self.marc_converter.read(TestMARCConverter.marc_ava)
         self.assertEqual('Pearson', self.marc_converter.publisher)
+
+    def test_type(self):
+        self.marc_converter.read(TestMARCConverter.marc_ava)
+        self.assertEqual('book', self.marc_converter.type)
+
+        self.marc_converter.read(TestMARCConverter.marc_journal)
+        self.assertEqual('serial', self.marc_converter.type)
+
+        self.marc_converter.read(TestMARCConverter.marc_basic)
+        self.assertEqual('other', self.marc_converter.type)
