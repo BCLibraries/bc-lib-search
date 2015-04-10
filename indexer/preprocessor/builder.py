@@ -85,7 +85,7 @@ class Builder(object):
             self.current_oai = tarinfo.name
             f = tar.extractfile(tarinfo)
             contents = f.read()
-            print(contents)
+            contents = contents.decode('utf-8')
             self.read_oai(contents)
 
 
@@ -125,6 +125,8 @@ class Builder(object):
 
         self.reporter.add_locations(self.marc_reader.location)
         self.reporter.add_collections(self.marc_reader.collections)
+
+        print(json.dumps(pull_data, ensure_ascii=False))
 
     def _write_to_autocomplete_index(self):
         pass

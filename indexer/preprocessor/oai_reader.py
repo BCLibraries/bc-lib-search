@@ -71,7 +71,7 @@ class OAIReader(object):
         """
         results = self.doc.find(self._marc_xpath)
         if results:
-            xml = ET.tostring(results).decode("utf-8")
+            xml = ET.tostring(results,encoding='utf-8').decode()
             parse_xml(StringIO(xml), self.handler)
             return self.handler.records.pop()
         else:
