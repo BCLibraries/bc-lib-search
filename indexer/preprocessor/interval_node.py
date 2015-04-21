@@ -1,4 +1,4 @@
-from preprocessor.category import Category
+from .category import Category
 
 
 class IntervalNode:
@@ -33,7 +33,7 @@ class IntervalNode:
     def get_matches(self, lcc):
         """
         :type lcc: str
-        :return: Category[]
+        :return: dict
         """
         results = []
 
@@ -43,13 +43,13 @@ class IntervalNode:
 
             i = 0
             while i < num_cats and self.cats_by_end[i].max_lcc >= lcc:
-                results.append(self.cats_by_end[i])
+                results.append(self.cats_by_end[i].terms)
                 i += 1
 
         else:
             i = 0
             while i < num_cats and self.cats_by_start[i].min_lcc <= lcc:
-                results.append(self.cats_by_start[i])
+                results.append(self.cats_by_start[i].terms)
                 i += 1
 
         return results

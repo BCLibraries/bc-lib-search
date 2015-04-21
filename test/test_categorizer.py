@@ -8,36 +8,23 @@ class TestCallNumberCategorizer(TestCase):
         cls.categorizer = Categorizer('lcc_flat.json')
 
     def test_categorize_by_callnum(self):
-        expected_0 = ['Humanities', 'Germanic Languages and Literatures']
+        AMER_CULT = {1: 'Humanities', 2: 'American Culture'}
+        ECOLOGY = {1: 'Science', 2: 'Biology', 3: 'Ecology and Evolutionary Biology'}
+        GERMANIC_LANG = {1: 'Humanities', 2: 'Germanic Languages and Literatures'}
+        LEGAL_STUDIES = {1: 'Government, Politics and Law', 2: 'Law and Legal Studies'}
+        PHILOSOPHY = {1: 'Humanities', 2: 'Philosophy'}
+        SOCIAL_WORK = {1: 'Social Sciences', 2: 'Social Work'}
+        SOCIOLOGY = {1: 'Social Sciences', 2: 'Sociology'}
+        STATE_GOV = {1: 'Government, Politics and Law', 2: 'Government Information',
+                     3: 'State and Local Government Information'}
+        US_HIST = {1: 'Humanities', 2: 'United States History'}
+        ZOOLOGY = {1: 'Science', 2: 'Biology', 3: 'Zoology'}
 
-        self.assertEqual(expected_0, self.categorizer.categorize_by_callnum('PT 1937')[0].terms)
-
-        expected_0 = ['Government, Politics and Law', 'Law and Legal Studies']
-        expected_1 = ['Humanities', 'Philosophy']
-        expected_2 = ['Government, Politics and Law', 'Government Information',
-                      'State and Local Government Information']
-        cats = self.categorizer.categorize(lcc_norm='K  0341')
-        self.assertEqual(expected_0, cats[0].terms)
-        self.assertEqual(expected_1, cats[2].terms)
-        self.assertEqual(expected_2, cats[1].terms)
-
-        expected_0 = ['Science', 'Biology', 'Zoology']
-        expected_1 = ['Science', 'Biology', 'Ecology and Evolutionary Biology']
-        cats = self.categorizer.categorize(lcc_norm='QL 073700C250G650 000 2012')
-        self.assertEqual(expected_0, cats[0].terms)
-        self.assertEqual(expected_1, cats[1].terms)
-
-        expected_0 = ['Social Sciences', 'Sociology']
-        expected_1 = ['Social Sciences', 'Social Work']
-        cats = self.categorizer.categorize(lcc_norm='HV 088100P725 000 000 2011')
-        self.assertEqual(expected_0, cats[0].terms)
-        self.assertEqual(expected_1, cats[1].terms)
-
-        expected_0 = ['Humanities', 'American Culture']
-        expected_1 = ['Humanities', 'United States History']
-        cats = self.categorizer.categorize(lcc_norm='E  017300K870 000 000 2013')
-        self.assertEqual(expected_0, cats[0].terms)
-        self.assertEqual(expected_1, cats[1].terms)
+        self.assertEqual([GERMANIC_LANG], self.categorizer.categorize(lcc_norm='PT 1937'))
+        self.assertEqual([LEGAL_STUDIES, STATE_GOV, PHILOSOPHY], self.categorizer.categorize(lcc_norm='K  0341'))
+        self.assertEqual([ZOOLOGY, ECOLOGY], self.categorizer.categorize(lcc_norm='QL 073700C250G650 000 2012'))
+        self.assertEqual([SOCIOLOGY, SOCIAL_WORK], self.categorizer.categorize(lcc_norm='HV 088100P725 000 000 2011'))
+        self.assertEqual([AMER_CULT, US_HIST], self.categorizer.categorize(lcc_norm='E  017300K870 000 000 2013'))
 
     def test_categorize_by_location(self):
         IRISH_MUSIC = {1: 'Arts', 2: 'Music', 3: 'Irish Music'}
@@ -64,7 +51,6 @@ class TestCallNumberCategorizer(TestCase):
         self.assertEqual([IRISH_MUSIC], self.categorizer.categorize(collection='BRETHOLZ', location='ERC-STACK'))
         self.assertEqual([IRISH_STUDIES], self.categorizer.categorize(collection='IRISH SERIALS', location='ERC-STACK',
                                                                       lcc_norm=lcc))
-
         # Location takes precedence over call number.
         self.assertEqual([ERC], self.categorizer.categorize(location='ERC-STACK', lcc_norm=lcc))
 

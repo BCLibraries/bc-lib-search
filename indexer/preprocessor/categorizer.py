@@ -37,9 +37,9 @@ class Categorizer(object):
         categories = []
         for cat in cat_list:
             if cat["startNorm"] is not None and cat["endNorm"] is not None:
-                terms = [cat['1'], cat['2']]
+                terms = {1: cat['1'], 2: cat['2']}
                 try:
-                    terms.append(cat['3'])
+                    terms[3] = cat['3']
                 except KeyError:
                     pass
 
