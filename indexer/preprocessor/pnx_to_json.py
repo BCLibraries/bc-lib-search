@@ -102,7 +102,7 @@ class PNXtoJSON(dict):
         self["LCCDep3"] = [];
         self["LCCByBranch"] = [];
         if self["LCCNorm"]:
-            categories = self.categorizer.categorize(self["LCCNorm"])
+            categories = self.categorizer.categorize(lcc_norm=self["LCCNorm"])
             if categories:
 
                 for c in categories:

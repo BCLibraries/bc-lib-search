@@ -1,9 +1,10 @@
 import json
-from preprocessor.category import Category
-from preprocessor.interval_node import IntervalNode
+from .category import Category
+from .interval_node import IntervalNode
+from .category_maps import COLLECTION_MAP, LOCATION_MAP
 
 
-class CallNumberCategorizer:
+class Categorizer(object):
     """
     Converts normalized LCC call numbers to taxonomy categories
 
@@ -15,6 +16,16 @@ class CallNumberCategorizer:
         categories = self.build_category_list(cat_list)
         self.root = self.add_node(categories)
         self.results = []
+
+    def categorize(self, *, collection=None, location=None, lcc_norm=None):
+        if COLLECTION_MAP.get(collection, None):
+            return COLLECTION_MAP[collection]
+        elif LOCATION_MAP.get(location, None):
+            return LOCATION_MAP[location]
+        elif lcc_norm:
+            return self.categorize_by_callnum(lcc_norm)
+        else:
+            return []
 
     def build_category_list(self, cat_list):
         """
@@ -75,17 +86,17 @@ class CallNumberCategorizer:
 
         return node
 
-    def categorize(self, norm_lcc):
+    def categorize_by_callnum(self, lcc_norm):
         """
         Get taxonomy terms for an LC call number
 
-        :type norm_lcc: str
-        :param norm_lcc: a normalized LC call number
+        :type lcc_norm: str
+        :param lcc_norm: a normalized LC call number
         :returns a list of relevant categories
         :rtype: Category[]
         """
         self.results = []
-        self.find(self.root, norm_lcc)
+        self.find(self.root, lcc_norm)
         return self.results
 
     def find(self, node, lcc):
