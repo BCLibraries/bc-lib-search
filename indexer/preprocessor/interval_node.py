@@ -1,4 +1,4 @@
-from category import Category
+from preprocessor.category import Category
 
 
 class IntervalNode:

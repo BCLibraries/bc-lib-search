@@ -1,9 +1,9 @@
 import json
-from interval_node import IntervalNode
-from category import Category
+from preprocessor.category import Category
+from preprocessor.interval_node import IntervalNode
 
 
-class Categorizer:
+class CallNumberCategorizer:
     """
     Converts normalized LCC call numbers to taxonomy categories
 
