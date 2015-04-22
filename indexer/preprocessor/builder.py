@@ -3,7 +3,6 @@ import tarfile
 import os
 import shelve
 import sys
-import json
 
 sys.path.append('/Users/benjaminflorin/PycharmProjects/bc-lib-search')
 
@@ -12,10 +11,11 @@ from indexer.preprocessor.marc_converter import MARCConverter
 from indexer.preprocessor.reporter import Reporter
 from indexer.preprocessor.callnumber import normalize
 from indexer.preprocessor.categorizer import Categorizer
+from indexer.preprocessor.json_writer import JsonWriter
 
 
 class Builder(object):
-    def __init__(self, oai_reader, marc_reader, reporter, categorizer):
+    def __init__(self, oai_reader, marc_reader, reporter, categorizer, writer):
         """
         :type reporter: indexer.preprocessor.oai_reader.Reporter
         :type categorizer: indexer.preprocesor.categorizer.Categorizer
@@ -23,6 +23,8 @@ class Builder(object):
         :param oai_reader:
         :type marc_reader:  indexer.preprocessor.marc_converter.MARCConverter
         :param marc_reader:
+        :type writer: indexer.preprocessor.json_writer.JsonWriter
+        :param writer: a writer
         :return:
         """
         self.records_seen = shelve.open('shelf')
@@ -31,6 +33,7 @@ class Builder(object):
         self.marc_reader = marc_reader
         self.reporter = reporter
         self.categorizer = categorizer
+        self.writer = writer
 
         self.current_tarball = ''
         self.current_oai = ''
@@ -137,7 +140,7 @@ class Builder(object):
         self.reporter.add_locations(self.marc_reader.location)
         self.reporter.add_collections(self.marc_reader.collections)
 
-        print(json.dumps(pull_data, ensure_ascii=False))
+        self.writer.write(data)
 
     def _write_to_autocomplete_index(self):
         pass
@@ -147,16 +150,17 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Convert MARC records to JSON for export to ElasticSearch')
 
     parser.add_argument('--src', type=str, help='source directory', required=True)
-    parser.add_argument('--dest', type=str, help='destination directory')
+    parser.add_argument('--dest', type=str, help='destination directory', required=True)
     parser.add_argument('--start', type=int, help='timestamp to import from', required=True)
-    parser.add_argument('--until', type=int, help='timestamp to import until')
+    parser.add_argument('--until', type=int, help='timestamp to import until', required=True)
 
     args = parser.parse_args()
 
-    if args.src and args.start and args.until:
+    if args.src and args.start and args.until and args.dest:
+        os.makedirs(args.dest, exist_ok=True)
         this_dir = os.path.dirname(__file__)
         lcc_map = os.path.join(this_dir, 'categories/lcc_flat.json')
-        p = Builder(OAIReader(), MARCConverter(), Reporter(), Categorizer(lcc_map))
+        p = Builder(OAIReader(), MARCConverter(), Reporter(), Categorizer(lcc_map), JsonWriter(args.dest))
         p.build(args.src, args.start, args.until)
     else:
         parser.print_help()

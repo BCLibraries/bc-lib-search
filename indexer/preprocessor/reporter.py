@@ -25,7 +25,6 @@ class Reporter(object):
         print("Restricted: {}".format(self.restricted))
         print("Law: {}".format(self.law_only))
         print("Skipped: {}".format(self.skips))
-        sys.stdout.flush()
 
     def report_read_error(self, tarball, oai):
         print('Error reading ' + tarball + ':' + oai, file=sys.stderr)
@@ -45,13 +44,11 @@ class Reporter(object):
                 self.collections[collection] = 1
 
     def dump_collections(self):
-        print(json.dumps(self.collections, indent=4))
-        sys.stdout.flush()
+        print(self.collections)
 
 
     def dump_locations(self):
-        print(json.dumps(self.locations, indent=4))
-        sys.stdout.flush()
+        print(self.locations)
 
     @property
     def oais_read(self):
