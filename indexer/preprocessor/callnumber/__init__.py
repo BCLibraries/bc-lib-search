@@ -48,6 +48,8 @@ lccn_re = re.compile(r'''^
 
 
 def normalize(lc, bottom=False):
+    if not lc:
+        return None
     lc = lc.upper()
     bottomout = bottom
 

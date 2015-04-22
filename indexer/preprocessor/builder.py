@@ -10,12 +10,15 @@ sys.path.append('/Users/benjaminflorin/PycharmProjects/bc-lib-search')
 from indexer.preprocessor.oai_reader import OAIReader
 from indexer.preprocessor.marc_converter import MARCConverter
 from indexer.preprocessor.reporter import Reporter
+from indexer.preprocessor.callnumber import normalize
+from indexer.preprocessor.categorizer import Categorizer
 
 
 class Builder(object):
-    def __init__(self, oai_reader, marc_reader, reporter):
+    def __init__(self, oai_reader, marc_reader, reporter, categorizer):
         """
         :type reporter: indexer.preprocessor.oai_reader.Reporter
+        :type categorizer: indexer.preprocesor.categorizer.Categorizer
         :type oai_reader:  indexer.preprocessor.oai_reader.OAIReader
         :param oai_reader:
         :type marc_reader:  indexer.preprocessor.marc_converter.MARCConverter
@@ -27,6 +30,7 @@ class Builder(object):
         self.oai_reader = oai_reader
         self.marc_reader = marc_reader
         self.reporter = reporter
+        self.categorizer = categorizer
 
         self.current_tarball = ''
         self.current_oai = ''
@@ -103,18 +107,25 @@ class Builder(object):
         return True
 
     def _write_to_catalog_index(self):
+        call_nums = self.marc_reader.call_number
+        call_nums_norm = [normalize(lcc) for lcc in call_nums]
+        locations = self.marc_reader.location
+        collections = self.marc_reader.collections
+        taxonomy = self.categorizer.categorize(collections=collections, locations=locations, lccs_norm=call_nums_norm)
+
         pull_data = {
             'title': self.marc_reader.title,
             'author': self.marc_reader.author,
             'subjects': self.marc_reader.subjects,
-            'location': self.marc_reader.location,
+            'location': locations,
             'issn': self.marc_reader.issn,
             'isbn': self.marc_reader.isbn,
-            'collections': self.marc_reader.collections,
+            'collections': collections,
             'series': self.marc_reader.series,
-            'callnum': self.marc_reader.call_number,
+            'callnum': call_nums,
             'notes': self.marc_reader.notes,
-            'toc': self.marc_reader.table_of_contents
+            'toc': self.marc_reader.table_of_contents,
+            'taxonomy': taxonomy
         }
 
         data = {}
@@ -143,7 +154,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.src and args.start and args.until:
-        p = Builder(OAIReader(), MARCConverter(), Reporter())
+        this_dir = os.path.dirname(__file__)
+        lcc_map = os.path.join(this_dir, 'categories/lcc_flat.json')
+        p = Builder(OAIReader(), MARCConverter(), Reporter(), Categorizer(lcc_map))
         p.build(args.src, args.start, args.until)
     else:
         parser.print_help()

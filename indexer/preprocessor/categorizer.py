@@ -17,15 +17,22 @@ class Categorizer(object):
         self.root = self.add_node(categories)
         self.results = []
 
-    def categorize(self, *, collection=None, location=None, lcc_norm=None):
-        if COLLECTION_MAP.get(collection, None):
-            return COLLECTION_MAP[collection]
-        elif LOCATION_MAP.get(location, None):
-            return LOCATION_MAP[location]
-        elif lcc_norm:
-            return self.categorize_by_callnum(lcc_norm)
-        else:
-            return []
+    def categorize(self, *, collections=[], locations=[], lccs_norm=[]):
+        result = []
+
+        for collection in collections:
+            result.extend(COLLECTION_MAP.get(collection,[]))
+        if len(result):
+            return result
+
+        for location in locations:
+            result.extend(LOCATION_MAP.get(location,[]))
+        if len(result):
+            return result
+
+        for lcc in lccs_norm:
+            result.extend(self.categorize_by_callnum(lcc))
+        return result
 
     def build_category_list(self, cat_list):
         """
@@ -95,6 +102,8 @@ class Categorizer(object):
         :returns a list of relevant categories
         :rtype: Category[]
         """
+        if not lcc_norm:
+            return []
         self.results = []
         self.find(self.root, lcc_norm)
         return self.results

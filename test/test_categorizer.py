@@ -20,39 +20,40 @@ class TestCallNumberCategorizer(TestCase):
         US_HIST = {1: 'Humanities', 2: 'United States History'}
         ZOOLOGY = {1: 'Science', 2: 'Biology', 3: 'Zoology'}
 
-        self.assertEqual([GERMANIC_LANG], self.categorizer.categorize(lcc_norm='PT 1937'))
-        self.assertEqual([LEGAL_STUDIES, STATE_GOV, PHILOSOPHY], self.categorizer.categorize(lcc_norm='K  0341'))
-        self.assertEqual([ZOOLOGY, ECOLOGY], self.categorizer.categorize(lcc_norm='QL 073700C250G650 000 2012'))
-        self.assertEqual([SOCIOLOGY, SOCIAL_WORK], self.categorizer.categorize(lcc_norm='HV 088100P725 000 000 2011'))
-        self.assertEqual([AMER_CULT, US_HIST], self.categorizer.categorize(lcc_norm='E  017300K870 000 000 2013'))
+        self.assertEqual([GERMANIC_LANG], self.categorizer.categorize(lccs_norm=['PT 1937']))
+        self.assertEqual([LEGAL_STUDIES, STATE_GOV, PHILOSOPHY], self.categorizer.categorize(lccs_norm=['K  0341']))
+        self.assertEqual([ZOOLOGY, ECOLOGY], self.categorizer.categorize(lccs_norm=['QL 073700C250G650 000 2012']))
+        self.assertEqual([SOCIOLOGY, SOCIAL_WORK], self.categorizer.categorize(lccs_norm=['HV 088100P725 000 000 2011']))
+        self.assertEqual([AMER_CULT, US_HIST], self.categorizer.categorize(lccs_norm=['E  017300K870 000 000 2013']))
 
     def test_categorize_by_location(self):
         IRISH_MUSIC = {1: 'Arts', 2: 'Music', 3: 'Irish Music'}
         ERC = {1: 'Social Sciences', 2: 'Education', 3: 'ERC'}
         ARCHIVES = {1: 'General Information Sources', 2: 'Archives and Manuscripts'}
-        self.assertEqual([IRISH_MUSIC], self.categorizer.categorize(location='ARCH-IMCR'))
-        self.assertEqual([ARCHIVES], self.categorizer.categorize(location='ARCH-CONG'))
-        self.assertEqual([ERC], self.categorizer.categorize(location='ERC-STACK'))
+        self.assertEqual([IRISH_MUSIC], self.categorizer.categorize(locations=['ARCH-IMCR']))
+        self.assertEqual([ARCHIVES], self.categorizer.categorize(locations=['ARCH-CONG']))
+        self.assertEqual([ERC], self.categorizer.categorize(locations=['ERC-STACK']))
 
     def test_categorize_by_collection(self):
         IRISH_MUSIC = {1: 'Arts', 2: 'Music', 3: 'Irish Music'}
         IRISH_STUDIES = {1: 'International Studies', 2: 'British and Irish Studies', 3: 'Irish Studies'}
-        self.assertEqual([IRISH_MUSIC], self.categorizer.categorize(collection='BRETHOLZ'))
-        self.assertEqual([IRISH_STUDIES], self.categorizer.categorize(collection='IRISH SERIALS'))
+        self.assertEqual([IRISH_MUSIC], self.categorizer.categorize(collections=['BRETHOLZ']))
+        self.assertEqual([IRISH_STUDIES], self.categorizer.categorize(collections=['IRISH SERIALS']))
 
     def test_combined_categorization(self):
         IRISH_MUSIC = {1: 'Arts', 2: 'Music', 3: 'Irish Music'}
         IRISH_STUDIES = {1: 'International Studies', 2: 'British and Irish Studies', 3: 'Irish Studies'}
         ERC = {1: 'Social Sciences', 2: 'Education', 3: 'ERC'}
         ARCHIVES = {1: 'General Information Sources', 2: 'Archives and Manuscripts'}
-        lcc = 'QL 073700C250G650 000 2012'
+        lcc = ['QL 073700C250G650 000 2012']
 
         # Collection takes precedence over location & call number.
-        self.assertEqual([IRISH_MUSIC], self.categorizer.categorize(collection='BRETHOLZ', location='ERC-STACK'))
-        self.assertEqual([IRISH_STUDIES], self.categorizer.categorize(collection='IRISH SERIALS', location='ERC-STACK',
-                                                                      lcc_norm=lcc))
+        self.assertEqual([IRISH_MUSIC], self.categorizer.categorize(collections=['BRETHOLZ'], locations=['ERC-STACK']))
+        self.assertEqual([IRISH_STUDIES],
+                         self.categorizer.categorize(collections=['IRISH SERIALS'], locations=['ERC-STACK'],
+                                                     lccs_norm=lcc))
         # Location takes precedence over call number.
-        self.assertEqual([ERC], self.categorizer.categorize(location='ERC-STACK', lcc_norm=lcc))
+        self.assertEqual([ERC], self.categorizer.categorize(locations=['ERC-STACK'], lccs_norm=lcc))
 
 
 
