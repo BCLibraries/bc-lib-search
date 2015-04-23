@@ -114,7 +114,7 @@ class Builder(object):
         call_nums_norm = [normalize(lcc) for lcc in call_nums]
         locations = self.marc_reader.location
         collections = self.marc_reader.collections
-        taxonomy = self.categorizer.categorize(collections=collections, locations=locations, lccs_norm=call_nums_norm)
+        taxonomies = self.categorizer.categorize(collections=collections, locations=locations, lccs_norm=call_nums_norm)
 
         pull_data = {
             'title': self.marc_reader.title,
@@ -128,8 +128,19 @@ class Builder(object):
             'callnum': call_nums,
             'notes': self.marc_reader.notes,
             'toc': self.marc_reader.table_of_contents,
-            'taxonomy': taxonomy
+            'tax1': [],
+            'tax2': [],
+            'tax3': [],
+            'id': self.oai_reader.id
         }
+
+        for taxonomy in taxonomies:
+            pull_data['tax1'].append(taxonomy[1])
+            pull_data['tax2'].append(taxonomy[2])
+            try:
+                pull_data['tax3'].append(taxonomy[3])
+            except KeyError as e:
+                pass
 
         data = {}
 

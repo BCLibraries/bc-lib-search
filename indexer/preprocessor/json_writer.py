@@ -3,7 +3,7 @@ import json
 
 
 class JsonWriter(object):
-    def __init__(self, output_dir, recs_per_file=1000):
+    def __init__(self, output_dir, recs_per_file=10000):
         """
         :type output_dir: str
         :param output_dir: Full path to output directory
@@ -31,7 +31,7 @@ class JsonWriter(object):
         if self.records_in_file > self.recs_per_file:
             self.open_file()
 
-        self.write_fh.write(json.dumps(data,sort_keys=True) + "\n")
+        self.write_fh.write(json.dumps(data, sort_keys=True, ensure_ascii=False) + "\n")
         self.records_in_file += 1
 
     def open_file(self):
@@ -41,7 +41,7 @@ class JsonWriter(object):
         while os.path.exists(self.output_dir + "/%s.xml" % self.file_counter):
             self.file_counter += 1
 
-        self.write_fh = open(self.output_dir + "/%s.xml" % self.file_counter, "w")
+        self.write_fh = open(self.output_dir + "/%s.xml" % self.file_counter, "w", encoding="utf-8")
         self.records_in_file = 0
 
     def write_to_file(self, data):

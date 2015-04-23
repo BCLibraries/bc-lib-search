@@ -64,17 +64,17 @@
         "toc": {
           "type": "string"
         },
-        "taxonomy1": {
+        "tax1": {
           "type": "string",
           "index": "not_analyzed",
           "include_in_all": false
         },
-        "taxonomy2": {
+        "tax2": {
           "type": "string",
           "index": "not_analyzed",
           "include_in_all": false
         },
-        "taxonomy3": {
+        "tax3": {
           "type": "string",
           "index": "not_analyzed",
           "include_in_all": false

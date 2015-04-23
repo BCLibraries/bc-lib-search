@@ -85,5 +85,10 @@ class MARCConverter(object):
         else:
             return 'other'
 
+    @property
+    def mms(self):
+        return [x.value() for x in self.marc_record.get_fields('001')]
+
+
     def _get_subfields(self, field, subfield):
         return [x[subfield] for x in self.marc_record.get_fields(field)]
