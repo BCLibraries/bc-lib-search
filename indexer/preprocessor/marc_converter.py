@@ -1,3 +1,6 @@
+from indexer.preprocessor.language_codes import lang_code
+
+
 class MARCConverter(object):
     def read(self, marc_record):
         """
@@ -89,6 +92,17 @@ class MARCConverter(object):
     def mms(self):
         return [x.value() for x in self.marc_record.get_fields('001')]
 
+    @property
+    def lang(self):
+        try:
+            code = self.marc_record.get_fields('008')[0].value()[35:38]
+        except IndexError as e:
+            return None
+
+        try:
+            return lang_code[code]
+        except KeyError as e:
+            return None
 
     def _get_subfields(self, field, subfield):
         return [x[subfield] for x in self.marc_record.get_fields(field)]

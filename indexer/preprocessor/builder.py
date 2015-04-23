@@ -131,7 +131,8 @@ class Builder(object):
             'tax1': [],
             'tax2': [],
             'tax3': [],
-            'id': self.oai_reader.id
+            'id': self.oai_reader.id,
+            'language': self.marc_reader.lang
         }
 
         for taxonomy in taxonomies:
