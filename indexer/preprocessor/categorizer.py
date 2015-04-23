@@ -22,12 +22,12 @@ class Categorizer(object):
 
         for collection in collections:
             result.extend(COLLECTION_MAP.get(collection,[]))
-        if len(result):
+        if result:
             return result
 
         for location in locations:
             result.extend(LOCATION_MAP.get(location,[]))
-        if len(result):
+        if result:
             return result
 
         for lcc in lccs_norm:
@@ -85,10 +85,10 @@ class Categorizer(object):
         for cat in spanned_cats:
             node.add_category(cat)
 
-        if len(left_cats) > 0:
+        if left_cats:
             node.left = self.add_node(left_cats)
 
-        if len(right_cats) > 0:
+        if right_cats:
             node.right = self.add_node(right_cats)
 
         return node
