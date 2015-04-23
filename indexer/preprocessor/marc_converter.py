@@ -1,7 +1,11 @@
 from indexer.preprocessor.language_codes import lang_code
+import logging
 
 
 class MARCConverter(object):
+    def __init__(self):
+        self.logger = logging.getLogger(__name__)
+
     def read(self, marc_record):
         """
         :type marc_record: pymarc.Record
@@ -97,11 +101,13 @@ class MARCConverter(object):
         try:
             code = self.marc_record.get_fields('008')[0].value()[35:38]
         except IndexError as e:
+            self.logger.error("no 008 {0}".format(self.mms))
             return None
 
         try:
             return lang_code[code]
         except KeyError as e:
+            self.logger.error("bad lang code '{0}' {1}".format(code, self.mms))
             return None
 
     def _get_subfields(self, field, subfield):

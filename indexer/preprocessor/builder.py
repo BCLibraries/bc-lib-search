@@ -3,6 +3,9 @@ import tarfile
 import os
 import shelve
 import sys
+import logging
+import logging.config
+import json
 
 sys.path.append('/Users/benjaminflorin/PycharmProjects/bc-lib-search')
 
@@ -38,6 +41,9 @@ class Builder(object):
         self.current_tarball = ''
         self.current_oai = ''
 
+        self.logger = logging.getLogger(__name__)
+
+
     def build(self, src_directory, since, until):
         os.chdir(src_directory)
         raw_file_list = os.listdir(src_directory)
@@ -66,7 +72,7 @@ class Builder(object):
             try:
                 self.read_marc()
             except ValueError as detail:
-                self.reporter.report_read_error(self.current_tarball, self.current_tarball)
+                self.logger.error('Error reading {0}'.format(self.current_tarball))
 
 
     def read_marc(self):
@@ -167,6 +173,12 @@ if __name__ == '__main__':
     parser.add_argument('--until', type=int, help='timestamp to import until', required=True)
 
     args = parser.parse_args()
+
+    path = os.path.join(os.path.dirname(__file__), 'logging.json')
+
+    with open(path, 'rt') as f:
+        config = json.load(f)
+    logging.config.dictConfig(config)
 
     if args.src and args.start and args.until and args.dest:
         os.makedirs(args.dest, exist_ok=True)

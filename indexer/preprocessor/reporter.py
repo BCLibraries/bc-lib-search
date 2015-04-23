@@ -1,5 +1,5 @@
 import sys
-import json
+import logging
 
 
 class Reporter(object):
@@ -17,17 +17,16 @@ class Reporter(object):
         self.collections = {}
         self.locations = {}
 
-    def report(self):
-        print("Tarballs read: {}".format(self.tarballs_read))
-        print("Tarball mtime: {}".format(self.tarball_mtime))
-        print("Adds: {}".format(self.creates))
-        print("Deletes: {}".format(self.deletes))
-        print("Restricted: {}".format(self.restricted))
-        print("Law: {}".format(self.law_only))
-        print("Skipped: {}".format(self.skips))
+        self.logger = logging.getLogger(__name__)
 
-    def report_read_error(self, tarball, oai):
-        print('Error reading ' + tarball + ':' + oai, file=sys.stderr)
+    def report(self):
+        self.logger.info("Tarballs read: {}".format(self.tarballs_read))
+        self.logger.info("Tarball mtime: {}".format(self.tarball_mtime))
+        self.logger.info("Adds: {}".format(self.creates))
+        self.logger.info("Deletes: {}".format(self.deletes))
+        self.logger.info("Restricted: {}".format(self.restricted))
+        self.logger.info("Law: {}".format(self.law_only))
+        self.logger.info("Skipped: {}".format(self.skips))
 
     def add_locations(self, locations):
         for location in locations:
@@ -44,11 +43,11 @@ class Reporter(object):
                 self.collections[collection] = 1
 
     def dump_collections(self):
-        print(self.collections)
+        self.logger.info(self.collections)
 
 
     def dump_locations(self):
-        print(self.locations)
+        self.logger.info(self.locations)
 
     @property
     def oais_read(self):

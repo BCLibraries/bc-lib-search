@@ -38,10 +38,10 @@ class JsonWriter(object):
         if self.write_fh:
             self.write_fh.close()
 
-        while os.path.exists(self.output_dir + "/%s.xml" % self.file_counter):
+        while os.path.exists(self.output_dir + "/%s.json.bulk" % self.file_counter):
             self.file_counter += 1
 
-        self.write_fh = open(self.output_dir + "/%s.xml" % self.file_counter, "w", encoding="utf-8")
+        self.write_fh = open(self.output_dir + "/%s.json.bulk" % self.file_counter, "w", encoding="utf-8")
         self.records_in_file = 0
 
     def write_to_file(self, data):

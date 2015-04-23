@@ -512,4 +512,9 @@ lang_code = {'aar': 'Afar',
              'zul': 'Zulu',
              'zun': 'Zuni',
              'zxx': 'No linguistic content',
-             'zza': 'Zaza'}
+             'zza': 'Zaza',
+             '   ': None,
+             '': None,
+             '|||': None,
+             'N/A': None
+             }
