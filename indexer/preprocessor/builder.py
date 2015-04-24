@@ -186,5 +186,7 @@ if __name__ == '__main__':
         lcc_map = os.path.join(this_dir, 'categories/lcc_flat.json')
         p = Builder(OAIReader(), MARCConverter(), Reporter(), Categorizer(lcc_map), JsonWriter(args.dest))
         p.build(args.src, args.start, args.until)
+        sys.exit(0)
     else:
         parser.print_help()
+        sys.exit('You forgot to enter a parameter')

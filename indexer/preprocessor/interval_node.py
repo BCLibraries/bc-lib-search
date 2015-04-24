@@ -40,12 +40,10 @@ class IntervalNode:
         num_cats = len(self.cats_by_start)
 
         if self.value <= lcc:
-
             i = 0
             while i < num_cats and self.cats_by_end[i].max_lcc >= lcc:
                 results.append(self.cats_by_end[i].terms)
                 i += 1
-
         else:
             i = 0
             while i < num_cats and self.cats_by_start[i].min_lcc <= lcc:
