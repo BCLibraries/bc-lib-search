@@ -134,6 +134,7 @@ class Builder(object):
             'callnum': call_nums,
             'notes': self.marc_reader.notes,
             'toc': self.marc_reader.table_of_contents,
+            'type': self.marc_reader.type,
             'tax1': [],
             'tax2': [],
             'tax3': [],

@@ -64,6 +64,11 @@
         "toc": {
           "type": "string"
         },
+        "type": {
+          "type": "string",
+          "index": "not_analyzed",
+          "include_in_all": false
+        },
         "tax1": {
           "type": "string",
           "index": "not_analyzed",
