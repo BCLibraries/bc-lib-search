@@ -65,10 +65,10 @@ class MARCConverter(object):
 
     @property
     def location(self):
-        return ['-'.join(x.get_subfields('b', 'j')) for x in self.marc_record.get_fields('AVA')]
+        return list(set(['-'.join(x.get_subfields('b', 'j')) for x in self.marc_record.get_fields('AVA')]))
 
     @property
-    def table_of_contents(self):
+    def table_of_contents(self):/no
         toc = self._get_subfields('505', 'a')
         if not any(toc):
             return []
@@ -77,7 +77,7 @@ class MARCConverter(object):
 
     @property
     def notes(self):
-        return [x.format_field() for x in self.marc_record.notes()]
+        return list(set([x.format_field() for x in self.marc_record.notes()]) - set(self.table_of_contents))
 
     @property
     def publisher(self):

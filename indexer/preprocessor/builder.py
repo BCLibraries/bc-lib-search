@@ -150,6 +150,10 @@ class Builder(object):
             except KeyError as e:
                 pass
 
+        pull_data['tax1'] = list(set(pull_data['tax1']))
+        pull_data['tax2'] = list(set(pull_data['tax2']))
+        pull_data['tax3'] = list(set(pull_data['tax3']))
+
         data = {}
 
         for key, value in pull_data.items():
