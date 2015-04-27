@@ -97,7 +97,7 @@
             <call-numbers start="z 5943 m66" end="z 5943 m66"/>
             <call-numbers start="z 5943 m87" end="z 5943 m87"/>
             <call-numbers start="z 5943 s88" end="z 5943 s88"/>
-            <call-numbers start="z 5943 s9" end="z 5943 s88"/>
+            <call-numbers start="z 5943 s9" end="z 5943 s9"/>
             <call-numbers start="z 5946" end="z 5946"/>
             <call-numbers start="z 5956 a47" end="z 5961"/>
         </topic>
@@ -288,7 +288,7 @@
             <call-numbers start="na 6815" end="na 6840"/>
             <call-numbers start="nc 825 t49" end="nc 825 t49"/>
             <call-numbers start="pa 3131" end="pa 3238"/>
-            <call-numbers start="pa 3204" end="pa 3029"/>
+            <call-numbers start="pa 3024" end="pa 3029"/>
             <call-numbers start="pa 3461" end="pa 3466"/>
             <call-numbers start="pa 3545 a2" end="pa 3553 z8"/>
             <call-numbers start="pa 3604 a5" end="pa 3604 a5"/>
@@ -756,7 +756,7 @@
             <call-numbers start="Z 695.1 V6" end="Z 695.1 V6"/>
             <call-numbers start="Z 699.5 V63" end="Z 699.5 V63"/>
             <call-numbers start="Z 1039 V63" end="Z 1039 V63"/>
-            <call-numbers start="Z 5814 C37" end="Z 5418 C37"/>
+            <call-numbers start="Z 5814 C37" end="Z 5814 C37"/>
             <call-numbers start="Z 5943 V62" end="Z 5943 V62"/>
             <call-numbers start="Z 7164 V6" end="Z 7164 V6"/>
             <call-numbers start="Z 7925" end="Z 7925"/>
@@ -1054,7 +1054,7 @@
         </topic>
         <topic name="Atmospheric and Oceanic Sciences">
             <call-numbers start="g 70.39" end="g 70.9"/>
-            <call-numbers start="g 79.2" end="g 70.215"/>
+            <call-numbers start="g 70.2" end="g 70.215"/>
             <call-numbers start="g 109.5" end="g 109.5"/>
             <call-numbers start="g 1201 c1" end="g 1201 c887"/>
             <call-numbers start="g 2800" end="g 2800"/>
@@ -3836,7 +3836,6 @@
             <call-numbers start="QL 76 i67" end="QL 76 i67"/>
             <call-numbers start="ra 793.5" end="ra 794"/>
             <call-numbers start="SB 469 l27" end="SB 469 l27"/>
-            <call-numbers start="SB 950.73 P22" end="SB 940.73 P22"/>
             <call-numbers start="SB 950.73 P23" end="SB 950.73 P23"/>
             <call-numbers start="SD 1 n274" end="SD 1 n274"/>
             <call-numbers start="t 11.9" end="t 11.9"/>
@@ -5143,7 +5142,6 @@
                 <call-numbers start="f 2239 a75" end="f 2239 a75"/>
                 <call-numbers start="f 2659 a75" end="f 2659 a75"/>
                 <call-numbers start="f 3021 a64" end="f 3021 a64"/>
-                <call-numbers start="g 155.8 a75" end="g 155 a76"/>
                 <call-numbers start="g 2164.2" end="g 2164.24"/>
                 <call-numbers start="g 2164.4" end="g 2164.44"/>
                 <call-numbers start="g 2164.6" end="g 2164.64"/>
@@ -6445,7 +6443,6 @@
                 <call-numbers start="hv 5840 t3" end="hv 5840 t3"/>
                 <call-numbers start="hv 5840 t93" end="hv 5840 t93"/>
                 <call-numbers start="hv 5840 u9" end="hv 5840 u9"/>
-                <call-numbers start="hv 6295 a75" end="hv 6295 a25"/>
                 <call-numbers start="hv 6295 a75" end="hv 6295 a76"/>
                 <call-numbers start="hv 6295 a98" end="hv 6295 a98"/>
                 <call-numbers start="hv 6295 c28" end="hv 6295 c28"/>
@@ -6867,7 +6864,7 @@
                 <call-numbers start="lc 442" end="lc 443"/>
                 <call-numbers start="lg 301" end="lg 306.2"/>
                 <call-numbers start="lg 331" end="lg 332.9"/>
-                <call-numbers start="lg 395 a9" end="la 395 a9"/>
+                <call-numbers start="lg 395 a9" end="lg 395 a9"/>
                 <call-numbers start="m 1800" end="m 1801.2"/>
                 <call-numbers start="m 1824 a9" end="m 1824 a9"/>
                 <call-numbers start="m 1824 g28" end="m 1824 g28"/>
@@ -6936,7 +6933,7 @@
                 <call-numbers start="nc 992 a74" end="nc 992 a742"/>
                 <call-numbers start="nc 992 k5" end="nc 992 k52"/>
                 <call-numbers start="nc 992 u95" end="nc 992 u952"/>
-                <call-numbers start="nk 608 m65" end="nk 608"/>
+                <call-numbers start="nk 608" end="nk 608 m65"/>
                 <call-numbers start="nk 3633.2" end="nk 3633.2"/>
                 <call-numbers start="nk 3639 m65" end="nk 3639 m656"/>
                 <call-numbers start="p 911" end="p 930"/>
@@ -6989,7 +6986,7 @@
                 <call-numbers start="qh 192.5" end="qh 192.5"/>
                 <call-numbers start="qh 193 k57" end="qh 193 k57"/>
                 <call-numbers start="qh 193 m6" end="qh 193 m6"/>
-                <call-numbers start="qk 357" end="qh 357"/>
+                <call-numbers start="qk 357" end="qk 357"/>
                 <call-numbers start="qk 374" end="qk 374"/>
                 <call-numbers start="qk 374.3" end="qk 374.7"/>
                 <call-numbers start="qk 377" end="qk 377"/>
@@ -7314,7 +7311,7 @@
                 <call-numbers start="hv 6453 c6" end="hv 6453 c6"/>
                 <call-numbers start="hv 6535 c52" end="hv 6535 c6"/>
                 <call-numbers start="hv 6548 c5" end="hv 6548 c5"/>
-                <call-numbers start="hv 6569 c5" end="hv 6560 c5"/>
+                <call-numbers start="hv 6569 c5" end="hv 6569 c5"/>
                 <call-numbers start="hv 6570.4 c5" end="hv 6570.4 c5"/>
                 <call-numbers start="hv 6593 c5" end="hv 6593 c5"/>
                 <call-numbers start="hv 6604 c6" end="hv 6604 c6"/>
@@ -7945,7 +7942,7 @@
                 <call-numbers start="cr 6090" end="cr 6090"/>
                 <call-numbers start="cs 1300" end="cs 1309"/>
                 <call-numbers start="cs 3000" end="cs 3000"/>
-                <call-numbers start="ct 1840" end="ct 1838"/>
+                <call-numbers start="ct 1838" end="ct 1840"/>
                 <call-numbers start="ct 3730" end="ct 3730"/>
                 <call-numbers start="d 767" end="d 767.25 n3"/>
                 <call-numbers start="d 767.99 i9" end="d 767.99 i9"/>
@@ -7990,7 +7987,7 @@
                 <call-numbers start="ha 4621" end="ha 4628"/>
                 <call-numbers start="hb 126 j2" end="hb 126 j4"/>
                 <call-numbers start="hb 236 j3" end="hb 236 j3"/>
-                <call-numbers start="hb 1061" end="ha 1062.4"/>
+                <call-numbers start="hb 1061" end="hb 1062.4"/>
                 <call-numbers start="hb 1271" end="hb 1272.4"/>
                 <call-numbers start="hb 1481" end="hb 1482.4"/>
                 <call-numbers start="hb 1691" end="hb 1692.4"/>
@@ -8268,7 +8265,7 @@
                 <call-numbers start="pn 6377 j3" end="pn 6377 j3"/>
                 <call-numbers start="pn 6519 j3" end="pn 6519 j3"/>
                 <call-numbers start="pn 6790 j3" end="pn 6790 j34"/>
-                <call-numbers start="pr 9515" end="pr 9419.9"/>
+                <call-numbers start="pr 9515" end="pr 9519.9"/>
                 <call-numbers start="q 77" end="q 77"/>
                 <call-numbers start="qe 304" end="qe 304"/>
                 <call-numbers start="qh 188" end="qh 188.3"/>
@@ -8307,7 +8304,6 @@
                 <call-numbers start="ve 277" end="ve 279"/>
                 <call-numbers start="vf 105" end="vf 106"/>
                 <call-numbers start="vf 277" end="vf 279"/>
-                <call-numbers start="vg 295" end="vg 206"/>
                 <call-numbers start="vk 505" end="vk 506"/>
                 <call-numbers start="vm 105" end="vm 106"/>
                 <call-numbers start="vm 255" end="vm 256"/>
@@ -8467,7 +8463,7 @@
                 <call-numbers start="hb 236 k6" end="hb 236 k6"/>
                 <call-numbers start="hb 1062.5" end="hb 1062.6"/>
                 <call-numbers start="hb 1272.5" end="hb 1272.6"/>
-                <call-numbers start="hb 1482.5" end="hb 1282.6"/>
+                <call-numbers start="hb 1482.5" end="hb 1482.6"/>
                 <call-numbers start="hb 1692.5" end="hb 1692.6"/>
                 <call-numbers start="hb 1902.5" end="hb 1902.6"/>
                 <call-numbers start="hb 2112.5" end="hb 2112.6"/>
@@ -8764,7 +8760,7 @@
                 <call-numbers start="r 713.81 k6" end="r 713.81 k6"/>
                 <call-numbers start="r 821 k8" end="r 821 k83"/>
                 <call-numbers start="ra 340 k6" end="ra 340 k6"/>
-                <call-numbers start="ra 541 k8" end="r 541 k83"/>
+                <call-numbers start="ra 541 k8" end="ra 541 k83"/>
                 <call-numbers start="ra 751 k6" end="ra 751 k6"/>
                 <call-numbers start="ra 934 k6" end="ra 934 k6"/>
                 <call-numbers start="rs 131.75 k6" end="rs 131.75 k6"/>
@@ -9051,7 +9047,7 @@
                 <call-numbers start="gn 70.9" end="gn 70.9"/>
                 <call-numbers start="gn 125" end="gn 128"/>
                 <call-numbers start="gn 190" end="gn 190.5"/>
-                <call-numbers start="gn 635 m35" end="gn 635 i65"/>
+                <call-numbers start="gn 635 m35" end="gn 635 m65"/>
                 <call-numbers start="gn 662" end="gn 671"/>
                 <call-numbers start="gn 665" end="gn 667"/>
                 <call-numbers start="gn 667.5" end="gn 667.5"/>
@@ -10862,7 +10858,7 @@
                 <call-numbers start="pn 6231 a76" end="pn 6231 a76"/>
                 <call-numbers start="pn 6519 m35" end="pn 6519 m35"/>
                 <call-numbers start="pn 6519 p6" end="pn 6519 p6"/>
-                <call-numbers start="pn 6519 s3" end="pn 6519"/>
+                <call-numbers start="pn 6519" end="pn 6519 s3"/>
                 <call-numbers start="pr 2797" end="pr 2797"/>
                 <call-numbers start="pr 9600" end="pr 9670 n49"/>
                 <call-numbers start="pt 149 a85" end="pt 149 a85"/>
@@ -11036,7 +11032,7 @@
                 <call-numbers start="tn 408" end="tn 408"/>
                 <call-numbers start="tn 418" end="tn 418"/>
                 <call-numbers start="tn 428" end="tn 428"/>
-                <call-numbers start="tn 438" end="tn 428"/>
+                <call-numbers start="tn 438" end="tn 438"/>
                 <call-numbers start="tn 448" end="tn 448"/>
                 <call-numbers start="tn 458" end="tn 458"/>
                 <call-numbers start="tn 468" end="tn 468"/>
@@ -11045,7 +11041,7 @@
                 <call-numbers start="tn 651" end="tn 655"/>
                 <call-numbers start="tn 811" end="tn 811"/>
                 <call-numbers start="tn 878" end="tn 878"/>
-                <call-numbers start="tn 929.5" end="tn 925.7"/>
+                <call-numbers start="tn 929.5" end="tn 929.7"/>
                 <call-numbers start="tn 956" end="tn 956"/>
                 <call-numbers start="tn 986" end="tn 986"/>
                 <call-numbers start="tp 179" end="tp 180"/>
@@ -11103,7 +11099,7 @@
                 <call-numbers start="z 5055 a696" end="z 5055 a7"/>
                 <call-numbers start="z 5055 n68" end="z 5055 n72"/>
                 <call-numbers start="z 5116" end="z 5116"/>
-                <call-numbers start="z 5358.03" end="z 5358 o3"/>
+                <call-numbers start="z 5358 o3" end="z 5358 o3"/>
                 <call-numbers start="z 6961" end="z 6962"/>
                 <call-numbers start="z 7111" end="z 7112 v35"/>
             </sub-topic>
@@ -11628,7 +11624,7 @@
                 <call-numbers start="bp 75.24" end="bp 75.24"/>
                 <call-numbers start="bp 104.4" end="bp 104.42"/>
                 <call-numbers start="bp 104.7" end="bp 104.72"/>
-                <call-numbers start="bq 20 w7" end="bq 20"/>
+                <call-numbers start="bq 20 w7" end="bq 20 w7"/>
                 <call-numbers start="bq 27" end="bq 43 w7"/>
                 <call-numbers start="bq 402" end="bq 569"/>
                 <call-numbers start="bq 4610 c3" end="bq 4610 c3"/>
@@ -11653,7 +11649,7 @@
                 <call-numbers start="bs 315 s53" end="bs 315 s53"/>
                 <call-numbers start="bs 315 s67" end="bs 315 s67"/>
                 <call-numbers start="bs 315 t45" end="bs 315 t45"/>
-                <call-numbers start="bs 315 t55" end="bs 315 m14"/>
+                <call-numbers start="bs 315 t55" end="bs 315 t55"/>
                 <call-numbers start="bs 315 t55" end="bs 315 t68"/>
                 <call-numbers start="bs 315 y25" end="bs 315 y25"/>
                 <call-numbers start="bv 3270" end="bv 3271"/>
@@ -12010,10 +12006,10 @@
                 <call-numbers start="hb 8689.9 c16" end="hb 8689.9 c16"/>
                 <call-numbers start="hb 8689.9 i48" end="hb 8689.9 i48"/>
                 <call-numbers start="hb 8689.9 i5" end="hb 8689.9 i5"/>
-                <call-numbers start="hb 8689.9 l28" end="hb 8689.9 k5"/>
-                <call-numbers start="hb 8689.9 m35" end="hb 8689.9 l28"/>
-                <call-numbers start="hb 8689.9 m4" end="hb 8689.9 m25"/>
-                <call-numbers start="hb 8689.9 p6" end="hb 8689.9 m35"/>
+                <call-numbers start="hb 8689.9 k5" end="hb 8689.9 l28"/>
+                <call-numbers start="hb 8689.9 l28" end="hb 8689.9 m35"/>
+                <call-numbers start="hb 8689.9 m25" end="hb 8689.9 m4"/>
+                <call-numbers start="hb 8689.9 m35" end="hb 8689.9 p6"/>
                 <call-numbers start="hb 8689.9 s55" end="hb 8689.9 s55"/>
                 <call-numbers start="hb 8689.9 t5" end="hb 8689.9 t5"/>
                 <call-numbers start="hb 8689.9 v5" end="hb 8689.9 v5"/>
@@ -14081,13 +14077,13 @@
                 <call-numbers start="ra 312.5" end="ra 320"/>
                 <call-numbers start="ra 340 s55" end="ra 340 s55"/>
                 <call-numbers start="ra 530.5" end="ra 530.5"/>
-                <call-numbers start="ra 541 p6" end="ra 541"/>
+                <call-numbers start="ra 541" end="ra 541 p6"/>
                 <call-numbers start="ra 595" end="ra 595"/>
                 <call-numbers start="ra 650.7" end="ra 650.7"/>
                 <call-numbers start="ra 742.5" end="ra 742.5 a8"/>
-                <call-numbers start="ra 751 p6" end="ra 751"/>
+                <call-numbers start="ra 751" end="ra 751 p6"/>
                 <call-numbers start="ra 916" end="ra 919"/>
-                <call-numbers start="ra 934 d9" end="ra 934"/>
+                <call-numbers start="ra 934" end="ra 934 d9"/>
                 <call-numbers start="ra 990 a785" end="ra 990 a785"/>
                 <call-numbers start="ra 990 b93" end="ra 990 b932"/>
                 <call-numbers start="ra 990 c16" end="ra 990 c162"/>
@@ -14100,7 +14096,6 @@
                 <call-numbers start="ra 990 s55" end="ra 990 s552"/>
                 <call-numbers start="ra 990 t5" end="ra 990 t52"/>
                 <call-numbers start="ra 990 v5" end="ra 990 v52"/>
-                <call-numbers start="ra 9334 p5" end="ra 934 a2"/>
                 <call-numbers start="rc 150.7" end="rc 150.7"/>
                 <call-numbers start="rc 154.7" end="rc 154.7"/>
                 <call-numbers start="rc 164" end="rc 164"/>
@@ -14133,7 +14128,7 @@
                 <call-numbers start="sh 214.58" end="sh 214.58"/>
                 <call-numbers start="sh 214.7" end="sh 214.8"/>
                 <call-numbers start="sh 214.92" end="sh 214.92 p5"/>
-                <call-numbers start="sh 307 p5" end="sh 307"/>
+                <call-numbers start="sh 307" end="sh 307 p5"/>
                 <call-numbers start="sk 247" end="sk 247"/>
                 <call-numbers start="sk 563" end="sk 563"/>
                 <call-numbers start="sk 567" end="sk 567"/>
@@ -14192,7 +14187,7 @@
                 <call-numbers start="tn 406" end="tn 406"/>
                 <call-numbers start="tn 416" end="tn 416"/>
                 <call-numbers start="tn 427" end="tn 427"/>
-                <call-numbers start="tn 436" end="tn 426"/>
+                <call-numbers start="tn 436" end="tn 436"/>
                 <call-numbers start="tn 446" end="tn 446"/>
                 <call-numbers start="tn 456" end="tn 456"/>
                 <call-numbers start="tn 466" end="tn 466"/>
@@ -14222,11 +14217,11 @@
                 <call-numbers start="v 650" end="v 650"/>
                 <call-numbers start="va 665" end="va 665"/>
                 <call-numbers start="vb 113" end="vb 113"/>
-                <call-numbers start="z 49.4 b8" end="z 49.4"/>
+                <call-numbers start="z 49.4" end="z 49.4 b8"/>
                 <call-numbers start="z 59.2" end="z 59.2"/>
                 <call-numbers start="z 76.5" end="z 76.5"/>
                 <call-numbers start="z 115.5 m42" end="z 115.5 m42"/>
-                <call-numbers start="z 115.5 t45" end="z 115.5 b8"/>
+                <call-numbers start="z 115.5 b8" end="z 115.5 t45"/>
                 <call-numbers start="z 186 i5" end="z 186 i5"/>
                 <call-numbers start="z 186 p5" end="z 186 z5"/>
                 <call-numbers start="z 251 t45" end="z 251 t45"/>
@@ -14288,7 +14283,7 @@
                 <call-numbers start="bs 2860 a76" end="bs 2860 a762"/>
                 <call-numbers start="bv 2628 a7" end="bv 2628 a7"/>
                 <call-numbers start="bv 3190" end="bv 3192"/>
-                <call-numbers start="bx 120" end="bv 129"/>
+                <call-numbers start="bx 120" end="bx 129"/>
                 <call-numbers start="bx 123.5" end="bx 123.5"/>
                 <call-numbers start="bx 123.7" end="bx 123.7"/>
                 <call-numbers start="bx 1622" end="bx 1624"/>
@@ -14378,14 +14373,14 @@
                 <call-numbers start="gt 346.3" end="gt 346.32"/>
                 <call-numbers start="gt 1057" end="gt 1057"/>
                 <call-numbers start="gt 1402" end="gt 1402"/>
-                <call-numbers start="gv 662.62" end="gv 660.625"/>
+                <call-numbers start="gv 660.62" end="gv 662.625"/>
                 <call-numbers start="gv 1700.23" end="gv 1700.24"/>
                 <call-numbers start="h 53 a75" end="h 53 a76"/>
                 <call-numbers start="h 61.92 a75" end="h 61.92 a76"/>
                 <call-numbers start="h 62.5 a75" end="h 62.5 a76"/>
-                <call-numbers start="ha 37 a75" end="h 37 a76"/>
+                <call-numbers start="ha 37 a75" end="ha 37 a76"/>
                 <call-numbers start="ha 4556.2 a7" end="ha 4556.2 a7"/>
-                <call-numbers start="hb 126 a74" end="hb 126 a73"/>
+                <call-numbers start="hb 126 a73" end="hb 126 a74"/>
                 <call-numbers start="hb 235 a74" end="hb 235 a76"/>
                 <call-numbers start="hb 1043.32" end="hb 1043.32"/>
                 <call-numbers start="hb 1253.32" end="hb 1253.32"/>
@@ -14721,7 +14716,7 @@
                 <call-numbers start="hb 1623" end="hb 1630"/>
                 <call-numbers start="hb 1833" end="hb 1840"/>
                 <call-numbers start="hb 2043" end="hb 2050"/>
-                <call-numbers start="hb 2253" end="hb 2230"/>
+                <call-numbers start="hb 2253" end="hb 2260"/>
                 <call-numbers start="hb 2463" end="hb 2470"/>
                 <call-numbers start="hb 2673" end="hb 2680"/>
                 <call-numbers start="hb 3583" end="hb 3590"/>
@@ -14847,9 +14842,9 @@
                 <call-numbers start="hg 2106 g7" end="hg 2106 g73"/>
                 <call-numbers start="hg 2156 g7" end="hg 2156 g73"/>
                 <call-numbers start="hg 2981" end="hg 3000.3"/>
-                <call-numbers start="hg 3751.9 g7" end="hg 3571.9 g7"/>
+                <call-numbers start="hg 3751.9 g7" end="hg 3751.9 g7"/>
                 <call-numbers start="hg 3769 g7" end="hg 3769 g75"/>
-                <call-numbers start="hg 3769 i73" end="hg 3759 i735"/>
+                <call-numbers start="hg 3769 i73" end="hg 3769 i735"/>
                 <call-numbers start="hg 3865" end="hg 3865"/>
                 <call-numbers start="hg 3871 g7" end="hg 3871 g7"/>
                 <call-numbers start="hg 3883 g7" end="hg 3883 g7"/>
@@ -14881,7 +14876,7 @@
                 <call-numbers start="hj 9925 g7" end="hj 9925 g7"/>
                 <call-numbers start="hn 46 g7" end="hn 46 g72"/>
                 <call-numbers start="hn 381" end="hn 400.3"/>
-                <call-numbers start="hq 57.6 g7" end="hq 56.7 g7"/>
+                <call-numbers start="hq 57.6 g7" end="hq 57.6 g7"/>
                 <call-numbers start="hq 60.7 g7" end="hq 60.7 g7"/>
                 <call-numbers start="hq 73.3 g7" end="hq 73.3 g72"/>
                 <call-numbers start="hq 74.2 g7" end="hq 74.2 g7"/>
@@ -14948,7 +14943,7 @@
                 <call-numbers start="ht 169.57 g7" end="ht 169.57 g72"/>
                 <call-numbers start="ht 169.59 g7" end="ht 169.59 g7"/>
                 <call-numbers start="ht 169.8 g7" end="ht 169.8 g72"/>
-                <call-numbers start="ht 178 g7" end="ht 178.001 g72"/>
+                <!-- NORMALIZATION ERROR? <call-numbers start="ht 178 g7" end="ht 178.001 g72"/>-->
                 <call-numbers start="ht 243 g7" end="ht 243 g72"/>
                 <call-numbers start="ht 334 g7" end="ht 334 g7"/>
                 <call-numbers start="ht 352 g7" end="ht 352 g72"/>
@@ -15294,7 +15289,7 @@
                 <call-numbers start="ml 106 i73" end="ml 106 i732"/>
                 <call-numbers start="ml 120 e5" end="ml 120 e5"/>
                 <call-numbers start="ml 120 g7" end="ml 120 g7"/>
-                <call-numbers start="ml 120 i73" end="ml 120 i7"/>
+                <call-numbers start="ml 120 i73" end="ml 120 i73"/>
                 <call-numbers start="ml 285" end="ml 289.9"/>
                 <call-numbers start="ml 501" end="ml 502.9"/>
                 <call-numbers start="ml 578" end="ml 579.9"/>
@@ -15323,7 +15318,7 @@
                 <call-numbers start="ml 3492" end="ml 3493.9"/>
                 <call-numbers start="ml 3509 e5" end="ml 3509 e58"/>
                 <call-numbers start="ml 3509 g7" end="ml 3509 g7"/>
-                <call-numbers start="ml 3534.6 g7" end="ml 3534 g7"/>
+                <call-numbers start="ml 3534.6 g7" end="ml 3534.6 g7"/>
                 <call-numbers start="ml 3534.6 i74" end="ml 3534.6 i74"/>
                 <call-numbers start="ml 3650" end="ml 3659"/>
                 <call-numbers start="ml 3917 g7" end="ml 3917 g7"/>
@@ -15548,19 +15543,18 @@
                 <call-numbers start="bs 293" end="bs 294"/>
                 <call-numbers start="bt 660 w352" end="bt 660 w352"/>
                 <call-numbers start="bv 510 c9" end="bv 510 c9"/>
-                <call-numbers start="bv 2857 s7" end="bv 2587 s7"/>
                 <call-numbers start="bv 3145 c9" end="bv 3145 c9"/>
                 <call-numbers start="bv 3145 s56" end="bv 3145 s56"/>
                 <call-numbers start="bv 4839 c9" end="bv 4839 c9"/>
                 <call-numbers start="bv 5039 c8" end="bv 5039 c8"/>
-                <call-numbers start="bv 9999.999 c8" end="bv 4509 c8"/>
+                <call-numbers start="bv 4509 c8" end="bv 9999.999 c8" />
                 <call-numbers start="bx 500 c9" end="bx 500 c9"/>
                 <call-numbers start="bx 680" end="bx 689"/>
                 <call-numbers start="bx 750 c9" end="bx 750 c9"/>
                 <call-numbers start="bx 1407 c9" end="bx 1407 c9"/>
                 <call-numbers start="bx 1407 s55" end="bx 1407 s55"/>
                 <call-numbers start="bx 1527.3" end="bx 1527.5"/>
-                <call-numbers start="bx 1582.4" end="bs 1582.6"/>
+                <call-numbers start="bx 1582.4" end="bx 1582.6"/>
                 <call-numbers start="bx 2676 c9" end="bx 2676 c9"/>
                 <call-numbers start="bx 2676 s56" end="bx 2676 s56"/>
                 <call-numbers start="bx 3645 c9" end="bx 3645 c9"/>
@@ -15795,7 +15789,6 @@
                 <call-numbers start="ht 334 s56" end="ht 334 s562"/>
                 <call-numbers start="ht 384 c95" end="ht 384 c952"/>
                 <call-numbers start="ht 384 s56" end="ht 384 s562"/>
-                <call-numbers start="ht 395 c95" end="ht 394 c953"/>
                 <call-numbers start="ht 395 s56" end="ht 395 s563"/>
                 <call-numbers start="ht 443 c95" end="ht 443 c952"/>
                 <call-numbers start="ht 443 s56" end="ht 443 s562"/>
@@ -15930,7 +15923,7 @@
                 <call-numbers start="ml 106 s56" end="ml 106 s56"/>
                 <call-numbers start="ml 120 c9" end="ml 120 c9"/>
                 <call-numbers start="ml 120 s51" end="ml 120 s51"/>
-                <call-numbers start="ml 247" end="ml 47.9"/>
+                <call-numbers start="ml 247" end="ml 247.9"/>
                 <call-numbers start="ml 249" end="ml 249.9"/>
                 <call-numbers start="ml 493" end="ml 493.9"/>
                 <call-numbers start="ml 495" end="ml 495.9"/>
@@ -16764,7 +16757,7 @@
                 <call-numbers start="lc 6562.3 f8" end="lc 6562.3 f85"/>
                 <call-numbers start="lc 6581 f8" end="lc 6581 f85"/>
                 <call-numbers start="lc 6656 f8" end="lc 6656 f85"/>
-                <call-numbers start="lc 9999.999" end="lc 1060"/>
+                <call-numbers start="lc 1060" end="lc 9999.999"/>
                 <call-numbers start="lf 1711" end="lf 2397"/>
                 <call-numbers start="lt 25 f8" end="lt 25 f85"/>
                 <call-numbers start="lt 117" end="lt 117"/>
@@ -16995,7 +16988,6 @@
                 <call-numbers start="z 994 f8" end="z 994 f8"/>
                 <call-numbers start="z 1067" end="z 1067.5"/>
                 <call-numbers start="z 2161" end="z 2189"/>
-                <call-numbers start="z 5055 f69" end="z 5053 f8"/>
                 <call-numbers start="z 5358 f8" end="z 5358 f8"/>
                 <call-numbers start="z 6034 f79" end="z 6034 f792"/>
             </sub-topic>
@@ -17408,7 +17400,7 @@
                 <call-numbers start="cn 1090" end="cn 1095"/>
                 <call-numbers start="cr 670" end="cr 679"/>
                 <call-numbers start="cr 680" end="cr 689"/>
-                <call-numbers start="cr 2140" end="cn 2159"/>
+                <call-numbers start="cr 2140" end="cr 2159"/>
                 <call-numbers start="cr 2160" end="cr 2169"/>
                 <call-numbers start="cr 3509" end="cr 3509"/>
                 <call-numbers start="cr 3523" end="cr 3523"/>
@@ -18535,7 +18527,7 @@
                 <call-numbers start="ml 3447" end="ml 3447.9"/>
                 <call-numbers start="ml 3448" end="ml 3448.9"/>
                 <call-numbers start="ml 3498" end="ml 3498.8"/>
-                <call-numbers start="ml 3499" end="ml 8"/>
+                <call-numbers start="ml 3499" end="ml 3499.8"/>
                 <call-numbers start="ml 3534.6 s7" end="ml 3534.6 s7"/>
                 <call-numbers start="ml 3710" end="ml 3714"/>
                 <call-numbers start="ml 3717" end="ml 3719"/>
@@ -18650,7 +18642,7 @@
                 <call-numbers start="ra 879" end="ra 880"/>
                 <call-numbers start="rd 206" end="rd 206"/>
                 <call-numbers start="rd 381" end="rd 381"/>
-                <call-numbers start="rd 401" end="ra 408"/>
+                <call-numbers start="rd 401" end="rd 408"/>
                 <call-numbers start="rd 406" end="rd 406"/>
                 <call-numbers start="rk 164" end="rk 164"/>
                 <call-numbers start="rk 171" end="rk 171"/>
@@ -19047,7 +19039,7 @@
                 <call-numbers start="hg 2040.5 i8" end="hg 2040.5 i85"/>
                 <call-numbers start="hg 2106 i8" end="hg 2106 i85"/>
                 <call-numbers start="hg 2156 i8" end="hg 2156 i85"/>
-                <call-numbers start="hg 3071" end="hg 3040"/>
+                <call-numbers start="hg 3040" end="hg 3071"/>
                 <call-numbers start="hg 3751.9 i8" end="hg 3751.9 i85"/>
                 <call-numbers start="hg 3769 i8" end="hg 3769 i85"/>
                 <call-numbers start="hg 3868 i8" end="hg 3868 i8"/>
@@ -19056,7 +19048,7 @@
                 <call-numbers start="hg 3951" end="hg 3951"/>
                 <call-numbers start="hg 4165" end="hg 4169"/>
                 <call-numbers start="hg 4412" end="hg 4415"/>
-                <call-numbers start="hg 5521" end="hg 5490"/>
+                <call-numbers start="hg 5490" end="hg 5521"/>
                 <call-numbers start="hg 6051 i8" end="hg 6051 i85"/>
                 <call-numbers start="hg 6202" end="hg 6205"/>
                 <call-numbers start="hg 8625" end="hg 8629"/>
@@ -19075,7 +19067,7 @@
                 <call-numbers start="hj 6940" end="hj 6947"/>
                 <call-numbers start="hj 7813" end="hj 7813"/>
                 <call-numbers start="hj 8675" end="hj 8679"/>
-                <call-numbers start="hj 9497" end="hj 950"/>
+                <call-numbers start="hj 9497" end="hj 9500"/>
                 <call-numbers start="hj 9779 i8" end="hj 9779 i85"/>
                 <call-numbers start="hj 9925 i8" end="hj 9925 i85"/>
                 <call-numbers start="hn 46 i8" end="hn 46 i85"/>
@@ -19252,7 +19244,7 @@
                 <call-numbers start="hv 7234" end="hv 7234"/>
                 <call-numbers start="hv 7351" end="hv 7351"/>
                 <call-numbers start="hv 7412.3 i8" end="hv 7412.3 i85"/>
-                <call-numbers start="hv 7439 i8" end="hv 7439"/>
+                <call-numbers start="hv 7439 i8" end="hv 7439 i8"/>
                 <call-numbers start="hv 7748" end="hv 7750"/>
                 <call-numbers start="hv 7917 i8" end="hv 7917 i85"/>
                 <call-numbers start="hv 8099 i8" end="hv 8099 i85"/>
@@ -19377,7 +19369,7 @@
                 <call-numbers start="lc 929.7 i8" end="lc 929.7 i85"/>
                 <call-numbers start="lc 988 i8" end="lc 988 i85"/>
                 <call-numbers start="lc 998 i8" end="lc 998 i85"/>
-                <call-numbers start="lc 1006" end="lc 106"/>
+                <call-numbers start="lc 1006" end="lc 1006"/>
                 <call-numbers start="lc 1014" end="lc 1014"/>
                 <call-numbers start="lc 1022.25 i8" end="lc 1022.25 i85"/>
                 <call-numbers start="lc 1024 i8" end="lc 1024 i85"/>
@@ -19541,7 +19533,7 @@
                 <call-numbers start="na 4505 i8" end="na 4505 i85"/>
                 <call-numbers start="na 5611" end="na 5623.3"/>
                 <call-numbers start="na 6167" end="na 6167"/>
-                <call-numbers start="na 6840 i8" end="na 6840 i7"/>
+                <call-numbers start="na 6840 i7" end="na 6840 i8"/>
                 <call-numbers start="na 7355" end="na 7357"/>
                 <call-numbers start="na 7514.6" end="na 7514.623 Arch"/>
                 <call-numbers start="na 7565" end="na 7565"/>
@@ -19585,7 +19577,7 @@
                 <call-numbers start="pg 7102 i73" end="pg 7102 i73"/>
                 <call-numbers start="pj 5149 i8" end="pj 5149 i85"/>
                 <call-numbers start="pk 8641" end="pk 8641"/>
-                <call-numbers start="pm 8267 i8" end="pm 8262 i85"/>
+                <call-numbers start="pm 8262 i85" end="pm 8267 i8"/>
                 <call-numbers start="pn 25" end="pn 25"/>
                 <call-numbers start="pn 56.3 i76" end="pn 56.3 i76"/>
                 <call-numbers start="pn 2670" end="pn 2689.5"/>
@@ -19627,7 +19619,7 @@
                 <call-numbers start="ra 721" end="ra 721"/>
                 <call-numbers start="ra 871" end="ra 872"/>
                 <call-numbers start="rd 361" end="rd 370"/>
-                <call-numbers start="rk 157" end="rk 144"/>
+                <call-numbers start="rk 144" end="rk 157"/>
                 <call-numbers start="rs 131.46" end="rs 131.46"/>
                 <call-numbers start="rs 141.46" end="rs 141.46"/>
                 <call-numbers start="rs 151.46" end="rs 151.46"/>
@@ -19707,7 +19699,7 @@
                 <call-numbers start="z 994 i8" end="z 994 i8"/>
                 <call-numbers start="z 1070" end="z 1070"/>
                 <call-numbers start="z 2341" end="z 2369"/>
-                <call-numbers start="z 5055 i78" end="z 5053 i8"/>
+                <call-numbers start="z 5053 i8" end="z 5055 i78"/>
                 <call-numbers start="z 5358 i8" end="z 5358 i8"/>
                 <call-numbers start="z 6034 i8" end="z 6034 i8"/>
             </sub-topic>
@@ -20127,7 +20119,7 @@
                 <call-numbers start="pa 4280" end="pa 4280"/>
                 <call-numbers start="pa 4280 a1" end="pa 4280 a299"/>
                 <call-numbers start="pa 4288 a2" end="pa 4288 a7"/>
-                <call-numbers start="pa 4289 a2" end="pa 4289"/>
+                <call-numbers start="pa 4289 a2" end="pa 4289 a2"/>
                 <call-numbers start="pa 4372 a2" end="pa 4372 a3"/>
                 <call-numbers start="pa 4405 a2" end="pa 4405 a2"/>
                 <call-numbers start="pa 4413 z2" end="pa 4413 z2"/>
@@ -20165,11 +20157,11 @@
                 <call-numbers start="pq 4497 g7" end="pq 4497 g7"/>
                 <call-numbers start="pq 4680 g8" end="pq 4680 g8"/>
                 <call-numbers start="pq 4714 g2" end="pq 4714 g39"/>
-                <call-numbers start="pq 6295 g7" end="pq 6295"/>
+                <call-numbers start="pq 6295 g7" end="pq 6295 g7"/>
                 <call-numbers start="pr 839 g7" end="pr 839 g7"/>
-                <call-numbers start="pr 1309 g73" end="pr 1309"/>
-                <call-numbers start="pr 3330 a55" end="pr 3330"/>
-                <call-numbers start="pr 3572 g7" end="pr 3572"/>
+                <call-numbers start="pr 1309 g73" end="pr 1309 g73"/>
+                <call-numbers start="pr 3330 a55" end="pr 3330 a55"/>
+                <call-numbers start="pr 3572 g7" end="pr 3572 g7"/>
                 <call-numbers start="pr 9115" end="pr 9115.9"/>
                 <call-numbers start="ps 374 g73" end="ps 374 g73"/>
                 <call-numbers start="ps 591 g74" end="ps 591 g74"/>
@@ -20294,7 +20286,7 @@
                 <call-numbers start="ub 251 g8" end="ub 251 g82"/>
                 <call-numbers start="ub 271 g8" end="ub 271 g82"/>
                 <call-numbers start="uc 188" end="uc 191"/>
-                <call-numbers start="ud 237" end="uc 239"/>
+                <call-numbers start="ud 237" end="ud 239"/>
                 <call-numbers start="ue 75" end="ue 76"/>
                 <call-numbers start="ue 237" end="ue 239"/>
                 <call-numbers start="uf 237" end="uf 239"/>
@@ -21781,7 +21773,7 @@
                 <call-numbers start="hg 3131" end="hg 3135"/>
                 <call-numbers start="hg 3140" end="hg 3180"/>
                 <call-numbers start="hg 3955.3" end="hg 3955.3"/>
-                <call-numbers start="hg 3956" end="hd 3960"/>
+                <call-numbers start="hg 3956" end="hg 3960"/>
                 <call-numbers start="hg 4190" end="hg 4190"/>
                 <call-numbers start="hg 4193" end="hg 4214"/>
                 <call-numbers start="hg 4427.3" end="hg 4427.3"/>
@@ -21805,7 +21797,7 @@
                 <call-numbers start="hj 4738.3" end="hj 4738.3"/>
                 <call-numbers start="hj 4738.8" end="hj 4743"/>
                 <call-numbers start="hj 5429.3" end="hj 5429.3"/>
-                <call-numbers start="hj 5429.95" end="hf 5433"/>
+                <call-numbers start="hj 5429.95" end="hj 5433"/>
                 <call-numbers start="hj 6968" end="hj 6968"/>
                 <call-numbers start="hj 6969.8" end="hj 6984"/>
                 <call-numbers start="hj 7834.3" end="hj 7834.3"/>
@@ -21986,7 +21978,7 @@
                 <call-numbers start="vk 1581" end="vk 1582"/>
                 <call-numbers start="vk 1586.5" end="vk 1586.5"/>
                 <call-numbers start="vk 1589" end="vk 1590"/>
-                <call-numbers start="vk 2081" end="vk 1082"/>
+                <call-numbers start="vk 2081" end="vk 2081"/>
                 <call-numbers start="vm 69" end="vm 70"/>
                 <call-numbers start="vm 81" end="vm 82"/>
                 <call-numbers start="vm 86.5" end="vm 86.5"/>
@@ -27049,7 +27041,7 @@
                 <call-numbers start="la 1000" end="la 1009"/>
                 <call-numbers start="la 1009.22" end="la 1009.26"/>
                 <call-numbers start="la 1009.32" end="la 1009.36"/>
-                <call-numbers start="la 1009.42" end="la 109.46"/>
+                <call-numbers start="la 1009.42" end="la 1009.46"/>
                 <call-numbers start="la 1009.52" end="la 1009.56"/>
                 <call-numbers start="la 1009.57" end="la 1009.57"/>
                 <call-numbers start="lb 85" end="lb 85"/>
@@ -27410,7 +27402,7 @@
                 <call-numbers start="nk 4141 b85" end="nk 4141 b852"/>
                 <call-numbers start="nk 4141 c76" end="nk 4141 c762"/>
                 <call-numbers start="nk 4141 h8" end="nk 4141 h82"/>
-                <call-numbers start="nk 4141 m32" end="nk 4141"/>
+                <call-numbers start="nk 4141 m32" end="nk 4141 m32"/>
                 <call-numbers start="nk 4141 m67" end="nk 4141 m672"/>
                 <call-numbers start="nk 4141 s56" end="nk 4141 s562"/>
                 <call-numbers start="nk 4141 y8" end="nk 4141 y82"/>
@@ -27549,7 +27541,7 @@
                 <call-numbers start="pa 4280" end="pa 4280"/>
                 <call-numbers start="pa 4280 a1" end="pa 4280 a299"/>
                 <call-numbers start="pa 4288 a2" end="pa 4288 a7"/>
-                <call-numbers start="pa 4289 a2" end="pa 4289"/>
+                <call-numbers start="pa 4289 a2" end="pa 4289 a7"/>
                 <call-numbers start="pa 4372 a2" end="pa 9999.999 a3"/>
                 <call-numbers start="pa 4405 a2" end="pa 4405 a2"/>
                 <call-numbers start="pa 4413 z2" end="pa 4413 z2"/>
@@ -27781,23 +27773,23 @@
                 <call-numbers start="pq 4714 s5" end="pq 4714 s59"/>
                 <call-numbers start="pq 4714 s8" end="pq 4714 s89"/>
                 <call-numbers start="pq 5947" end="pq 5947"/>
-                <call-numbers start="pq 6295 g7" end="pq 6295"/>
-                <call-numbers start="pq 6295 h8" end="pq 6295"/>
-                <call-numbers start="pq 6295 r8" end="pq 6295"/>
-                <call-numbers start="pq 6295 s4" end="pq 6295"/>
-                <call-numbers start="pq 6295 s5" end="pq 6295"/>
-                <call-numbers start="pq 6295 s8" end="pq 6295"/>
-                <call-numbers start="pq 6295 s84" end="pq 6295"/>
+                <call-numbers start="pq 6295 g7" end="pq 6295 g7"/>
+                <call-numbers start="pq 6295 h8" end="pq 6295 h8"/>
+                <call-numbers start="pq 6295 r8" end="pq 6295 r8"/>
+                <call-numbers start="pq 6295 s4" end="pq 6295 s4"/>
+                <call-numbers start="pq 6295 s5" end="pq 6295 s5"/>
+                <call-numbers start="pq 6295 s8" end="pq 6295 s8"/>
+                <call-numbers start="pq 6295 s84" end="pq 6295 s84"/>
                 <call-numbers start="pr 839 g7" end="pr 839 g7"/>
-                <call-numbers start="pr 1309 g73" end="pr 1309"/>
+                <call-numbers start="pr 1309 g73" end="pr 1309 g73"/>
                 <call-numbers start="pr 2795 s33" end="pr 2795 s332"/>
                 <call-numbers start="pr 2795 s35" end="pr 2795 s352"/>
                 <call-numbers start="pr 2795 s37" end="pr 2795 s372"/>
                 <call-numbers start="pr 2795 s6" end="pr 2795 s62"/>
                 <call-numbers start="pr 2795 s75" end="pr 2795 s752"/>
-                <call-numbers start="pr 3330 a55" end="pr 3330"/>
-                <call-numbers start="pr 3330 a77" end="pr 3330"/>
-                <call-numbers start="pr 3572 g7" end="pr 3572"/>
+                <call-numbers start="pr 3330 a55" end="pr 3330 a55"/>
+                <call-numbers start="pr 3330 a77" end="pr 3330 a77"/>
+                <call-numbers start="pr 3572 g7" end="pr 3572 g7"/>
                 <call-numbers start="pr 9115" end="pr 9115.9"/>
                 <call-numbers start="ps 374 g73" end="ps 374 g73"/>
                 <call-numbers start="ps 591 g74" end="ps 591 g74"/>
@@ -29145,12 +29137,12 @@
                 <call-numbers start="tn 808 h9" end="tn 808 h92"/>
                 <call-numbers start="tn 808 k86" end="tn 808 k86"/>
                 <call-numbers start="tn 808 m27" end="tn 808 m275"/>
-                <call-numbers start="tn 808 m68" end="tn 808 m27"/>
-                <call-numbers start="tn 808 r6" end="tn 808 m68"/>
-                <call-numbers start="tn 808 s45" end="tn 808 r6"/>
-                <call-numbers start="tn 808 s57" end="tn 808 s45"/>
-                <call-numbers start="tn 808 t6" end="tn 808 s57"/>
-                <call-numbers start="tn 808 y8" end="tn 808 t6"/>
+                <call-numbers start="tn 808 m68" end="tn 808 m68"/>
+                <call-numbers start="tn 808 r6" end="tn 808 r6"/>
+                <call-numbers start="tn 808 s45" end="tn 808 s45"/>
+                <call-numbers start="tn 808 s57" end="tn 808 s57"/>
+                <call-numbers start="tn 808 t6" end="tn 808 t6"/>
+                <call-numbers start="tn 808 y8" end="tn 808 y8"/>
                 <call-numbers start="tp 75" end="tp 76"/>
                 <call-numbers start="tp 95 a2" end="tp 95 a2"/>
                 <call-numbers start="tp 95 a38" end="tp 95 a38"/>
@@ -29458,7 +29450,7 @@
                 <call-numbers start="uc 230" end="uc 230"/>
                 <call-numbers start="uc 231" end="uc 231"/>
                 <call-numbers start="uc 233 h9" end="uc 233 h9"/>
-                <call-numbers start="ud 237" end="uc 239"/>
+                <call-numbers start="ud 237" end="ud 239"/>
                 <call-numbers start="ud 269 a38" end="ud 269 a38"/>
                 <call-numbers start="ud 269 b28" end="ud 269 b28"/>
                 <call-numbers start="ud 269 b54" end="ud 269 b54"/>
@@ -29932,7 +29924,7 @@
             <call-numbers start="hd 2346 h2" end="hd 2346 h2"/>
             <call-numbers start="hd 2346 h8" end="hd 2346 h8"/>
             <call-numbers start="hd 2356 l38" end="hd 2356 l38"/>
-            <call-numbers start="hd 2356 m4" end="hd 2346 m42"/>
+            <call-numbers start="hd 2356 m4" end="hd 2356 m42"/>
             <call-numbers start="hd 2356 n5" end="hd 2356 n5"/>
             <call-numbers start="hd 2356 p2" end="hd 2356 p2"/>
             <call-numbers start="hd 2356 p3" end="hd 2356 p3"/>
@@ -29976,7 +29968,7 @@
             <call-numbers start="hd 6100.5" end="hd 6132"/>
             <call-numbers start="hd 6250 b6" end="hd 6250 b62"/>
             <call-numbers start="hd 6250 c52" end="hd 6250 c52"/>
-            <call-numbers start="hd 6250 c7" end="hd 6250"/>
+            <call-numbers start="hd 6250 c7" end="hd 6250 c7"/>
             <call-numbers start="hd 6250 l38" end="hd 6250 l38"/>
             <call-numbers start="hd 6530.5" end="hd 6592.5"/>
             <call-numbers start="hd 6995.5" end="hd 7015"/>
@@ -30378,7 +30370,7 @@
             <call-numbers start="b 155" end="b 158"/>
             <call-numbers start="b 755" end="b 759"/>
             <call-numbers start="b 4796" end="b 4800"/>
-            <call-numbers start="b 4871" end="b 4765.6"/>
+            <call-numbers start="b 4871" end="b 4871"/>
             <call-numbers start="b 5025" end="b 5099"/>
             <call-numbers start="b 5295" end="b 5295"/>
             <call-numbers start="b 5335" end="b 5364"/>
@@ -30933,7 +30925,7 @@
             <call-numbers start="hd 127" end="hd 129"/>
             <call-numbers start="hd 146" end="hd 146"/>
             <call-numbers start="hd 1537.3" end="hd 1537.4"/>
-            <call-numbers start="hd 1698.5" end="hd 1689.7"/>
+            <call-numbers start="hd 1698.5" end="hd 1698.7"/>
             <call-numbers start="hd 6305 e34" end="hd 6305 e34"/>
             <call-numbers start="hd 6305 s92" end="hd 6305 s92"/>
             <call-numbers start="hd 6338.3" end="hd 6338.3"/>
@@ -32005,7 +31997,7 @@
         </topic>
         <topic name="Atmospheric and Oceanic Sciences">
             <call-numbers start="g 70.39" end="g 70.9"/>
-            <call-numbers start="g 79.2" end="g 70.215"/>
+            <call-numbers start="g 79.2" end="g 79.215"/>
             <call-numbers start="g 109.5" end="g 109.5"/>
             <call-numbers start="g 1201 c1" end="g 1201 c887"/>
             <call-numbers start="g 2800" end="g 2800"/>
@@ -32446,7 +32438,7 @@
             <call-numbers start="p 96 b53" end="p 96 b53"/>
             <call-numbers start="p 410 b33" end="p 410 b33"/>
             <call-numbers start="pe 1127 b55" end="pe 1127 b55"/>
-            <call-numbers start="pe 1127 b55" end="pe 1127 bee"/>
+            <call-numbers start="pe 1127 b55" end="pe 1127 b55"/>
             <call-numbers start="pe 3102 n4" end="pe 3102 n48"/>
             <call-numbers start="pe 3727 n4" end="pe 3727 n4"/>
             <call-numbers start="pn 56.3 b55" end="pn 56.3 b55"/>
@@ -32700,7 +32692,7 @@
             <call-numbers start="ds 13" end="ds 28"/>
             <call-numbers start="ds 35.625" end="ds 35.625"/>
             <call-numbers start="ds 36.9" end="ds 36.9"/>
-            <call-numbers start="ds 36.9 a1" end="ds 36.9"/>
+            <call-numbers start="ds 36.9 a1" end="ds 36.9 a1"/>
             <call-numbers start="ds 54.4" end="ds 54.44"/>
             <call-numbers start="ds 58" end="ds 59"/>
             <call-numbers start="ds 70.8" end="ds 70.8"/>
@@ -32804,8 +32796,6 @@
             <call-numbers start="dt 582.42" end="dt 582.45"/>
             <call-numbers start="dt 600" end="dt 600"/>
             <call-numbers start="dt 613.42" end="dt 613.45"/>
-            <call-numbers start="dt 613.42" end="dt 613"/>
-            <call-numbers start="dt 615.42" end="dt 615"/>
             <call-numbers start="dt 615.42" end="dt 615.45"/>
             <call-numbers start="dt 620.42" end="dt 620.45"/>
             <call-numbers start="dt 630" end="dt 630.5"/>
@@ -34662,7 +34652,7 @@
             <call-numbers start="z 697 s62" end="z 697 s62"/>
             <call-numbers start="z 5814 e3" end="z 5814 e3"/>
             <call-numbers start="z 6514 s6" end="z 6514 s6"/>
-            <call-numbers start="z 6724 s6" end="z 6724"/>
+            <call-numbers start="z 6724 s6" end="z 6724 s6"/>
             <call-numbers start="z 7164 s68" end="z 7164 s688"/>
         </topic>
         <topic name="Statistics and Numeric Data">
@@ -34889,7 +34879,7 @@
             <call-numbers start="gt 3370" end="gt 3370"/>
             <call-numbers start="gv 163" end="gv 163"/>
             <call-numbers start="gv 183" end="gv 183"/>
-            <call-numbers start="gv 183.9" end="gv 183"/>
+            <call-numbers start="gv 183.9" end="gv 183.9"/>
             <call-numbers start="gv 191.64" end="gv 191.64"/>
             <call-numbers start="gv 439" end="gv 439"/>
             <call-numbers start="gv 709" end="gv 709"/>
@@ -35005,7 +34995,7 @@
             <call-numbers start="lb 3045.66" end="lb 3045.66"/>
             <call-numbers start="lb 3433" end="lb 3433"/>
             <call-numbers start="lc 212.8" end="lc 212.863"/>
-            <call-numbers start="lc 219.9" end="lc 212.93"/>
+            <call-numbers start="lc 219.9" end="lc 219.93"/>
             <call-numbers start="lc 1401" end="lc 2571"/>
             <call-numbers start="lc 1411" end="lc 1426"/>
             <call-numbers start="lc 1421" end="lc 1466"/>
