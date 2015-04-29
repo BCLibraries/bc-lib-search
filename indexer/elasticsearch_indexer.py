@@ -10,9 +10,6 @@ class ElasticSearchIndexer(object):
         self.logger = logging.getLogger(__name__)
         self.spent_waiting = 0
 
-    def __del__(self):
-        self.post()
-
     def add(self, item):
         self.actions.append({
             "_index": "catalog",

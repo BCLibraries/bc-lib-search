@@ -3,7 +3,7 @@ import pymarc
 
 import io
 
-from preprocessor.marc_converter import MARCConverter
+from indexer.marc_converter import MARCConverter
 
 
 class TestMARCConverter(unittest.TestCase):

@@ -1,5 +1,5 @@
 from unittest import TestCase
-import preprocessor.callnumber as CallNumber
+import indexer.callnumber as CallNumber
 
 
 class TestCallnumber(TestCase):

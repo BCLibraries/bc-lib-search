@@ -1,4 +1,4 @@
-from indexer.preprocessor.language_codes import lang_code
+from indexer.language_codes import lang_code
 import logging
 
 

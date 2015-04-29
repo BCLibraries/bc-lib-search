@@ -1,5 +1,5 @@
 from unittest import TestCase
-from preprocessor.oai_reader import OAIReader, OAIError
+from indexer.oai_reader import OAIReader, OAIError
 
 
 class TestPNXReader(TestCase):

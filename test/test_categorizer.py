@@ -1,5 +1,5 @@
 from unittest import TestCase
-from indexer.preprocessor.categorizer import Categorizer
+from indexer.categorizer import Categorizer
 
 
 class TestCallNumberCategorizer(TestCase):

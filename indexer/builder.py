@@ -9,25 +9,25 @@ import json
 
 sys.path.append('/Users/benjaminflorin/PycharmProjects/bc-lib-search')
 
-from indexer.preprocessor.oai_reader import OAIReader
-from indexer.preprocessor.marc_converter import MARCConverter
-from indexer.preprocessor.reporter import Reporter
-from indexer.preprocessor.callnumber import normalize
-from indexer.preprocessor.categorizer import Categorizer
-from indexer.preprocessor.json_writer import JsonWriter
-from indexer.preprocessor.elasticsearch_indexer import ElasticSearchIndexer
+from indexer.oai_reader import OAIReader
+from indexer.marc_converter import MARCConverter
+from indexer.reporter import Reporter
+from indexer.callnumber import normalize
+from indexer.categorizer import Categorizer
+from indexer.json_writer import JsonWriter
+from indexer.elasticsearch_indexer import ElasticSearchIndexer
 
 
 class Builder(object):
     def __init__(self, oai_reader, marc_reader, reporter, categorizer, writer):
         """
-        :type reporter: indexer.preprocessor.oai_reader.Reporter
+        :type reporter: indexer.oai_reader.Reporter
         :type categorizer: indexer.preprocesor.categorizer.Categorizer
-        :type oai_reader:  indexer.preprocessor.oai_reader.OAIReader
+        :type oai_reader:  indexer.oai_reader.OAIReader
         :param oai_reader:
-        :type marc_reader:  indexer.preprocessor.marc_converter.MARCConverter
+        :type marc_reader:  indexer.marc_converter.MARCConverter
         :param marc_reader:
-        :type writer: indexer.preprocessor.json_writer.JsonWriter
+        :type writer: indexer.json_writer.JsonWriter
         :param writer: a writer
         :return:
         """
@@ -57,6 +57,7 @@ class Builder(object):
             self.reporter.tarball_mtime = os.path.getmtime(src_directory + '/' + tarball)
             self.current_tarball = tarball
             self.read_tarball(src_directory + '/' + tarball)
+        self.indexer.post()
         self.reporter.report()
         self.reporter.dump_locations()
         self.reporter.dump_collections()
