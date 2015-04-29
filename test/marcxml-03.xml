@@ -75,11 +75,17 @@
         <subfield code="b">ill. ;</subfield>
         <subfield code="c">28 cm.</subfield>
     </datafield>
+    <datafield tag="500" ind1=" " ind2=" ">
+        <subfield code="a">Generic note field.</subfield>
+    </datafield>
     <datafield tag="504" ind1=" " ind2=" ">
         <subfield code="a">Includes bibliographical references.</subfield>
     </datafield>
     <datafield tag="505" ind1="2" ind2=" ">
         <subfield code="a">Includes bibliographical references.</subfield>
+    </datafield>
+    <datafield tag="518" ind1=" " ind2=" ">
+        <subfield code="a">Found on March 5, 1975, in Richmond, Tex.</subfield>
     </datafield>
     <datafield tag="650" ind1=" " ind2="0">
         <subfield code="a">Language arts (Elementary)</subfield>

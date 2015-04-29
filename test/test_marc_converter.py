@@ -1,6 +1,8 @@
 import unittest
 import pymarc
+
 import io
+
 from preprocessor.marc_converter import MARCConverter
 
 
@@ -79,7 +81,7 @@ class TestMARCConverter(unittest.TestCase):
 
     def test_call_number(self):
         self.marc_converter.read(TestMARCConverter.marc_ava)
-        self.assertEqual(['ERC-STACK', 'ONL-KC_STACK', 'ARCH-IRMA'], self.marc_converter.location)
+        self.assertEqual(['ARCH-IRMA', 'ERC-STACK', 'ONL-KC_STACK'], sorted(self.marc_converter.location))
 
     def test_toc(self):
         self.marc_converter.read(TestMARCConverter.marc_toc)
@@ -87,8 +89,8 @@ class TestMARCConverter(unittest.TestCase):
 
     def test_notes(self):
         self.marc_converter.read(TestMARCConverter.marc_ava)
-        self.assertEqual(['Includes bibliographical references.', 'Includes bibliographical references.'],
-                         self.marc_converter.notes)
+        self.assertEqual(['Found on March 5, 1975, in Richmond, Tex.', 'Generic note field.'],
+                         sorted(self.marc_converter.notes))
 
     def test_publisher(self):
         self.marc_converter.read(TestMARCConverter.marc_ava)
