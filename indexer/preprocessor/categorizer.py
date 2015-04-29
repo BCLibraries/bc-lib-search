@@ -20,18 +20,15 @@ class Categorizer(object):
     def categorize(self, *, collections=[], locations=[], lccs_norm=[]):
         result = []
 
-        for collection in collections:
-            result.extend(COLLECTION_MAP.get(collection,[]))
+        [result.extend(COLLECTION_MAP.get(collection, [])) for collection in collections]
         if result:
             return result
 
-        for location in locations:
-            result.extend(LOCATION_MAP.get(location,[]))
+        [result.extend(LOCATION_MAP.get(location, [])) for location in locations]
         if result:
             return result
 
-        for lcc in lccs_norm:
-            result.extend(self.categorize_by_callnum(lcc))
+        [result.extend(self.categorize_by_callnum(lcc)) for lcc in lccs_norm]
         return result
 
     def build_category_list(self, cat_list):
@@ -42,19 +39,20 @@ class Categorizer(object):
         :rtype : list of [Category]
         """
         categories = []
-        for cat in cat_list:
-            if cat["startNorm"] is not None and cat["endNorm"] is not None:
-                terms = {1: cat['1'], 2: cat['2']}
-                try:
-                    terms[3] = cat['3']
-                except KeyError:
-                    pass
-
-                category = Category(cat['startNorm'], cat['endNorm'], terms)
-                categories.append(category)
+        [categories.append(Categorizer.get_taxonomy_terms(cat)) for cat in cat_list]
         categories = sorted(categories, key=lambda category: category.min_lcc)
         return categories
 
+    @staticmethod
+    def get_taxonomy_terms(cat):
+        if cat["startNorm"] is not None and cat["endNorm"] is not None:
+            terms = {1: cat['1'], 2: cat['2']}
+            try:
+                terms[3] = cat['3']
+            except KeyError:
+                pass
+
+            return Category(cat['startNorm'], cat['endNorm'], terms)
 
     def add_node(self, categories):
         """
@@ -82,8 +80,7 @@ class Categorizer(object):
                 break
             i += 1
 
-        for cat in spanned_cats:
-            node.add_category(cat)
+        [node.add_category(cat) for cat in spanned_cats]
 
         if left_cats:
             node.left = self.add_node(left_cats)

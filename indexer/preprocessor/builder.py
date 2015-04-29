@@ -15,6 +15,7 @@ from indexer.preprocessor.reporter import Reporter
 from indexer.preprocessor.callnumber import normalize
 from indexer.preprocessor.categorizer import Categorizer
 from indexer.preprocessor.json_writer import JsonWriter
+from indexer.preprocessor.elasticsearch_indexer import ElasticSearchIndexer
 
 
 class Builder(object):
@@ -37,6 +38,7 @@ class Builder(object):
         self.reporter = reporter
         self.categorizer = categorizer
         self.writer = writer
+        self.indexer = ElasticSearchIndexer('localhost')
 
         self.current_tarball = ''
         self.current_oai = ''
@@ -135,24 +137,24 @@ class Builder(object):
             'notes': self.marc_reader.notes,
             'toc': self.marc_reader.table_of_contents,
             'type': self.marc_reader.type,
-            'tax1': [],
-            'tax2': [],
-            'tax3': [],
+            'tax1': set(),
+            'tax2': set(),
+            'tax3': set(),
             'id': self.oai_reader.id,
             'language': self.marc_reader.lang
         }
 
         for taxonomy in taxonomies:
-            pull_data['tax1'].append(taxonomy[1])
-            pull_data['tax2'].append(taxonomy[2])
+            pull_data['tax1'].add(taxonomy[1])
+            pull_data['tax2'].add(taxonomy[2])
             try:
-                pull_data['tax3'].append(taxonomy[3])
+                pull_data['tax3'].add(taxonomy[3])
             except KeyError as e:
                 pass
 
-        pull_data['tax1'] = list(set(pull_data['tax1']))
-        pull_data['tax2'] = list(set(pull_data['tax2']))
-        pull_data['tax3'] = list(set(pull_data['tax3']))
+        pull_data['tax1'] = list(pull_data['tax1'])
+        pull_data['tax2'] = list(pull_data['tax2'])
+        pull_data['tax3'] = list(pull_data['tax3'])
 
         data = {}
 
@@ -163,6 +165,7 @@ class Builder(object):
         self.reporter.add_locations(self.marc_reader.location)
         self.reporter.add_collections(self.marc_reader.collections)
 
+        self.indexer.add(data)
         self.writer.write(data)
 
     def _write_to_autocomplete_index(self):

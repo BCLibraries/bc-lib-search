@@ -68,7 +68,7 @@ class MARCConverter(object):
         return list(set(['-'.join(x.get_subfields('b', 'j')) for x in self.marc_record.get_fields('AVA')]))
 
     @property
-    def table_of_contents(self):/no
+    def table_of_contents(self):
         toc = self._get_subfields('505', 'a')
         if not any(toc):
             return []
