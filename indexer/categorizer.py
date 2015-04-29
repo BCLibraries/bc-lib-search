@@ -17,18 +17,21 @@ class Categorizer(object):
         self.root = self.add_node(categories)
         self.results = []
 
-    def categorize(self, *, collections=[], locations=[], lccs_norm=[]):
+    def categorize(self, *, collections=None, locations=None, lccs_norm=None):
         result = []
 
-        [result.extend(COLLECTION_MAP.get(collection, [])) for collection in collections]
+        for collection in collections:
+            result.extend(COLLECTION_MAP.get(collection, []))
         if result:
             return result
 
-        [result.extend(LOCATION_MAP.get(location, [])) for location in locations]
+        for location in locations:
+            result.extend(LOCATION_MAP.get(location, []))
         if result:
             return result
 
-        [result.extend(self.categorize_by_callnum(lcc)) for lcc in lccs_norm]
+        for lcc in lccs_norm:
+            result.extend(self.categorize_by_callnum(lcc))
         return result
 
     def build_category_list(self, cat_list):
