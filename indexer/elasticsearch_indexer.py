@@ -18,9 +18,18 @@ class ElasticSearchIndexer(object):
             "_source": item
         })
         if len(self.actions) == 1000:
-            self.post()
+            self._post()
 
-    def post(self):
+    def update(self, data):
+        pass
+
+    def delete(self, id):
+        pass
+
+    def close(self):
+        self._post()
+
+    def _post(self):
         helpers.bulk(self.es, self.actions)
         self.actions = []
         self.logger.info('Posted bulk')

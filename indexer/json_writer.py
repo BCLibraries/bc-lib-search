@@ -18,23 +18,25 @@ class JsonWriter(object):
         """:type : io.TextIOWrapper"""
         self.output_dir = output_dir
 
-    def __del__(self):
-        if self.write_fh:
-            self.write_fh.close()
-
-    def write(self, data):
+    def add(self, data):
         """
         Write a record to permanent storage
         :param data: the data to write, in some format that can be converted to JSON
         :return:
         """
         if self.records_in_file > self.recs_per_file:
-            self.open_file()
+            self._open_file()
 
         self.write_fh.write(json.dumps(data, sort_keys=True, ensure_ascii=False) + "\n")
         self.records_in_file += 1
 
-    def open_file(self):
+    def update(self, data):
+        pass
+
+    def delete(self, id):
+        pass
+
+    def _open_file(self):
         if self.write_fh:
             self.write_fh.close()
 
@@ -44,5 +46,6 @@ class JsonWriter(object):
         self.write_fh = open(self.output_dir + "/%s.json.bulk" % self.file_counter, "w", encoding="utf-8")
         self.records_in_file = 0
 
-    def write_to_file(self, data):
-        pass
+    def close(self):
+        if self.write_fh:
+            self.write_fh.close()

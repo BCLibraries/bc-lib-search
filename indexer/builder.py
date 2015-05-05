@@ -19,26 +19,22 @@ from indexer.elasticsearch_indexer import ElasticSearchIndexer
 
 
 class Builder(object):
-    def __init__(self, oai_reader, marc_reader, reporter, categorizer, writer):
+    def __init__(self, oai_reader, marc_reader, categorizer, writers=None):
         """
-        :type reporter: indexer.oai_reader.Reporter
         :type categorizer: indexer.preprocesor.categorizer.Categorizer
         :type oai_reader:  indexer.oai_reader.OAIReader
         :param oai_reader:
         :type marc_reader:  indexer.marc_converter.MARCConverter
         :param marc_reader:
-        :type writer: indexer.json_writer.JsonWriter
-        :param writer: a writer
+        :param writers: a list of Writers
         :return:
         """
         self.records_seen = shelve.open('shelf')
 
         self.oai_reader = oai_reader
         self.marc_reader = marc_reader
-        self.reporter = reporter
         self.categorizer = categorizer
-        self.writer = writer
-        self.indexer = ElasticSearchIndexer('localhost')
+        self.writers = writers
 
         self.current_tarball = ''
         self.current_oai = ''
@@ -54,23 +50,21 @@ class Builder(object):
             filter(lambda x: x.endswith('tar.gz') and until > os.path.getmtime(src_directory + '/' + x) > since,
                    all_files))
         for tarball in tarballs:
-            self.reporter.tarball_mtime = os.path.getmtime(src_directory + '/' + tarball)
             self.current_tarball = tarball
             self.read_tarball(src_directory + '/' + tarball)
-        self.indexer.post()
-        self.reporter.report()
-        self.reporter.dump_locations()
-        self.reporter.dump_collections()
+        for writer in self.writers:
+            writer.close()
+        self.records_seen.close()
 
     def read_oai(self, oai_file):
         self.oai_reader.read(oai_file)
-        self.reporter.oais_read += 1
 
         if self.oai_reader.id in self.records_seen:
-            self.reporter.skips += 1
+            pass
         elif self.oai_reader.status == 'deleted':
+            for writer in writers:
+                writer.delete(self.oai_reader.id)
             self.records_seen[self.oai_reader.id] = True
-            self.reporter.deletes += 1
         else:
             try:
                 self.read_marc()
@@ -83,19 +77,15 @@ class Builder(object):
             self.marc_reader.read(self.oai_reader.record)
 
             if self._only_at_law(self.marc_reader.location):
-                self.reporter.law_only += 1
+                pass
             elif self.marc_reader.restricted:
-                self.reporter.restricted += 1
+                pass
             else:
-                self.reporter.creates += 1
                 self._write_to_catalog_index()
                 self._write_to_autocomplete_index()
             self.records_seen[self.oai_reader.id] = True
-        else:
-            self.reporter.report_read_error(self.current_tarball, self.current_tarball)
 
     def read_tarball(self, tarball_file):
-        self.reporter.tarballs_read += 1
         tar = tarfile.open(tarball_file, 'r', encoding='utf-8')
         for tarinfo in tar:
             self.current_oai = tarinfo.name
@@ -163,11 +153,8 @@ class Builder(object):
             if value:
                 data[key] = value
 
-        self.reporter.add_locations(self.marc_reader.location)
-        self.reporter.add_collections(self.marc_reader.collections)
-
-        self.indexer.add(data)
-        self.writer.write(data)
+        for writer in self.writers:
+            writer.add(data)
 
     def _write_to_autocomplete_index(self):
         pass
@@ -176,8 +163,8 @@ class Builder(object):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Convert MARC records to JSON for export to ElasticSearch')
 
-    parser.add_argument('--src', type=str, help='source directory', required=True)
-    parser.add_argument('--dest', type=str, help='destination directory', required=True)
+    parser.add_argument('src', type=str, help='source directory')
+    parser.add_argument('--out', type=str, help='destination directory for JSON output', required=False)
     parser.add_argument('--start', type=int, help='timestamp to import from', required=True)
     parser.add_argument('--until', type=int, help='timestamp to import until', required=True)
 
@@ -189,11 +176,14 @@ if __name__ == '__main__':
         config = json.load(f)
     logging.config.dictConfig(config)
 
-    if args.src and args.start and args.until and args.dest:
-        os.makedirs(args.dest, exist_ok=True)
+    if args.src and args.start and args.until:
         this_dir = os.path.dirname(__file__)
         lcc_map = os.path.join(this_dir, 'categories/lcc_flat.json')
-        p = Builder(OAIReader(), MARCConverter(), Reporter(), Categorizer(lcc_map), JsonWriter(args.dest))
+        writers = [ElasticSearchIndexer('localhost'), Reporter()]
+        if args.out:
+            os.makedirs(args.out, exist_ok=True)
+            writers.append(JsonWriter.args.out)
+        p = Builder(OAIReader(), MARCConverter(), Categorizer(lcc_map), writers)
         p.build(args.src, args.start, args.until)
         sys.exit(0)
     else:
