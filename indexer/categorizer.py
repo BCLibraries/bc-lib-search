@@ -20,17 +20,17 @@ class Categorizer(object):
     def categorize(self, *, collections=None, locations=None, lccs_norm=None):
         result = []
 
-        for collection in collections:
+        for collection in collections or []:
             result.extend(COLLECTION_MAP.get(collection, []))
         if result:
             return result
 
-        for location in locations:
+        for location in locations or []:
             result.extend(LOCATION_MAP.get(location, []))
         if result:
             return result
 
-        for lcc in lccs_norm:
+        for lcc in lccs_norm or []:
             result.extend(self.categorize_by_callnum(lcc))
         return result
 
