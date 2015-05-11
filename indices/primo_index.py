@@ -63,6 +63,9 @@ primo_index_request_body = {
                 'toc': {
                     'type': 'string'
                 },
+                'alttitles': {
+                    'type': 'string'
+                },
                 'tax1': {
                     'type': 'string',
                     'index': 'not_analyzed',

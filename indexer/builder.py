@@ -124,7 +124,8 @@ class Builder(object):
             'tax2': set(),
             'tax3': set(),
             'id': self.oai_reader.id,
-            'language': self.marc_reader.lang
+            'language': self.marc_reader.lang,
+            'alttitles': self.marc_reader.uniform_title + self.marc_reader.var_title
         }
 
         for taxonomy in taxonomies:

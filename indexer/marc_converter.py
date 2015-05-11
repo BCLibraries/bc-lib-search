@@ -1,6 +1,10 @@
 from .language_codes import lang_code
 import logging
 
+subfields_240 = ['a', 'd', 'f', 'g', 'h', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's']
+subfields_246 = ['a', 'b']
+subfields_subjects = ['a', 'b', 'c', 'd', 'v', 'x', 'y', 'z']
+
 
 class MARCConverter(object):
     def __init__(self):
@@ -24,24 +28,15 @@ class MARCConverter(object):
 
     @property
     def subjects(self):
-        subject_list = self.marc_record.subjects()
-        return [self._format_subjects(x) for x in subject_list]
-
-    def _format_subjects(self, field):
-        """
-        :type field: pymarc.Field
-        :param field:
-        :return:
-        """
-        return ' -- '.join(field.get_subfields('a', 'b', 'c', 'd', 'v', 'x', 'y', 'z')).rstrip('.')
+        return [' -- '.join(x.get_subfields(*subfields_subjects)).rstrip('.') for x in self.marc_record.subjects()]
 
     @property
     def collections(self):
-        return self._get_subfields('940', 'a')
+        return self._get_field('940', 'a')
 
     @property
     def issn(self):
-        return self._get_subfields('022', 'a')
+        return self._get_field('022', 'a')
 
     @property
     def isbn(self):
@@ -49,15 +44,15 @@ class MARCConverter(object):
 
     @property
     def restricted(self):
-        return 'CR_RESTRICTED' in self._get_subfields('999', 'a')
+        return 'CR_RESTRICTED' in self._get_field('999', 'a')
 
     @property
     def series(self):
-        return self._get_subfields('490', 'a')
+        return self._get_field('490', 'a')
 
     @property
     def call_number(self):
-        callnum = self._get_subfields('AVA', 'd')
+        callnum = self._get_field('AVA', 'd')
         if not any(callnum):
             return []
         else:
@@ -69,7 +64,7 @@ class MARCConverter(object):
 
     @property
     def table_of_contents(self):
-        toc = self._get_subfields('505', 'a')
+        toc = self._get_field('505', 'a')
         if not any(toc):
             return []
         else:
@@ -110,5 +105,14 @@ class MARCConverter(object):
             self.logger.error("bad lang code '{0}' {1}".format(code, self.mms))
             return None
 
-    def _get_subfields(self, field, subfield):
-        return [x[subfield] for x in self.marc_record.get_fields(field)]
+    @property
+    def uniform_title(self):
+        return self._get_field('130', 'a') + self._get_field('240', subfields_240)
+
+    @property
+    def var_title(self):
+        return [' '.join(field.get_subfields(*subfields_246)) for field in self.marc_record.get_fields('246') if
+                field.indicators[0] in ['1', '3']]
+
+    def _get_field(self, code, subfields):
+        return [' '.join(field.get_subfields(*subfields)) for field in self.marc_record.get_fields(code)]

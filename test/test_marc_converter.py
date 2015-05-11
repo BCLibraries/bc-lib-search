@@ -34,6 +34,16 @@ class TestMARCConverter(unittest.TestCase):
         pymarc.parse_xml(io.StringIO(xml), handler)
         marc_journal = handler.records.pop()
 
+    with open('marcxml-06.xml', "r") as f:
+        xml = f.read().replace('\n', '')
+        pymarc.parse_xml(io.StringIO(xml), handler)
+        marc_music = handler.records.pop()
+
+    with open('marcxml-07.xml', "r") as f:
+        xml = f.read().replace('\n', '')
+        pymarc.parse_xml(io.StringIO(xml), handler)
+        marc_alt_titles = handler.records.pop()
+
     def setUp(self):
         self.marc_converter = MARCConverter()
         self.marc_converter.read(TestMARCConverter.marc_basic)
@@ -105,3 +115,11 @@ class TestMARCConverter(unittest.TestCase):
 
         self.marc_converter.read(TestMARCConverter.marc_basic)
         self.assertEqual('other', self.marc_converter.type)
+
+    def test_uniform_title(self):
+        self.marc_converter.read(TestMARCConverter.marc_music)
+        self.assertEqual(['Symphonies, no. 3, op. 55, E♭ major'], self.marc_converter.uniform_title)
+
+    def test_var_title(self):
+        self.marc_converter.read(TestMARCConverter.marc_alt_titles)
+        self.assertEqual(['Pretended simpleton', 'Verstellte Einfalt', 'Fausse naïve'], self.marc_converter.var_title)

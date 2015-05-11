@@ -47,13 +47,12 @@ def load_logger():
 
 
 def get_writers(args):
-    writers = []
-    writers.append(Reporter())
+    writers = [Reporter()]
     if args.es:
         writers.append(ElasticSearchIndexer(args.es))
     if args.out:
         os.makedirs(args.out, exist_ok=True)
-        writers.append(JsonWriter.args.out)
+        writers.append(JsonWriter(args.out))
     return writers
 
 
