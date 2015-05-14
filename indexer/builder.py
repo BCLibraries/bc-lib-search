@@ -81,10 +81,13 @@ class Builder(object):
         tar = tarfile.open(tarball_file, 'r', encoding='utf-8')
         for tarinfo in tar:
             self.current_oai = tarinfo.name
-            f = tar.extractfile(tarinfo)
-            contents = f.read()
-            contents = contents.decode('utf-8')
-            self.read_oai(contents)
+            (name, extension) = tarinfo.name.split('.')
+            record_id = 'urm_publish-' + name
+            if not record_id in self.records_seen:
+                f = tar.extractfile(tarinfo)
+                contents = f.read()
+                contents = contents.decode('utf-8')
+                self.read_oai(contents)
 
 
     def _only_at_law(self, locations):
