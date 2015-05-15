@@ -123,3 +123,7 @@ class TestMARCConverter(unittest.TestCase):
     def test_var_title(self):
         self.marc_converter.read(TestMARCConverter.marc_alt_titles)
         self.assertEqual(['Pretended simpleton', 'Verstellte Einfalt', 'Fausse naïve'], self.marc_converter.var_title)
+
+    def test_short_title(self):
+        self.marc_converter.read(TestMARCConverter.marc_alt_titles)
+        self.assertEqual('finta semplice', self.marc_converter.short_title)

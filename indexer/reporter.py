@@ -7,6 +7,7 @@ class Reporter(object):
         self.creates = 0
         self.updates = 0
         self.deletes = 0
+        self.skips = 0
 
     def add(self, data):
         self.creates += 1
@@ -17,7 +18,10 @@ class Reporter(object):
     def delete(self, data):
         self.deletes += 1
 
+    def skip(self):
+        self.skips += 1
+
     def close(self):
         self.logger.info("Adds: {}".format(self.creates))
-        self.logger.info("Updates: {}".format(self.updates))
+        self.logger.info("Skips: {}".format(self.skips))
         self.logger.info("Deletes: {}".format(self.deletes))

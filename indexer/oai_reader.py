@@ -1,6 +1,8 @@
 import xml.etree.cElementTree as ET
 from io import StringIO
 from pymarc import XmlHandler, parse_xml
+import logging
+import traceback, sys
 
 
 class OAIReader(object):
@@ -26,6 +28,7 @@ class OAIReader(object):
 
     def __init__(self):
         self.handler = XmlHandler()
+        self.logger = logging.getLogger(__name__)
 
     def read(self, oai):
         """
@@ -71,9 +74,13 @@ class OAIReader(object):
         """
         results = self.doc.find(self._marc_xpath)
         if results:
-            xml = ET.tostring(results,encoding='utf-8').decode()
-            parse_xml(StringIO(xml), self.handler)
-            return self.handler.records.pop()
+            xml = ET.tostring(results, encoding='utf-8').decode()
+            try:
+                parse_xml(StringIO(xml), self.handler)
+                return self.handler.records.pop()
+            except ValueError:
+                self.logger.error('Error in ' + self.id)
+                traceback.print_exc(file=sys.stdout)
         else:
             return None
 

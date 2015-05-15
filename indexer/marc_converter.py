@@ -106,6 +106,32 @@ class MARCConverter(object):
             return None
 
     @property
+    def short_title(self):
+        try:
+            title_field = self.marc_record.get_fields('245')[0]
+        except (TypeError, IndexError):
+            self.logger.error("problem in 245 $a: {0}".format(self.mms))
+            return None
+
+        try:
+            nonfiling = title_field.indicators[1]
+            if nonfiling == ' ':
+                nonfiling = 0
+        except ValueError:
+            nonfiling = 0
+
+        try:
+            short_title = title_field['a'][int(nonfiling):]
+        except TypeError:
+            return None
+
+        try:
+            short_title += " " + self['245']['b']
+        except TypeError:
+            pass
+        return short_title
+
+    @property
     def uniform_title(self):
         return self._get_field('130', 'a') + self._get_field('240', subfields_240)
 

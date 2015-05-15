@@ -4,6 +4,7 @@ import shelve
 import logging
 import logging.config
 from indexer.callnumber import normalize
+import traceback, sys
 
 
 class Builder(object):
@@ -52,6 +53,7 @@ class Builder(object):
         self.oai_reader.read(oai_file)
 
         if self.oai_reader.id in self.records_seen:
+            self.writers[0].skip()
             pass
         elif self.oai_reader.status == 'deleted':
             for writer in self.writers:
@@ -81,13 +83,19 @@ class Builder(object):
         tar = tarfile.open(tarball_file, 'r', encoding='utf-8')
         for tarinfo in tar:
             self.current_oai = tarinfo.name
-            (name, extension) = tarinfo.name.split('.')
+            try:
+                (name, extension) = tarinfo.name.split('.')
+            except ValueError:
+                name = ''
+                self.logger.error('No name or extension: ' + tarinfo.name + " in " + tarball_file)
             record_id = 'urm_publish-' + name
             if not record_id in self.records_seen:
                 f = tar.extractfile(tarinfo)
                 contents = f.read()
                 contents = contents.decode('utf-8')
                 self.read_oai(contents)
+            else:
+                self.writers[0].skip()
 
 
     def _only_at_law(self, locations):
@@ -130,6 +138,13 @@ class Builder(object):
             'language': self.marc_reader.lang,
             'alttitles': self.marc_reader.uniform_title + self.marc_reader.var_title
         }
+
+        try:
+            data['shorttitle'] = self.marc_reader.short_title
+        except ValueError:
+            self.logger.error('Short title error in ' + self.oai_reader.id)
+            traceback.print_exc(file=sys.stdout)
+            raise
 
         for taxonomy in taxonomies:
             data['tax1'].add(taxonomy[1])
