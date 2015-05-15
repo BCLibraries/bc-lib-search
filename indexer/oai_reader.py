@@ -79,8 +79,7 @@ class OAIReader(object):
                 parse_xml(StringIO(xml), self.handler)
                 return self.handler.records.pop()
             except ValueError:
-                self.logger.error('Error in ' + self.id)
-                traceback.print_exc(file=sys.stdout)
+                self.logger.exception('Error in ' + self.id)
         else:
             return None
 

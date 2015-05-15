@@ -21,7 +21,7 @@ from indexer.elasticsearch_indexer import ElasticSearchIndexer
 
 def main(argv=sys.argv):
     args = get_arguments()
-    load_logger()
+    load_logger(args.log_es)
     lcc_map = os.path.join(os.path.dirname(__file__), 'categories/lcc_flat.json')
     with Builder(OAIReader(), MARCConverter(), Categorizer(lcc_map), get_writers(args)) as builder:
         builder.build(args.src, args.start, args.until)
@@ -35,15 +35,18 @@ def get_arguments():
     parser.add_argument('--out', type=str, help='destination directory for JSON output')
     parser.add_argument('--start', type=int, help='timestamp to import from', required=True)
     parser.add_argument('--until', type=int, help='timestamp to import until', default=int(time.time()))
-    parser.add_argument('--build', action='store_true')
+    parser.add_argument('--build', action='store_true'),
+    parser.add_argument('--log_es', action='store_true')
     return parser.parse_args()
 
 
-def load_logger():
+def load_logger(log_elasticsearch=False):
     path = os.path.join(os.path.dirname(__file__), 'logging.json')
     with open(path, 'rt') as f:
         config = json.load(f)
     logging.config.dictConfig(config)
+    if log_elasticsearch:
+        logging.getLogger('elasticsearch.trace').propagate = True
 
 
 def get_writers(args):

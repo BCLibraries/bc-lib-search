@@ -143,7 +143,6 @@ class Builder(object):
             data['shorttitle'] = self.marc_reader.short_title
         except ValueError:
             self.logger.error('Short title error in ' + self.oai_reader.id)
-            traceback.print_exc(file=sys.stdout)
             raise
 
         for taxonomy in taxonomies:
