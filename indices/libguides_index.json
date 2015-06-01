@@ -1,37 +1,37 @@
 {
-	"index":"libguides",
-	"settings":{
-		"number_of_shards":4,
-		"number_of_replicas":1
-	},
-	"mappings":{
-		"docs":{
-			"properties":{
-				"url":{
-					"type":"string"
-				},
-				"title":{
-					"type":"string"
-				},
-				"author":{
-					"type":"string"
-				},
-				"type":{
-					"type":"string"
-				},
-				"description":{
-					"type":"string"
-				},
-				"tags":{
-					"type":"string"
-				},
-				"content":{
-					"type":"string"
-				},
-				"modified":{
-					"type":"string"
-				}
-			}
-		}
-	}
+  "index": "libguides",
+  "settings": {
+    "number_of_shards": 2,
+    "number_of_replicas": 1
+  },
+  "mappings": {
+    "docs": {
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "modified": {
+          "type": "string"
+        }
+      }
+    }
+  }
 }

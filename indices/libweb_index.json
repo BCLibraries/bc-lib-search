@@ -1,28 +1,28 @@
 {
-	"index":"web",
-	"settings":{
-		"number_of_shards":4,
-		"number_of_replicas":1
-	},
-	"mappings":{
-		"docs":{
-			"properties":{
-				"url":{
-					"type":"string"
-				},
-				"text":{
-					"type":"string"
-				},
-				"tags":{
-					"type":"string"
-				},
-				"classification":{
-					"type":"string"
-				},
-				"title":{
-					"type":"string"
-				}
-			}
-		}
-	}
+  "index": "web",
+  "settings": {
+    "number_of_shards": 1
+    "number_of_replicas": 1
+  },
+  "mappings": {
+    "docs": {
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "string"
+        },
+        "classification": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    }
+  }
 }

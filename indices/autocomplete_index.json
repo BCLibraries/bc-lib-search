@@ -1,21 +1,20 @@
 {
-	"index":"autocomp",
-	"settings":{
-		"number_of_shards":10,
-		"number_of_replicas":0,
-		"refresh_interval":"-1"
-	},
-	"mappings":{
-		"primo":{
-			"properties":{
-				"text":{
-					"type":"string"
-				},
-				"name_suggest":{
-					"type":"completion",
-					"payloads":true
-				}
-			}
-		}
-	}
+  "index": "autocomplete_v0",
+  "settings": {
+    "number_of_shards": 3,
+    "number_of_replicas": 0
+  },
+  "mappings": {
+    "term": {
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "suggest": {
+          "type": "completion",
+          "payloads": true
+        }
+      }
+    }
+  }
 }
