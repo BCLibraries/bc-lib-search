@@ -2,6 +2,7 @@ from .language_codes import lang_code
 import logging
 
 subfields_240 = ['a', 'd', 'f', 'g', 'h', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's']
+subfields_245 = ['a', 'b', 'f', 'g', 'k', 'n', 'p']
 subfields_246 = ['a', 'b']
 subfields_subjects = ['a', 'b', 'c', 'd', 'v', 'x', 'y', 'z']
 
@@ -20,7 +21,7 @@ class MARCConverter(object):
 
     @property
     def title(self):
-        return self.marc_record.title()
+        return self._get_field('245', subfields_245)[0]
 
     @property
     def author(self):
