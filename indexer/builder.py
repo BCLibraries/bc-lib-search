@@ -56,7 +56,10 @@ class Builder(object):
                    all_files))
         for tarball in tarballs:
             self.current_tarball = tarball
-            self.read_tarball(src_directory + '/' + tarball)
+            full_path = src_directory + '/' + tarball
+            if not full_path in self.records_seen:
+                self.read_tarball(full_path)
+                self.records_seen[full_path] = True
         self.building = False
 
     def reindex(self):
@@ -83,16 +86,20 @@ class Builder(object):
                 self.logger.error('Error reading {0}'.format(self.current_tarball))
 
     def read_marc(self, oai_string):
-        if self.oai_reader.record:
-            self.marc_reader.read(self.oai_reader.record)
+        try:
+            if self.oai_reader.record:
+                self.marc_reader.read(self.oai_reader.record)
 
-            if self._only_at_law(self.marc_reader.location):
-                pass
-            elif self.marc_reader.restricted:
-                pass
-            else:
-                data = self._write_to_catalog_index()
-                self.records.add(data, oai_string)
+                if self._only_at_law(self.marc_reader.location):
+                    pass
+                elif self.marc_reader.restricted:
+                    pass
+                else:
+                    data = self._write_to_catalog_index()
+                    self.records.add(data, oai_string)
+                self.records_seen[self.oai_reader.id] = True
+        except ValueError:
+            self.logger.exception('Error in ' + self.oai_reader.id)
             self.records_seen[self.oai_reader.id] = True
 
     def read_tarball(self, tarball_file):

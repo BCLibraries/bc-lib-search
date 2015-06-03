@@ -75,11 +75,8 @@ class OAIReader(object):
         results = self.doc.find(self._marc_xpath)
         if results:
             xml = ET.tostring(results, encoding='utf-8').decode()
-            try:
-                parse_xml(StringIO(xml), self.handler)
-                return self.handler.records.pop()
-            except ValueError:
-                self.logger.exception('Error in ' + self.id)
+            parse_xml(StringIO(xml), self.handler)
+            return self.handler.records.pop()
         else:
             return None
 
