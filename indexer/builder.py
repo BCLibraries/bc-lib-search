@@ -28,6 +28,7 @@ class Builder(object):
         self.categorizer = categorizer
         self.db = sqlite3_cursor
         self.writers = writers
+        self.building = False
 
         if sqlite3_cursor:
             self.records = record_store.RecordStore(sqlite3_cursor)
@@ -46,6 +47,7 @@ class Builder(object):
         self.records_seen.close()
 
     def build(self, src_directory, since, until):
+        self.building = True
         os.chdir(src_directory)
         raw_file_list = os.listdir(src_directory)
         all_files = sorted(raw_file_list, key=lambda x: os.path.getmtime(x), reverse=True)
@@ -55,25 +57,32 @@ class Builder(object):
         for tarball in tarballs:
             self.current_tarball = tarball
             self.read_tarball(src_directory + '/' + tarball)
+        self.building = False
 
-    def read_oai(self, oai_file):
-        self.oai_reader.read(oai_file)
-
-        if self.oai_reader.id in self.records_seen:
-            self.writers['reporter'].skip()
+    def reindex(self):
+        try:
+            for oai_string in self.records:
+                self.read_oai(oai_string)
+        except IndexError:
             pass
+
+    def read_oai(self, oai_string):
+        self.oai_reader.read(oai_string)
+
+        if self.building and self.oai_reader.id in self.records_seen:
+            self.writers['reporter'].skip()
         elif self.oai_reader.status == 'deleted':
             for writer in self.writers.values():
                 writer.delete(self.oai_reader.id)
             self.records_seen[self.oai_reader.id] = True
         else:
             try:
-                self.read_marc()
+                self.read_marc(oai_string)
             except ValueError as detail:
                 self.records_seen[self.oai_reader.id] = True
                 self.logger.error('Error reading {0}'.format(self.current_tarball))
 
-    def read_marc(self):
+    def read_marc(self, oai_string):
         if self.oai_reader.record:
             self.marc_reader.read(self.oai_reader.record)
 
@@ -83,7 +92,7 @@ class Builder(object):
                 pass
             else:
                 data = self._write_to_catalog_index()
-                self.records.add(data)
+                self.records.add(data, oai_string)
             self.records_seen[self.oai_reader.id] = True
 
     def read_tarball(self, tarball_file):

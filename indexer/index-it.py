@@ -27,23 +27,27 @@ def main(argv=sys.argv):
     db = connect_to_db(args)
     writers = get_writers(args)
     with Builder(OAIReader(), MARCConverter(), Categorizer(lcc_map), db, writers, shelve_path=args.shelf) as builder:
-        builder.build(args.src, args.start, args.until)
-    if args.rebuild:
-        os.remove(args.shelf)
-    disconnect_db(db)
+        if args.build:
+            builder.build(args.src, args.start, args.until)
+            os.remove(args.shelf)
+        elif args.reindex:
+            builder.reindex()
+    if db:
+        db.connection.close()
     sys.exit(0)
 
 
 def get_arguments():
     parser = argparse.ArgumentParser(description='Convert MARC records to JSON for export to ElasticSearch')
-    parser.add_argument('src', type=str, help='source directory')
+    parser.add_argument('db', type=str, help='SQLite database')
+    parser.add_argument('--src', type=str, help='source directory')
     parser.add_argument('--es', type=str, help='ElasticSearch host name')
     parser.add_argument('--out', type=str, help='destination directory for JSON output')
-    parser.add_argument('--start', type=int, help='timestamp to import from', required=True)
+    parser.add_argument('--start', type=int, help='timestamp to import from')
     parser.add_argument('--until', type=int, help='timestamp to import until', default=int(time.time()))
-    parser.add_argument('--rebuild', action='store_true', help='rebuild index')
+    parser.add_argument('--build', action='store_true', help='rebuild index')
+    parser.add_argument('--reindex', action='store_true')
     parser.add_argument('--log_es', action='store_true')
-    parser.add_argument('--db', type=str, help='SQLite database')
     parser.add_argument('--shelf', help='path to shelf file', default='shelf')
     return parser.parse_args()
 
@@ -75,11 +79,6 @@ def connect_to_db(args):
     else:
         cursor = None
     return cursor
-
-
-def disconnect_db(db):
-    if db:
-        db.connection.disconnect()
 
 
 if __name__ == '__main__':
