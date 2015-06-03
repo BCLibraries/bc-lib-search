@@ -4,21 +4,19 @@ import logging
 
 
 class ElasticSearchIndexer(object):
-    def __init__(self, host):
+    def __init__(self, host, bulk_size=100):
         self.es = Elasticsearch([{'host': host}])
         self.actions = []
         self.logger = logging.getLogger(__name__)
-        self.spent_waiting = 0
+        self.bulk_size = bulk_size
 
     def add(self, item):
-        self.actions.append({
-            "_index": "catalog",
-            "_type": "record",
-            "_id": item['id'],
-            "_source": item
-        })
-        if len(self.actions) == 1000:
-            self._post()
+        self._add_actions([{
+            '_index': 'catalog',
+            '_type': 'record',
+            '_id': item['id'],
+            '_source': item
+        }])
 
     def update(self, data):
         pass
@@ -28,6 +26,12 @@ class ElasticSearchIndexer(object):
 
     def close(self):
         self._post()
+
+    def _add_actions(self, actions):
+        for action in actions:
+            self.actions.append(action)
+        if len(self.actions) >= self.bulk_size:
+            self._post()
 
     def _post(self):
         helpers.bulk(self.es, self.actions)

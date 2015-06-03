@@ -7,6 +7,7 @@ import logging
 import logging.config
 import json
 import time
+import sqlite3
 
 sys.path.append('/Users/benjaminflorin/PycharmProjects/bc-lib-search')
 
@@ -23,8 +24,13 @@ def main(argv=sys.argv):
     args = get_arguments()
     load_logger(args.log_es)
     lcc_map = os.path.join(os.path.dirname(__file__), 'categories/lcc_flat.json')
-    with Builder(OAIReader(), MARCConverter(), Categorizer(lcc_map), get_writers(args)) as builder:
+    db = connect_to_db(args)
+    writers = get_writers(args)
+    with Builder(OAIReader(), MARCConverter(), Categorizer(lcc_map), db, writers, shelve_path=args.shelf) as builder:
         builder.build(args.src, args.start, args.until)
+    if args.rebuild:
+        os.remove(args.shelf)
+    disconnect_db(db)
     sys.exit(0)
 
 
@@ -35,8 +41,10 @@ def get_arguments():
     parser.add_argument('--out', type=str, help='destination directory for JSON output')
     parser.add_argument('--start', type=int, help='timestamp to import from', required=True)
     parser.add_argument('--until', type=int, help='timestamp to import until', default=int(time.time()))
-    parser.add_argument('--build', action='store_true'),
+    parser.add_argument('--rebuild', action='store_true', help='rebuild index')
     parser.add_argument('--log_es', action='store_true')
+    parser.add_argument('--db', type=str, help='SQLite database')
+    parser.add_argument('--shelf', help='path to shelf file', default='shelf')
     return parser.parse_args()
 
 
@@ -50,13 +58,28 @@ def load_logger(log_elasticsearch=False):
 
 
 def get_writers(args):
-    writers = [Reporter()]
+    writers = {'reporter': Reporter()}
     if args.es:
-        writers.append(ElasticSearchIndexer(args.es))
+        writers['elasticsearch'] = ElasticSearchIndexer(args.es)
     if args.out:
         os.makedirs(args.out, exist_ok=True)
-        writers.append(JsonWriter(args.out))
+        writers['json'] = JsonWriter(args.out)
     return writers
+
+
+def connect_to_db(args):
+    if args.db:
+        con = sqlite3.connect(args.db)
+        con.execute('PRAGMA foreign_keys = ON')
+        cursor = con.cursor()
+    else:
+        cursor = None
+    return cursor
+
+
+def disconnect_db(db):
+    if db:
+        db.connection.disconnect()
 
 
 if __name__ == '__main__':

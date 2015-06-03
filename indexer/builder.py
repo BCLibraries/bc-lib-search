@@ -3,27 +3,34 @@ import os
 import shelve
 import logging
 import logging.config
+import record_store
 from indexer.callnumber import normalize
-import traceback, sys
 
 
 class Builder(object):
-    def __init__(self, oai_reader, marc_reader, categorizer, writers=None):
+    def __init__(self, oai_reader, marc_reader, categorizer, sqlite3_cursor=None, writers=None, shelve_path='shelf'):
         """
         :type categorizer: indexer.categorizer.Categorizer
         :type oai_reader:  indexer.oai_reader.OAIReader
         :param oai_reader:
         :type marc_reader:  indexer.marc_converter.MARCConverter
         :param marc_reader:
-        :param writers: a list of Writers
+        :type sqlite3_cursor: sqlite3.Cursor
+        :param sqlite3_cursor: an sqlite3 cursor for the indexing database
+        :param writers: a list of
+        :param shelve_path: path to the shelf file
         :return:
         """
-        self.records_seen = shelve.open('shelf')
+        self.records_seen = shelve.open(shelve_path)
 
         self.oai_reader = oai_reader
         self.marc_reader = marc_reader
         self.categorizer = categorizer
+        self.db = sqlite3_cursor
         self.writers = writers
+
+        if sqlite3_cursor:
+            self.records = record_store.RecordStore(sqlite3_cursor)
 
         self.current_tarball = ''
         self.current_oai = ''
@@ -34,7 +41,7 @@ class Builder(object):
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        for writer in self.writers:
+        for writer in self.writers.values():
             writer.close()
         self.records_seen.close()
 
@@ -53,18 +60,18 @@ class Builder(object):
         self.oai_reader.read(oai_file)
 
         if self.oai_reader.id in self.records_seen:
-            self.writers[0].skip()
+            self.writers['reporter'].skip()
             pass
         elif self.oai_reader.status == 'deleted':
-            for writer in self.writers:
+            for writer in self.writers.values():
                 writer.delete(self.oai_reader.id)
             self.records_seen[self.oai_reader.id] = True
         else:
             try:
                 self.read_marc()
             except ValueError as detail:
+                self.records_seen[self.oai_reader.id] = True
                 self.logger.error('Error reading {0}'.format(self.current_tarball))
-
 
     def read_marc(self):
         if self.oai_reader.record:
@@ -75,8 +82,8 @@ class Builder(object):
             elif self.marc_reader.restricted:
                 pass
             else:
-                self._write_to_catalog_index()
-                self._write_to_autocomplete_index()
+                data = self._write_to_catalog_index()
+                self.records.add(data)
             self.records_seen[self.oai_reader.id] = True
 
     def read_tarball(self, tarball_file):
@@ -95,8 +102,7 @@ class Builder(object):
                 contents = contents.decode('utf-8')
                 self.read_oai(contents)
             else:
-                self.writers[0].skip()
-
+                self.writers['reporter'].skip()
 
     def _only_at_law(self, locations):
         """
@@ -157,8 +163,7 @@ class Builder(object):
         data['tax2'] = list(data['tax2'])
         data['tax3'] = list(data['tax3'])
 
-        for writer in self.writers:
+        for writer in self.writers.values():
             writer.add(data)
 
-    def _write_to_autocomplete_index(self):
-        pass
+        return data
