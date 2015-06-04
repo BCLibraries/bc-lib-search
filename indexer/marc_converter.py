@@ -21,7 +21,11 @@ class MARCConverter(object):
 
     @property
     def title(self):
-        return self._get_field('245', subfields_245)[0]
+        try:
+            return self._get_field('245', subfields_245)[0]
+        except (TypeError, IndexError):
+            self.logger.error("problem in 245 $a: {0}".format(self.mms))
+            return None
 
     @property
     def author(self):
