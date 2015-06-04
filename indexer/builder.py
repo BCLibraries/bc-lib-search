@@ -45,6 +45,7 @@ class Builder(object):
         for writer in self.writers.values():
             writer.close()
         self.records_seen.close()
+        self.records.close()
 
     def build(self, src_directory, since, until):
         self.building = True
