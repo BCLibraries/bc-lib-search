@@ -2,7 +2,7 @@ import xml.etree.cElementTree as ET
 from io import StringIO
 from pymarc import XmlHandler, parse_xml
 import logging
-import traceback, sys
+import re
 
 
 class OAIReader(object):
@@ -37,6 +37,7 @@ class OAIReader(object):
         :type oai: str
         :param oai: the OAI record as a string
         """
+        self.oai_string = oai.replace('\n', ' ').replace('\r', '')
         self.doc = ET.fromstring(oai)
 
     @property
@@ -72,9 +73,8 @@ class OAIReader(object):
         :rtype: pymarc.Record
         :return: The MARC record
         """
-        results = self.doc.find(self._marc_xpath)
-        if results:
-            xml = ET.tostring(results, encoding='utf-8').decode()
+        xml = re.search(r'<record .*?/record>',self.oai_string,re.DOTALL).group()
+        if xml:
             parse_xml(StringIO(xml), self.handler)
             return self.handler.records.pop()
         else:
