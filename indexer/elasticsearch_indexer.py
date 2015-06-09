@@ -4,7 +4,7 @@ import logging
 
 
 class ElasticSearchIndexer(object):
-    def __init__(self, host, bulk_size=100):
+    def __init__(self, host, bulk_size=1000):
         self.es = Elasticsearch([{'host': host}])
         self.actions = []
         self.logger = logging.getLogger(__name__)
@@ -26,6 +26,24 @@ class ElasticSearchIndexer(object):
 
     def close(self):
         self._post()
+
+    def add_autocomplete(self, text, type=None, weight=None):
+        source = {
+            'output': text,
+            'input': [
+                text
+            ],
+            'payload': {
+                'term': text,
+                'type': type
+            },
+            'weight': weight
+        }
+        self._add_actions([{
+            '_index': 'autocomplete',
+            '_type': 'term',
+            '_source': source
+        }])
 
     def _add_actions(self, actions):
         for action in actions:

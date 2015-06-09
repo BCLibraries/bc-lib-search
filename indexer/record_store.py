@@ -52,6 +52,7 @@ class RecordStore(object):
 
     def close(self):
         self._post()
+        self._build_terms()
 
     def _scroll(self, offset=100):
         sql = 'SELECT id,fulltext FROM records WHERE id > ? ORDER BY id LIMIT ' + str(offset)
@@ -70,3 +71,17 @@ class RecordStore(object):
         self.record_buffer = []
         self.subject_buffer = []
         self.alttitle_buffer = []
+
+    def _build_terms(self):
+        self.cursor.execute(
+            'INSERT INTO terms SELECT text, \'subject\' AS type, COUNT(text) AS cnt FROM subjects WHERE dirty=1 GROUP BY text')
+        self.cursor.execute(
+            'INSERT INTO terms SELECT text, \'alttitle\' AS type, COUNT(text) AS cnt FROM alttitles WHERE dirty=1 GROUP BY text')
+        self.cursor.execute(
+            'INSERT INTO terms SELECT author AS text, \'author\' AS type, COUNT(author) AS cnt FROM records WHERE dirty=1 GROUP BY author')
+        self.cursor.execute(
+            'INSERT INTO terms SELECT title AS text, \'title\' AS type, COUNT(title) AS cnt FROM records WHERE dirty=1 GROUP BY title')
+        self.cursor.execute('UPDATE subjects SET dirty=0')
+        self.cursor.execute('UPDATE alttitles SET dirty=0')
+        self.cursor.execute('UPDATE records SET dirty=0')
+        self.cursor.connection.commit()

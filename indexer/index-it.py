@@ -32,8 +32,10 @@ def main(argv=sys.argv):
             os.remove(args.shelf)
         elif args.reindex:
             builder.reindex()
-    if db:
-        db.connection.close()
+
+        if args.autoc:
+            pass
+    db.connection.close()
     sys.exit(0)
 
 
@@ -49,6 +51,7 @@ def get_arguments():
     parser.add_argument('--reindex', action='store_true')
     parser.add_argument('--log_es', action='store_true')
     parser.add_argument('--shelf', help='path to shelf file', default='shelf')
+    parser.add_argument('--autoc', action='store_true', help='build autocomplete index')
     return parser.parse_args()
 
 
@@ -72,12 +75,9 @@ def get_writers(args):
 
 
 def connect_to_db(args):
-    if args.db:
-        con = sqlite3.connect(args.db)
-        con.execute('PRAGMA foreign_keys = ON')
-        cursor = con.cursor()
-    else:
-        cursor = None
+    con = sqlite3.connect(args.db)
+    con.execute('PRAGMA foreign_keys = ON')
+    cursor = con.cursor()
     return cursor
 
 
