@@ -7,7 +7,6 @@ import logging
 import logging.config
 import json
 import time
-import sqlite3
 
 sys.path.append('/Users/benjaminflorin/PycharmProjects/bc-lib-search')
 
@@ -18,15 +17,19 @@ from indexer.reporter import Reporter
 from indexer.categorizer import Categorizer
 from indexer.json_writer import JsonWriter
 from indexer.elasticsearch_indexer import ElasticSearchIndexer
+from indexer.db import DB
+from indexer.record_store import RecordStore
 
 
 def main(argv=sys.argv):
     args = get_arguments()
     load_logger(args.log_es)
     lcc_map = os.path.join(os.path.dirname(__file__), 'categories/lcc_flat.json')
-    db = connect_to_db(args)
+    db = DB(args.db)
+    records = RecordStore(db)
     writers = get_writers(args)
-    with Builder(OAIReader(), MARCConverter(), Categorizer(lcc_map), db, writers, shelve_path=args.shelf) as builder:
+    with Builder(OAIReader(), MARCConverter(), Categorizer(lcc_map), records, writers,
+                 shelve_path=args.shelf) as builder:
         if args.build:
             builder.build(args.src, args.start, args.until)
             os.remove(args.shelf)
@@ -72,13 +75,6 @@ def get_writers(args):
         os.makedirs(args.out, exist_ok=True)
         writers['json'] = JsonWriter(args.out)
     return writers
-
-
-def connect_to_db(args):
-    con = sqlite3.connect(args.db)
-    con.execute('PRAGMA foreign_keys = ON')
-    cursor = con.cursor()
-    return cursor
 
 
 if __name__ == '__main__':

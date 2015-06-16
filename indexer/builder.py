@@ -8,14 +8,14 @@ from indexer.callnumber import normalize
 
 
 class Builder(object):
-    def __init__(self, oai_reader, marc_reader, categorizer, sqlite3_cursor=None, writers=None, shelve_path='shelf'):
+    def __init__(self, oai_reader, marc_reader, categorizer, records=None, writers=None, shelve_path='shelf'):
         """
         :type categorizer: indexer.categorizer.Categorizer
         :type oai_reader:  indexer.oai_reader.OAIReader
         :param oai_reader:
         :type marc_reader:  indexer.marc_converter.MARCConverter
         :param marc_reader:
-        :type sqlite3_cursor: sqlite3.Cursor
+        :type records: indexer.record_store.RecordStore
         :param sqlite3_cursor: an sqlite3 cursor for the indexing database
         :param writers: a list of
         :param shelve_path: path to the shelf file
@@ -26,12 +26,9 @@ class Builder(object):
         self.oai_reader = oai_reader
         self.marc_reader = marc_reader
         self.categorizer = categorizer
-        self.db = sqlite3_cursor
+        self.records = records
         self.writers = writers
         self.building = False
-
-        if sqlite3_cursor:
-            self.records = record_store.RecordStore(sqlite3_cursor)
 
         self.current_tarball = ''
         self.current_oai = ''
@@ -61,6 +58,8 @@ class Builder(object):
             if not full_path in self.records_seen:
                 self.read_tarball(full_path)
                 self.records_seen[full_path] = True
+        self.records.close()
+        self.records.build_terms()
         self.building = False
 
     def reindex(self):
@@ -99,7 +98,7 @@ class Builder(object):
                     data = self._write_to_catalog_index()
                     self.records.add(data, oai_string)
                 self.records_seen[self.oai_reader.id] = True
-        except ValueError:
+        except (ValueError, AttributeError):
             self.logger.exception('Error in ' + self.oai_reader.id)
             self.records_seen[self.oai_reader.id] = True
 
