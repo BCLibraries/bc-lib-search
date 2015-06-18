@@ -3,12 +3,11 @@ import os
 import shelve
 import logging
 import logging.config
-import record_store
 from indexer.callnumber import normalize
 
 
 class Builder(object):
-    def __init__(self, oai_reader, marc_reader, categorizer, records=None, writers=None, shelve_path='shelf'):
+    def __init__(self, oai_reader, marc_reader, categorizer, records=None, writers=None, records_seen=None):
         """
         :type categorizer: indexer.categorizer.Categorizer
         :type oai_reader:  indexer.oai_reader.OAIReader
@@ -18,10 +17,11 @@ class Builder(object):
         :type records: indexer.record_store.RecordStore
         :param sqlite3_cursor: an sqlite3 cursor for the indexing database
         :param writers: a list of
-        :param shelve_path: path to the shelf file
+        :type records_seen: shelve.Shelf
+        :param records_seen: a shelf
         :return:
         """
-        self.records_seen = shelve.open(shelve_path)
+        self.records_seen = records_seen
 
         self.oai_reader = oai_reader
         self.marc_reader = marc_reader

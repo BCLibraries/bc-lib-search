@@ -1,5 +1,6 @@
 import sqlite3
 
+
 class DB(object):
     def __init__(self, db_name):
         self.connection = sqlite3.connect(db_name)
@@ -12,7 +13,11 @@ class DB(object):
 
     def scroll_records(self, last_id='0', offset=1000):
         sql = 'SELECT id,fulltext FROM records WHERE id > ? ORDER BY id LIMIT ' + str(offset)
-        self.select_buffer = self.cursor.execute(sql, (last_id,)).fetchall()
+        return self.cursor.execute(sql, (last_id,)).fetchall()
+
+    def scroll_terms(self, last_id='0', offset=1000):
+        sql = 'SELECT id,text,type,cnt FROM terms WHERE id > ? ORDER BY id LIMIT ' + str(offset)
+        return self.cursor.execute(sql, (last_id,)).fetchall()
 
     def insert_record(self, record_buffer, subject_buffer, alttitle_buffer):
         self.cursor.executemany('INSERT OR IGNORE INTO records VALUES (?,?,?,?,1)', record_buffer)
@@ -22,13 +27,34 @@ class DB(object):
 
     def build_terms(self):
         self.cursor.execute(
-            'INSERT INTO terms SELECT text, \'subject\' AS type, COUNT(text), 1 AS cnt FROM subjects WHERE dirty=1 GROUP BY text')
+            """INSERT INTO terms(text,type,cnt,dirty)
+            SELECT text, 'subject' AS type, COUNT(text), 1 AS dirty
+            FROM subjects
+            WHERE dirty=1
+            GROUP BY text"""
+        )
         self.cursor.execute(
-            'INSERT INTO terms SELECT text, \'alttitle\' AS type, COUNT(text), 1 AS cnt FROM alttitles WHERE dirty=1 GROUP BY text')
+            """INSERT INTO terms(text,type,cnt,dirty)
+            SELECT text, 'alttitle' AS type, COUNT(text), 1 AS dirty
+            FROM alttitles
+            WHERE dirty=1
+            GROUP BY text"""
+        )
         self.cursor.execute(
-            'INSERT INTO terms SELECT author AS text, \'author\' AS type, COUNT(author), 1 AS cnt FROM records WHERE dirty=1 GROUP BY author')
+            """INSERT INTO terms(text,type,cnt,dirty)
+            SELECT text, 'author' AS type, COUNT(text), 1 AS dirty
+            FROM records
+            WHERE dirty=1
+            AND author IS NOT NULL
+            GROUP BY author"""
+        )
         self.cursor.execute(
-            'INSERT INTO terms SELECT title AS text, \'title\' AS type, COUNT(title), 1 AS cnt FROM records WHERE dirty=1 GROUP BY title')
+            """INSERT INTO terms(text,type,cnt,dirty)
+            SELECT text, 'title' AS type, COUNT(text), 1 AS dirty
+            FROM records
+            WHERE dirty=1
+            GROUP BY title"""
+        )
         self.cursor.execute('UPDATE subjects SET dirty=0')
         self.cursor.execute('UPDATE alttitles SET dirty=0')
         self.cursor.execute('UPDATE records SET dirty=0')

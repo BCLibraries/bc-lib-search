@@ -7,6 +7,7 @@ import logging
 import logging.config
 import json
 import time
+import shelve
 
 sys.path.append('/Users/benjaminflorin/PycharmProjects/bc-lib-search')
 
@@ -19,6 +20,7 @@ from indexer.json_writer import JsonWriter
 from indexer.elasticsearch_indexer import ElasticSearchIndexer
 from indexer.db import DB
 from indexer.record_store import RecordStore
+from indexer.term_store import TermStore
 
 
 def main(argv=sys.argv):
@@ -28,8 +30,8 @@ def main(argv=sys.argv):
     db = DB(args.db)
     records = RecordStore(db)
     writers = get_writers(args)
-    with Builder(OAIReader(), MARCConverter(), Categorizer(lcc_map), records, writers,
-                 shelve_path=args.shelf) as builder:
+    shelf = shelve.open(args.shelf)
+    with Builder(OAIReader(), MARCConverter(), Categorizer(lcc_map), records, writers, shelf) as builder:
         if args.build:
             builder.build(args.src, args.start, args.until)
             os.remove(args.shelf)
@@ -37,7 +39,18 @@ def main(argv=sys.argv):
             builder.reindex()
 
         if args.autoc:
-            pass
+            es = ElasticSearchIndexer(args.es)
+            try:
+                last_term_id = shelf['last_term_id']
+            except KeyError:
+                last_term_id = 0
+            terms = TermStore(db, last_term_id)
+            print('Starting from {}'.format(last_term_id))
+            for term in terms:
+                es.add_autocomplete(term[1], term[2], term[3])
+                shelf['last_term_id'] = term[0]
+            shelf['last_term_id'] = 0
+
     db.connection.close()
     sys.exit(0)
 

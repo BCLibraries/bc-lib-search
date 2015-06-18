@@ -1,6 +1,9 @@
 from elasticsearch import Elasticsearch
 from elasticsearch import helpers
 import logging
+import hashlib
+import time
+import math
 
 
 class ElasticSearchIndexer(object):
@@ -28,22 +31,38 @@ class ElasticSearchIndexer(object):
         self._post()
 
     def add_autocomplete(self, text, type=None, weight=None):
+        term_id = self._autocomplete_id(text, type)
+
+        if type == 'author':
+            weight *= 2
+        elif type == 'title':
+            weight *= 20
+        elif type == 'subject':
+            weight = math.ceil(float(weight) / 20)
+
         source = {
-            'output': text,
-            'input': [
-                text
-            ],
-            'payload': {
-                'term': text,
-                'type': type
-            },
-            'weight': weight
+            'text': text,
+            'suggest': {
+                'input': [text],
+                'output': text,
+                'payload': {
+                    'term': text,
+                    'type': type,
+
+                },
+                'weight': weight
+            }
         }
         self._add_actions([{
             '_index': 'autocomplete',
             '_type': 'term',
-            '_source': source
+            '_source': source,
+            '_id': term_id
         }])
+
+    def _autocomplete_id(self, text, type):
+        fullstring = text + '-' + type
+        return (hashlib.md5(fullstring.encode('utf-8'))).hexdigest()
 
     def _add_actions(self, actions):
         for action in actions:
@@ -55,3 +74,4 @@ class ElasticSearchIndexer(object):
         helpers.bulk(self.es, self.actions)
         self.actions = []
         self.logger.info('Posted bulk')
+        time.sleep(1)
