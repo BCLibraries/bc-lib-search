@@ -7,7 +7,7 @@ from indexer.callnumber import normalize
 
 
 class Builder(object):
-    def __init__(self, oai_reader, marc_reader, categorizer, records=None, writers=None, records_seen=None):
+    def __init__(self, oai_reader, marc_reader, categorizer, records=None, elasticsearch=None, records_seen=None):
         """
         :type categorizer: indexer.categorizer.Categorizer
         :type oai_reader:  indexer.oai_reader.OAIReader
@@ -15,8 +15,9 @@ class Builder(object):
         :type marc_reader:  indexer.marc_converter.MARCConverter
         :param marc_reader:
         :type records: indexer.record_store.RecordStore
-        :param sqlite3_cursor: an sqlite3 cursor for the indexing database
-        :param writers: a list of
+        :param records: the record store
+        :type elasticsearch: indexer.elasticsearch_indexer.ElasticSearchIndexer
+        :param elasticsearch: elasticsearch writer
         :type records_seen: shelve.Shelf
         :param records_seen: a shelf
         :return:
@@ -27,7 +28,7 @@ class Builder(object):
         self.marc_reader = marc_reader
         self.categorizer = categorizer
         self.records = records
-        self.writers = writers
+        self.elasticsearch = elasticsearch
         self.building = False
 
         self.current_tarball = ''
@@ -39,8 +40,7 @@ class Builder(object):
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        for writer in self.writers.values():
-            writer.close()
+        self.elasticsearch.close()
         self.records_seen.close()
         self.records.close()
 
@@ -73,10 +73,9 @@ class Builder(object):
         self.oai_reader.read(oai_string)
 
         if self.building and self.oai_reader.id in self.records_seen:
-            self.writers['reporter'].skip()
+            pass
         elif self.oai_reader.status == 'deleted':
-            for writer in self.writers.values():
-                writer.delete(self.oai_reader.id)
+            self.elasticsearch.delete(self.oai_reader.id)
             self.records_seen[self.oai_reader.id] = True
         else:
             try:
@@ -117,8 +116,6 @@ class Builder(object):
                 contents = f.read()
                 contents = contents.decode('utf-8')
                 self.read_oai(contents)
-            else:
-                self.writers['reporter'].skip()
 
     def _only_at_law(self, locations):
         """
@@ -179,7 +176,6 @@ class Builder(object):
         data['tax2'] = list(data['tax2'])
         data['tax3'] = list(data['tax3'])
 
-        for writer in self.writers.values():
-            writer.add(data)
+        self.elasticsearch.add(data)
 
         return data

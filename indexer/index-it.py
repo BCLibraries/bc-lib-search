@@ -16,78 +16,95 @@ from indexer.oai_reader import OAIReader
 from indexer.marc_converter import MARCConverter
 from indexer.reporter import Reporter
 from indexer.categorizer import Categorizer
-from indexer.json_writer import JsonWriter
 from indexer.elasticsearch_indexer import ElasticSearchIndexer
 from indexer.db import DB
 from indexer.record_store import RecordStore
 from indexer.term_store import TermStore
 
 
-def main(argv=sys.argv):
+def main():
     args = get_arguments()
-    load_logger(args.log_es)
-    lcc_map = os.path.join(os.path.dirname(__file__), 'categories/lcc_flat.json')
-    db = DB(args.db)
-    records = RecordStore(db)
-    writers = get_writers(args)
-    shelf = shelve.open(args.shelf)
-    with Builder(OAIReader(), MARCConverter(), Categorizer(lcc_map), records, writers, shelf) as builder:
-        if args.build:
-            builder.build(args.src, args.start, args.until)
-            os.remove(args.shelf)
-        elif args.reindex:
-            builder.reindex()
-
-        if args.autoc:
-            es = ElasticSearchIndexer(args.es)
-            try:
-                last_term_id = shelf['last_term_id']
-            except KeyError:
-                last_term_id = 0
-            terms = TermStore(db, last_term_id)
-            print('Starting from {}'.format(last_term_id))
-            for term in terms:
-                es.add_autocomplete(term[1], term[2], term[3])
-                shelf['last_term_id'] = term[0]
-            shelf['last_term_id'] = 0
-
-    db.connection.close()
+    load_logger()
+    args.func(args)
     sys.exit(0)
 
 
+def index(args):
+    builder = get_builder(args)
+    builder.build(args.source_dir, args.start, time.time())
+    os.remove(args.shelf)
+
+
+def reindex(args):
+    builder = get_builder(args)
+    builder.reindex()
+    pass
+
+
+def publish(args):
+    pass
+
+
+def autocomplete(args):
+    shelf = shelve.open(args.shelf)
+    es = ElasticSearchIndexer(args.elasticsearch_host)
+    db = DB(args.sqlite_path)
+    db.build_terms()
+    try:
+        last_term_id = shelf['last_term_id']
+    except KeyError:
+        last_term_id = 0
+    terms = TermStore(db, last_term_id)
+    for term in terms:
+        es.add_autocomplete(term[1], term[2], term[3])
+        shelf['last_term_id'] = term[0]
+    shelf['last_term_id'] = 0
+
+
 def get_arguments():
-    parser = argparse.ArgumentParser(description='Convert MARC records to JSON for export to ElasticSearch')
-    parser.add_argument('db', type=str, help='SQLite database')
-    parser.add_argument('--src', type=str, help='source directory')
-    parser.add_argument('--es', type=str, help='ElasticSearch host name')
-    parser.add_argument('--out', type=str, help='destination directory for JSON output')
-    parser.add_argument('--start', type=int, help='timestamp to import from')
-    parser.add_argument('--until', type=int, help='timestamp to import until', default=int(time.time()))
-    parser.add_argument('--build', action='store_true', help='rebuild index')
-    parser.add_argument('--reindex', action='store_true')
-    parser.add_argument('--log_es', action='store_true')
+    parser = argparse.ArgumentParser(description='Manage the BC bento search ElasticSearch and SQLite stores')
+    subparsers = parser.add_subparsers(help='Subcommands')
     parser.add_argument('--shelf', help='path to shelf file', default='shelf')
-    parser.add_argument('--autoc', action='store_true', help='build autocomplete index')
+
+    index_parser = subparsers.add_parser('index', help='index new MARC records')
+    index_parser.add_argument('source_dir', type=str, help='source directory')
+    index_parser.add_argument('sqlite_path', type=str, help='SQLite database')
+    index_parser.add_argument('elasticsearch_host', type=str, help='ElasticSearch host name')
+    index_parser.add_argument('--start', type=int, help='timestamp to import from', default=1000000)
+    index_parser.set_defaults(func=index)
+
+    reindex_parser = subparsers.add_parser('reindex', help='reindex existing MARC records')
+    reindex_parser.add_argument('sqlite_path', type=str, help='SQLite database')
+    reindex_parser.add_argument('elasticsearch_host', type=str, help='ElasticSearch host name')
+    reindex_parser.set_defaults(func=reindex)
+
+    publish_parser = subparsers.add_parser('publish', help='publish from SQLite database to ElasticSearch')
+    publish_parser.add_argument('sqlite_path', type=str, help='SQLite database')
+    publish_parser.add_argument('elasticsearch_host', type=str, help='ElasticSearch host name')
+    publish_parser.set_defaults(func=publish)
+
+    autocmp_parser = subparsers.add_parser('autocomplete', help='build autocomplete index')
+    autocmp_parser.add_argument('sqlite_path', type=str, help='SQLite database')
+    autocmp_parser.add_argument('elasticsearch_host', type=str, help='ElasticSearch host name')
+    autocmp_parser.set_defaults(func=autocomplete)
+
     return parser.parse_args()
 
 
-def load_logger(log_elasticsearch=False):
+def load_logger():
     path = os.path.join(os.path.dirname(__file__), 'logging.json')
     with open(path, 'rt') as f:
         config = json.load(f)
     logging.config.dictConfig(config)
-    if log_elasticsearch:
-        logging.getLogger('elasticsearch.trace').propagate = True
 
 
-def get_writers(args):
-    writers = {'reporter': Reporter()}
-    if args.es:
-        writers['elasticsearch'] = ElasticSearchIndexer(args.es)
-    if args.out:
-        os.makedirs(args.out, exist_ok=True)
-        writers['json'] = JsonWriter(args.out)
-    return writers
+def get_builder(args):
+    lcc_map = os.path.join(os.path.dirname(__file__), 'categories/lcc_flat.json')
+    db = DB(args.sqlite_path)
+    records = RecordStore(db)
+    shelf = shelve.open(args.shelf)
+    es = ElasticSearchIndexer(args.elasticsearch_host)
+    return Builder(OAIReader(), MARCConverter(), Categorizer(lcc_map), records, es, shelf)
 
 
 if __name__ == '__main__':

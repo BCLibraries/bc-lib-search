@@ -26,11 +26,13 @@ class DB(object):
         self.connection.commit()
 
     def build_terms(self):
+        print('building terms...')
         self.cursor.execute(
             """INSERT INTO terms(text,type,cnt,dirty)
             SELECT text, 'subject' AS type, COUNT(text), 1 AS dirty
             FROM subjects
             WHERE dirty=1
+            AND text IS NOT NULL
             GROUP BY text"""
         )
         self.cursor.execute(
@@ -38,11 +40,12 @@ class DB(object):
             SELECT text, 'alttitle' AS type, COUNT(text), 1 AS dirty
             FROM alttitles
             WHERE dirty=1
+            AND text IS NOT NULL
             GROUP BY text"""
         )
         self.cursor.execute(
             """INSERT INTO terms(text,type,cnt,dirty)
-            SELECT text, 'author' AS type, COUNT(text), 1 AS dirty
+            SELECT author, 'author' AS type, COUNT(author), 1 AS dirty
             FROM records
             WHERE dirty=1
             AND author IS NOT NULL
@@ -50,9 +53,10 @@ class DB(object):
         )
         self.cursor.execute(
             """INSERT INTO terms(text,type,cnt,dirty)
-            SELECT text, 'title' AS type, COUNT(text), 1 AS dirty
+            SELECT title, 'title' AS type, COUNT(title), 1 AS dirty
             FROM records
             WHERE dirty=1
+            AND title IS NOT NULL
             GROUP BY title"""
         )
         self.cursor.execute('UPDATE subjects SET dirty=0')
