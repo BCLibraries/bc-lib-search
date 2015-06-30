@@ -32,20 +32,27 @@ class RecordStore(object):
         self.last_id = current[0]
         return zlib.decompress(current[1]).decode('utf-8')
 
-    def add(self, item, oai_string):
-        values = (item['id'], item['title'], item['author'], zlib.compress(oai_string.encode('utf-8')))
+    def add(self, oai_record):
+        """
+        :type oai_record: indexer.oai_record.OAIRecord
+        :param oai_record:
+        :return:
+        """
+        index_record = oai_record.index_record
+        values = (
+        oai_record.id, index_record.title, index_record.author, zlib.compress(oai_record.oai_string.encode('utf-8')))
         self._add_to_buffer(self.record_buffer, values)
 
-        for subject in item['subjects']:
-            values = (item['id'], subject)
+        for subject in index_record.subjects:
+            values = (oai_record.id, subject)
             self._add_to_buffer(self.subject_buffer, values)
 
-        for alt_title in item['alttitles']:
-            values = (item['id'], alt_title)
+        for alt_title in index_record.alttitles:
+            values = (oai_record.id, alt_title)
             self._add_to_buffer(self.alttitle_buffer, values)
 
-    def delete(self, item):
-        self.db.delete_record(item['id'])
+    def delete(self, id):
+        self.db.delete_record(id)
 
     def close(self):
         self._post()

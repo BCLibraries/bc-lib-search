@@ -1,93 +1,59 @@
 import xml.etree.cElementTree as ET
-from io import StringIO
-from pymarc import XmlHandler, parse_xml
+from indexer.oai_record import OAIRecord
+import marc_reader
 import logging
 import re
+import io
+from pymarc import XmlHandler, parse_xml
+
+MARC_XPATH = '{http://www.openarchives.org/OAI/2.0/}ListRecords/{http://www.openarchives.org/OAI/2.0/}record/{http://www.openarchives.org/OAI/2.0/}metadata/{http://www.loc.gov/MARC21/slim}record'
+
+logger = logging.getLogger(__name__)
+handler = XmlHandler()
 
 
-class OAIReader(object):
+def read(oai):
     """
-    Reads an Alma-generated OAI-PMH file
+    Read an OAI file.
 
-    Usage:
-        reader = OAIReader()
-        reader.read(oai_string)
-        if reader.status == 'new':
-            marc_record = reader.record
-
-    Attributes:
-        id              The OAI-PMH identifier
-        record          The MARC record inside the OAI-PMH record
-        restricted      Is the record restricted for publication?
-        status          The OAI-PMH record status ("new" or "delete")
-
+    :type oai: str
+    :param oai: the OAI record as a string
     """
-    _marc_xpath = '{http://www.openarchives.org/OAI/2.0/}ListRecords/{http://www.openarchives.org/OAI/2.0/}record/{http://www.openarchives.org/OAI/2.0/}metadata/{http://www.loc.gov/MARC21/slim}record'
+    doc = ET.fromstring(oai)
+    oai_id = _get_id(doc)
+    status = _get_status(doc)
 
-    _valid_statuses = ['new', 'deleted', 'updated']
+    if status == 'deleted':
+        return OAIRecord(status='deleted', id=oai_id)
 
-    def __init__(self):
-        self.handler = XmlHandler()
-        self.logger = logging.getLogger(__name__)
-
-    def read(self, oai):
-        """
-        Read an OAI file.
-
-        :type oai: str
-        :param oai: the OAI record as a string
-        """
-        self.oai_string = oai.replace('\n', ' ').replace('\r', '')
-        self.doc = ET.fromstring(oai)
-
-    @property
-    def id(self):
-        """
-        The OAI-PMH record id
-
-        :rtype: str
-        :return: the OAI-PMH record id
-        """
-        xpath = self._format_xpath('{0}ListRecords/{0}record/{0}header/{0}identifier')
-        return self.doc.find(xpath).text.replace(':', '-')
-
-    @property
-    def status(self):
-        """
-        The OAI-PMH command
-
-        :rtype: str
-        :return: one of "new", "deleted", or "updated"
-        """
-        xpath = self._format_xpath('{0}ListRecords/{0}record/{0}header')
-        status = self.doc.find(xpath).attrib['status']
-        if status not in OAIReader._valid_statuses:
-            raise OAIError(status + ' is not a valid OAI record status')
-        return self.doc.find(xpath).attrib['status']
-
-    @property
-    def record(self):
-        """
-        The MARC record attached to the OAI record
-
-        :rtype: pymarc.Record
-        :return: The MARC record
-        """
-        xml = re.search(r'<record .*?/record>',self.oai_string,re.DOTALL).group()
-        if xml:
-            parse_xml(StringIO(xml), self.handler)
-            return self.handler.records.pop()
+    try:
+        oai_string = oai.replace('\n', ' ').replace('\r', '')
+        marc_record = _get_marc_record(oai_string)
+    except ValueError as detail:
+        if str(detail)=='need more than 0 values to unpack':
+            logger.error('Field lacks indicators in {0}'.format(oai_id))
         else:
-            return None
+            logger.exception('Problem reading MARC in {0}'.format(oai_id))
+        return OAIRecord(status='error', id=oai_id)
 
-    @staticmethod
-    def _format_xpath(xpath):
-        return xpath.format("{http://www.openarchives.org/OAI/2.0/}", "{http://www.loc.gov/MARC21/slim}")
+    return OAIRecord(status=status, id=oai_id, index_record=marc_reader.read(marc_record), oai_string=oai_string)
 
 
-class OAIError(Exception):
-    def __init__(self, value):
-        self.value = value
+def _get_id(doc):
+    xpath = _format_xpath('{0}ListRecords/{0}record/{0}header/{0}identifier')
+    return doc.find(xpath).text.replace(':', '-')
 
-    def __str__(self):
-        return repr(self.value)
+
+def _get_status(doc):
+    xpath = _format_xpath('{0}ListRecords/{0}record/{0}header')
+    return doc.find(xpath).attrib['status']
+
+
+def _get_marc_record(oai_string):
+    marc_string = re.search(r'<record .*?/record>', oai_string, re.DOTALL).group()
+    parse_xml(io.StringIO(marc_string), handler)
+    return handler.records.pop()
+
+
+def _format_xpath(xpath):
+    return xpath.format("{http://www.openarchives.org/OAI/2.0/}", "{http://www.loc.gov/MARC21/slim}")

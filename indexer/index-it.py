@@ -12,9 +12,6 @@ import shelve
 sys.path.append('/Users/benjaminflorin/PycharmProjects/bc-lib-search')
 
 from indexer.builder import Builder
-from indexer.oai_reader import OAIReader
-from indexer.marc_converter import MARCConverter
-from indexer.reporter import Reporter
 from indexer.categorizer import Categorizer
 from indexer.elasticsearch_indexer import ElasticSearchIndexer
 from indexer.db import DB
@@ -31,7 +28,7 @@ def main():
 
 def index(args):
     builder = get_builder(args)
-    builder.build(args.source_dir, args.start, time.time())
+    builder.index(args.source_dir, args.start, time.time())
     os.remove(args.shelf)
 
 
@@ -104,7 +101,7 @@ def get_builder(args):
     records = RecordStore(db)
     shelf = shelve.open(args.shelf)
     es = ElasticSearchIndexer(args.elasticsearch_host)
-    return Builder(OAIReader(), MARCConverter(), Categorizer(lcc_map), records, es, shelf)
+    return Builder(Categorizer(lcc_map), records, es, shelf)
 
 
 if __name__ == '__main__':

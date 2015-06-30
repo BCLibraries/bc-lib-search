@@ -8,7 +8,7 @@ class DB(object):
         self.cursor = self.connection.cursor()
 
     def delete_record(self, id):
-        self.cursor.execute('DELETE FROM records WHERE id=?', id)
+        self.cursor.execute('DELETE FROM records WHERE id=?', (id,))
         self.connection.commit()
 
     def scroll_records(self, last_id='0', offset=1000):

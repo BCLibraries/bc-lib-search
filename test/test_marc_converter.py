@@ -3,7 +3,7 @@ import pymarc
 
 import io
 
-from indexer.marc_converter import MARCConverter
+from indexer.marc_reader import MARCReader
 
 
 class TestMARCConverter(unittest.TestCase):
@@ -45,7 +45,7 @@ class TestMARCConverter(unittest.TestCase):
         marc_alt_titles = handler.records.pop()
 
     def setUp(self):
-        self.marc_converter = MARCConverter()
+        self.marc_converter = MARCReader()
         self.marc_converter.read(TestMARCConverter.marc_basic)
 
     def test_title(self):

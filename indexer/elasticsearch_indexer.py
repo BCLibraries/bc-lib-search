@@ -13,12 +13,17 @@ class ElasticSearchIndexer(object):
         self.logger = logging.getLogger(__name__)
         self.bulk_size = bulk_size
 
-    def add(self, item):
+    def add(self, oai_record):
+        """
+        :type oai_record: indexer.oai_record.OAIRecord
+        :param oai_record:
+        :return:
+        """
         self._add_actions([{
             '_index': 'catalog',
             '_type': 'record',
-            '_id': item['id'],
-            '_source': item
+            '_id': oai_record.id,
+            '_source': oai_record.index_record.__dict__
         }])
 
     def update(self, data):

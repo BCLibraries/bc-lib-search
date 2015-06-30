@@ -10,24 +10,24 @@ class TestPNXReader(TestCase):
 
     def test_create_status(self):
         self.oai_reader.read(self.create_oai)
-        self.assertEqual('new', self.oai_reader.status)
+        self.assertEqual('new', self.oai_reader._get_status)
 
     def test_delete_status(self):
         self.oai_reader.read(self.delete_oai)
-        self.assertEqual('deleted', self.oai_reader.status)
+        self.assertEqual('deleted', self.oai_reader._get_status)
 
     def test_bad_status(self):
         self.oai_reader.read(self._load_oai('oai-03.xml'))
         with self.assertRaises(OAIError):
-             self.oai_reader.status
+             self.oai_reader._get_status
 
     def test_id(self):
         self.oai_reader.read(self.create_oai)
-        self.assertEqual('urm_publish-61441201100001021', self.oai_reader.id)
+        self.assertEqual('urm_publish-61441201100001021', self.oai_reader._get_id)
 
     def test_record(self):
         self.oai_reader.read(self.create_oai)
-        self.assertEqual(self.oai_reader.record.title(), 'Capital IQ')
+        self.assertEqual(self.oai_reader._marc_record.title(), 'Capital IQ')
 
     def _load_oai(self, filename):
         with open(filename, "r") as myfile:

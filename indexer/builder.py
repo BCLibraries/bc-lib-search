@@ -3,17 +3,14 @@ import os
 import shelve
 import logging
 import logging.config
-from indexer.callnumber import normalize
+import indexer.callnumber as call_number
+from indexer import oai_reader
 
 
 class Builder(object):
-    def __init__(self, oai_reader, marc_reader, categorizer, records=None, elasticsearch=None, records_seen=None):
+    def __init__(self, categorizer, records, elasticsearch, records_seen):
         """
         :type categorizer: indexer.categorizer.Categorizer
-        :type oai_reader:  indexer.oai_reader.OAIReader
-        :param oai_reader:
-        :type marc_reader:  indexer.marc_converter.MARCConverter
-        :param marc_reader:
         :type records: indexer.record_store.RecordStore
         :param records: the record store
         :type elasticsearch: indexer.elasticsearch_indexer.ElasticSearchIndexer
@@ -24,8 +21,9 @@ class Builder(object):
         """
         self.records_seen = records_seen
 
-        self.oai_reader = oai_reader
-        self.marc_reader = marc_reader
+        self.adds = 0
+        self.deletes = 0
+
         self.categorizer = categorizer
         self.records = records
         self.elasticsearch = elasticsearch
@@ -40,11 +38,13 @@ class Builder(object):
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
+        print("Adds: {}".format(self.adds))
+        print("Dels: {}".format(self.deletes))
         self.elasticsearch.close()
         self.records_seen.close()
         self.records.close()
 
-    def build(self, src_directory, since, until):
+    def index(self, src_directory, since, until):
         self.building = True
         os.chdir(src_directory)
         raw_file_list = os.listdir(src_directory)
@@ -70,52 +70,48 @@ class Builder(object):
             pass
 
     def read_oai(self, oai_string):
-        self.oai_reader.read(oai_string)
-
-        if self.building and self.oai_reader.id in self.records_seen:
-            pass
-        elif self.oai_reader.status == 'deleted':
-            self.elasticsearch.delete(self.oai_reader.id)
-            self.records_seen[self.oai_reader.id] = True
-        else:
-            try:
-                self.read_marc(oai_string)
-            except ValueError as detail:
-                self.records_seen[self.oai_reader.id] = True
-                self.logger.error('Error reading {0}'.format(self.current_tarball))
-
-    def read_marc(self, oai_string):
-        try:
-            if self.oai_reader.record:
-                self.marc_reader.read(self.oai_reader.record)
-
-                if self._only_at_law(self.marc_reader.location):
-                    pass
-                elif self.marc_reader.restricted:
-                    pass
-                else:
-                    data = self._write_to_catalog_index()
-                    self.records.add(data, oai_string)
-                self.records_seen[self.oai_reader.id] = True
-        except (ValueError, AttributeError):
-            self.logger.exception('Error in ' + self.oai_reader.id)
-            self.records_seen[self.oai_reader.id] = True
+        oai_record = oai_reader.read(oai_string)
+        return oai_record
 
     def read_tarball(self, tarball_file):
         tar = tarfile.open(tarball_file, 'r', encoding='utf-8')
         for tarinfo in tar:
-            self.current_oai = tarinfo.name
+            self.read_tarred_file(tar, tarball_file, tarinfo)
+
+    def read_tarred_file(self, tar, tarball_file, tarinfo):
+        self.current_oai = tarinfo.name
+        try:
+            (name, extension) = tarinfo.name.split('.')
+        except ValueError:
+            name = ''
+            self.logger.error('No name or extension: ' + tarinfo.name + " in " + tarball_file)
+        record_id = 'urm_publish-' + name
+        if not record_id in self.records_seen:
+            f = tar.extractfile(tarinfo)
+            contents = f.read()
+            contents = contents.decode('utf-8')
             try:
-                (name, extension) = tarinfo.name.split('.')
-            except ValueError:
-                name = ''
-                self.logger.error('No name or extension: ' + tarinfo.name + " in " + tarball_file)
-            record_id = 'urm_publish-' + name
-            if not record_id in self.records_seen:
-                f = tar.extractfile(tarinfo)
-                contents = f.read()
-                contents = contents.decode('utf-8')
-                self.read_oai(contents)
+                oai_record = self.read_oai(contents)
+
+                if oai_record.status == 'deleted':
+                    self.delete_record(oai_record.id)
+                elif oai_record.status == 'new' or oai_record.status == 'updated':
+                    self.add_record(oai_record)
+
+                self.records_seen[oai_record.id] = True
+
+            except ValueError as detail:
+                self.logger.exception('Error reading {0}'.format(self.current_tarball))
+
+    def delete_record(self, id):
+        self.deletes += 1
+        self.elasticsearch.delete(id)
+        self.records.delete(id)
+
+    def add_record(self, oai_record):
+        self.adds += 1
+        self._write_to_catalog_index(oai_record)
+        self.records.add(oai_record)
 
     def _only_at_law(self, locations):
         """
@@ -130,52 +126,36 @@ class Builder(object):
                 return False
         return True
 
-    def _write_to_catalog_index(self):
-        call_nums = self.marc_reader.call_number
-        call_nums_norm = [normalize(lcc) for lcc in call_nums]
-        locations = self.marc_reader.location
-        collections = self.marc_reader.collections
-        taxonomies = self.categorizer.categorize(collections=collections, locations=locations, lccs_norm=call_nums_norm)
-
-        data = {
-            'title': self.marc_reader.title,
-            'author': self.marc_reader.author,
-            'subjects': self.marc_reader.subjects,
-            'location': locations,
-            'issn': self.marc_reader.issn,
-            'isbn': self.marc_reader.isbn,
-            'collections': collections,
-            'series': self.marc_reader.series,
-            'callnum': call_nums,
-            'notes': self.marc_reader.notes,
-            'toc': self.marc_reader.table_of_contents,
-            'type': self.marc_reader.type,
-            'tax1': set(),
-            'tax2': set(),
-            'tax3': set(),
-            'id': self.oai_reader.id,
-            'language': self.marc_reader.lang,
-            'alttitles': self.marc_reader.uniform_title + self.marc_reader.var_title
-        }
-
+    def _write_to_catalog_index(self, oai_record):
+        """
+        :type oai_record: indexer.oai_record.OAIRecord
+        :param oai_record:
+        :return:
+        """
+        index_record = oai_record.index_record
         try:
-            data['shorttitle'] = self.marc_reader.short_title
+            call_nums_norm = [call_number.normalize(lcc) for lcc in index_record.callnum]
+            taxonomies = self.categorizer.categorize(collections=index_record.collections,
+                                                     locations=index_record.location,
+                                                     lccs_norm=call_nums_norm)
         except ValueError:
-            self.logger.error('Short title error in ' + self.oai_reader.id)
-            raise
+            self.logger.info("Strange callnumber {} for ".format(index_record.callnum, oai_record.id))
+            taxonomies = []
+
+        tax1 = set()
+        tax2 = set()
+        tax3 = set()
 
         for taxonomy in taxonomies:
-            data['tax1'].add(taxonomy[1])
-            data['tax2'].add(taxonomy[2])
+            tax1.add(taxonomy[1])
+            tax2.add(taxonomy[2])
             try:
-                data['tax3'].add(taxonomy[3])
+                tax3.add(taxonomy[3])
             except KeyError as e:
                 pass
 
-        data['tax1'] = list(data['tax1'])
-        data['tax2'] = list(data['tax2'])
-        data['tax3'] = list(data['tax3'])
+        index_record.tax1 = list(tax1)
+        index_record.tax2 = list(tax2)
+        index_record.tax3 = list(tax3)
 
-        self.elasticsearch.add(data)
-
-        return data
+        self.elasticsearch.add(oai_record)
