@@ -30,10 +30,16 @@ def read(oai):
         oai_string = oai.replace('\n', ' ').replace('\r', '')
         marc_record = _get_marc_record(oai_string)
     except ValueError as detail:
-        if str(detail)=='need more than 0 values to unpack':
-            logger.error('Field lacks indicators in {0}'.format(oai_id))
+        if str(detail) == 'need more than 0 values to unpack':
+            logger.error('Field lacks indicators - {0}'.format(oai_id))
         else:
-            logger.exception('Problem reading MARC in {0}'.format(oai_id))
+            logger.exception('Problem reading MARC - {0}'.format(oai_id))
+        return OAIRecord(status='error', id=oai_id)
+    except AttributeError as detail:
+        if str(detail) == "'Field' object has no attribute 'subfields'":
+            logger.error('Datafield without subfields - {0}'.format(oai_id))
+        else:
+            logger.exception('Problem reading MARC - {0}'.format(oai_id))
         return OAIRecord(status='error', id=oai_id)
 
     return OAIRecord(status=status, id=oai_id, index_record=marc_reader.read(marc_record), oai_string=oai_string)

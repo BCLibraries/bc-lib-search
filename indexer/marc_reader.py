@@ -33,6 +33,7 @@ def read(marc_record):
     index_record.language = lang(marc_record)
     index_record.alttitles = var_title(marc_record) + uniform_title(marc_record)
     index_record.restricted = restricted(marc_record)
+    find_errors(marc_record)
     return index_record
 
 
@@ -117,13 +118,13 @@ def lang(marc_record):
     try:
         code = marc_record.get_fields('008')[0].value()[35:38]
     except IndexError as e:
-        logger.error("no 008 {0}".format(mms(marc_record)))
+        logger.error("no 008 - {0}".format(mms(marc_record)))
         return None
 
     try:
         return lang_code[code]
     except KeyError as e:
-        logger.error("bad lang code '{0}' {1}".format(code, mms(marc_record)))
+        logger.error("bad lang code '{0}' - {1}".format(code, mms(marc_record)))
         return None
 
 
@@ -131,7 +132,7 @@ def short_title(marc_record):
     try:
         title_field = marc_record.get_fields('245')[0]
     except (TypeError, IndexError):
-        logger.error("problem in 245 $a: {0}".format(mms(marc_record)))
+        logger.error("problem in 245 $a - {0}".format(mms(marc_record)))
         return None
 
     try:
@@ -164,3 +165,19 @@ def var_title(marc_record):
 
 def _get_field(marc_record, code, subfields):
     return [' '.join(field.get_subfields(*subfields)) for field in marc_record.get_fields(code)]
+
+
+def find_errors(marc_record):
+    try:
+        code = marc_record.leader[22]
+        if code != '0':
+            logger.error('bad character ({0}) in LDR 22 - {1}'.format(code, mms(marc_record)))
+    except IndexError as e:
+        logger.error('no LDR - {0}'.format(mms(marc_record)))
+
+    try:
+        len_008 = len(str(marc_record.get_fields('008')[0].value()))
+        if len_008 and len_008 != 40:
+            logger.error('bad 008 length {1} - {0}'.format(mms(marc_record),len_008))
+    except IndexError:
+        pass

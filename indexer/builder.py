@@ -97,6 +97,8 @@ class Builder(object):
                     self.delete_record(oai_record.id)
                 elif oai_record.status == 'new' or oai_record.status == 'updated':
                     self.add_record(oai_record)
+                else:
+                    self.logger.error('Generic error - {0}'.format(oai_record.id))
 
                 self.records_seen[oai_record.id] = True
 
