@@ -59,7 +59,6 @@ class Builder(object):
                 self.read_tarball(full_path)
                 self.records_seen[full_path] = True
         self.records.close()
-        self.records.build_terms()
         self.building = False
 
     def reindex(self):
@@ -87,10 +86,10 @@ class Builder(object):
             self.logger.error('No name or extension: ' + tarinfo.name + " in " + tarball_file)
         record_id = 'urm_publish-' + name
         if not record_id in self.records_seen:
-            f = tar.extractfile(tarinfo)
-            contents = f.read()
-            contents = contents.decode('utf-8')
             try:
+                f = tar.extractfile(tarinfo)
+                contents = f.read()
+                contents = contents.decode('utf-8')
                 oai_record = self.read_oai(contents)
 
                 if oai_record.status == 'deleted':
@@ -103,6 +102,8 @@ class Builder(object):
                 self.records_seen[oai_record.id] = True
 
             except ValueError as detail:
+                self.logger.exception('Error reading {0}'.format(self.current_tarball))
+            except AttributeError as detail:
                 self.logger.exception('Error reading {0}'.format(self.current_tarball))
 
     def delete_record(self, id):

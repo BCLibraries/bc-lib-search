@@ -16,7 +16,6 @@ from indexer.categorizer import Categorizer
 from indexer.elasticsearch_indexer import ElasticSearchIndexer
 from indexer.db import DB
 from indexer.record_store import RecordStore
-from indexer.term_store import TermStore
 
 
 def main():
@@ -43,19 +42,10 @@ def publish(args):
 
 
 def autocomplete(args):
-    shelf = shelve.open(args.shelf)
     es = ElasticSearchIndexer(args.elasticsearch_host)
     db = DB(args.sqlite_path)
-    db.build_terms()
-    try:
-        last_term_id = shelf['last_term_id']
-    except KeyError:
-        last_term_id = 0
-    terms = TermStore(db, last_term_id)
-    for term in terms:
-        es.add_autocomplete(term[1], term[2], term[3])
-        shelf['last_term_id'] = term[0]
-    shelf['last_term_id'] = 0
+    for term in db.updated_terms():
+        es.add_autocomplete(term[0], term[1], term[2])
 
 
 def get_arguments():
