@@ -5,7 +5,7 @@
     "number_of_replicas": 1
   },
   "mappings": {
-    "docs": {
+    "librarian": {
       "properties": {
         "name": {
           "type": "string"
@@ -28,7 +28,7 @@
         "imageSrc": {
           "type": "string"
         },
-        "tags": {
+        "taxonomy": {
           "type": "string"
         }
       }
