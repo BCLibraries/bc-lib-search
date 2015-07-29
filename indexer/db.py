@@ -46,10 +46,27 @@ class DB(object):
         GROUP BY title
         """
         results = self.cursor.execute(sql)
-        #self.reset_dirty_flags()
+        # self.reset_dirty_flags()
         return results
 
     def reset_dirty_flags(self):
         self.cursor.execute('UPDATE subjects SET dirty=0')
         self.cursor.execute('UPDATE alttitles SET dirty=0')
         self.cursor.execute('UPDATE records SET dirty=0')
+
+    def get_subjects(self, id):
+        sql = 'SELECT text FROM subjects WHERE record_id = ?'
+        sqlite_response = self.cursor.execute(sql, (id,)).fetchall()
+        return DB._extract_row_values(sqlite_response)
+
+    def get_alttitles(self, id):
+        sql = 'SELECT text FROM alttitles WHERE record_id = ?'
+        return self.cursor.execute(sql, (id,)).fetchall()
+        pass
+
+    @staticmethod
+    def _extract_row_values(row):
+        returnlist = []
+        for item in row:
+            returnlist.append(item[0])
+        return returnlist

@@ -1,5 +1,6 @@
 import logging
 import zlib
+from index_record import IndexRecord
 
 
 class RecordStore(object):
@@ -30,7 +31,10 @@ class RecordStore(object):
             self._scroll()
         current = self.select_buffer.pop(0)
         self.last_id = current[0]
-        return zlib.decompress(current[1]).decode('utf-8')
+        index_record = IndexRecord()
+        index_record.id = current[0]
+        index_record.subjects = self.db.get_subjects(index_record.id)
+        return index_record
 
     def add(self, oai_record):
         """

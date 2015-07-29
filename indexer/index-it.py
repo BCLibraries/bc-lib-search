@@ -16,6 +16,7 @@ from indexer.categorizer import Categorizer
 from indexer.elasticsearch_indexer import ElasticSearchIndexer
 from indexer.db import DB
 from indexer.record_store import RecordStore
+from indexer.oai_record import OAIRecord
 
 
 def main():
@@ -38,7 +39,11 @@ def reindex(args):
 
 
 def publish(args):
-    pass
+    records = get_record_store(args)
+    shelf = shelve.open(args.shelf)
+    es = ElasticSearchIndexer(args.elasticsearch_host)
+    for record in records:
+        print(record.subjects)
 
 
 def autocomplete(args):
@@ -87,11 +92,16 @@ def load_logger():
 
 def get_builder(args):
     lcc_map = os.path.join(os.path.dirname(__file__), 'categories/lcc_flat.json')
-    db = DB(args.sqlite_path)
-    records = RecordStore(db)
+    records = get_record_store(args)
     shelf = shelve.open(args.shelf)
     es = ElasticSearchIndexer(args.elasticsearch_host)
     return Builder(Categorizer(lcc_map), records, es, shelf)
+
+
+def get_record_store(args):
+    db = DB(args.sqlite_path)
+    records = RecordStore(db)
+    return records
 
 
 if __name__ == '__main__':
