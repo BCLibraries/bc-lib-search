@@ -1,7 +1,7 @@
 import json
 from .category import Category
 from .interval_node import IntervalNode
-from .category_maps import COLLECTION_MAP, LOCATION_MAP
+from .category_maps import COLLECTION_MAP, LOCATION_MAP, LANGUAGE_MAP
 
 
 class Categorizer(object):
@@ -17,7 +17,7 @@ class Categorizer(object):
         self.root = self.add_node(categories)
         self.results = []
 
-    def categorize(self, *, collections=None, locations=None, lccs_norm=None):
+    def categorize(self, *, collections=None, locations=None, languages=None, lccs_norm=None):
         result = []
 
         for collection in collections or []:
@@ -27,6 +27,11 @@ class Categorizer(object):
 
         for location in locations or []:
             result.extend(LOCATION_MAP.get(location, []))
+        if result:
+            return result
+
+        for language in languages or []:
+            result.extend(LANGUAGE_MAP.get(language, []))
         if result:
             return result
 

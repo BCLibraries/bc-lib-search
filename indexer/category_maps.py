@@ -2,6 +2,7 @@ ARCHIVES = {1: "General Information Sources", 2: "Archives and Manuscripts"}
 ERC = {1: "Social Sciences", 2: "Education", 3: "ERC"}
 IRISH_MUSIC = {1: "Arts", 2: "Music", 3: "Irish Music"}
 IRISH_STUDIES = {1: "International Studies", 2: "British and Irish Studies", 3: "Irish Studies"}
+SSW = {1: "Social Sciences", 2: "Social Work"}
 
 COLLECTION_MAP = {
     "BRETHOLZ": [IRISH_MUSIC],
@@ -78,5 +79,11 @@ LOCATION_MAP = {
     "ERC-POST_14D": [ERC],
     "ERC-REF_NL": [ERC],
     "ERC-STACK": [ERC],
-    "ERC-VIDEO_14D": [ERC]
+    "ERC-VIDEO_14D": [ERC],
+
+    "SWC-STACK": [SSW]
+}
+
+LANGUAGE_MAP = {
+    "Irish": [IRISH_STUDIES]
 }
