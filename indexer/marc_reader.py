@@ -1,11 +1,14 @@
 from indexer.language_codes import lang_code
 import logging
 from indexer.index_record import IndexRecord
+import string
 
 SUBFIELDS_240 = ['a', 'd', 'f', 'g', 'h', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's']
 SUBFIELDS_245 = ['a', 'b', 'f', 'g', 'k', 'n', 'p']
 SUBFIELDS_246 = ['a', 'b']
 SUBFIELDS_SUBJECTS = ['a', 'b', 'c', 'd', 'v', 'x', 'y', 'z']
+
+STRIPCHARS = ';./\\,-' + string.whitespace
 
 logger = logging.getLogger(__name__)
 
@@ -39,18 +42,20 @@ def read(marc_record):
 
 def title(marc_record):
     try:
-        return _get_field(marc_record, '245', SUBFIELDS_245)[0]
+        return _get_field(marc_record, '245', SUBFIELDS_245)[0].rstrip(STRIPCHARS)
     except (TypeError, IndexError):
         logger.error("problem in 245 $a: {0}".format(mms(marc_record)))
         return None
 
 
 def author(marc_record):
-    return marc_record.author()
+    if marc_record.author():
+        return  marc_record.author().rstrip(STRIPCHARS)
+    return None
 
 
 def subjects(marc_record):
-    return [' -- '.join(x.get_subfields(*SUBFIELDS_SUBJECTS)).rstrip('.') for x in marc_record.subjects()]
+    return [' -- '.join(x.get_subfields(*SUBFIELDS_SUBJECTS)).rstrip(STRIPCHARS) for x in marc_record.subjects()]
 
 
 def collections(marc_record):
@@ -96,11 +101,6 @@ def table_of_contents(marc_record):
 def notes(marc_record):
     return list(set([x.format_field() for x in marc_record.notes()]) - set(table_of_contents(marc_record)))
 
-
-def publisher(marc_record):
-    return marc_record.publisher().rstrip(',.')
-
-
 def type(marc_record):
     if marc_record.leader[7] == 'm':
         return 'book'
@@ -128,38 +128,14 @@ def lang(marc_record):
         return None
 
 
-def short_title(marc_record):
-    try:
-        title_field = marc_record.get_fields('245')[0]
-    except (TypeError, IndexError):
-        logger.error("problem in 245 $a - {0}".format(mms(marc_record)))
-        return None
-
-    try:
-        nonfiling = title_field.indicators[1]
-        if nonfiling == ' ':
-            nonfiling = 0
-    except ValueError:
-        nonfiling = 0
-
-    try:
-        short_title = title_field['a'][int(nonfiling):]
-    except TypeError:
-        return None
-
-    try:
-        short_title += " " + marc_record['245']['b']
-    except TypeError:
-        pass
-    return short_title
-
-
 def uniform_title(marc_record):
-    return _get_field(marc_record, '130', 'a') + _get_field(marc_record, '240', SUBFIELDS_240)
+    all_uniform_titles = _get_field(marc_record, '130', 'a') + _get_field(marc_record, '240', SUBFIELDS_240)
+    return [x.rstrip(STRIPCHARS) for x in all_uniform_titles]
 
 
 def var_title(marc_record):
-    return [' '.join(field.get_subfields(*SUBFIELDS_246)) for field in marc_record.get_fields('246') if
+    return [' '.join(field.get_subfields(*SUBFIELDS_246)).rstrip(STRIPCHARS) for field in marc_record.get_fields('246')
+            if
             field.indicators[0] in ['1', '3']]
 
 
@@ -178,6 +154,6 @@ def find_errors(marc_record):
     try:
         len_008 = len(str(marc_record.get_fields('008')[0].value()))
         if len_008 and len_008 != 40:
-            logger.error('bad 008 length {1} - {0}'.format(mms(marc_record),len_008))
+            logger.error('bad 008 length {1} - {0}'.format(mms(marc_record), len_008))
     except IndexError:
         pass

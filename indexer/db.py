@@ -22,28 +22,32 @@ class DB(object):
         self.connection.commit()
 
     def updated_terms(self):
-        sql = """SELECT text, 'subject', count(text)
+        sql = """SELECT text, SUM(subject_count), SUM(alt_count), SUM(title_count), SUM(auth_count)
+        FROM
+        (SELECT text as text, count(text) as subject_count, 0 as alt_count, 0 as title_count, 0 as auth_count
         FROM subjects
         WHERE dirty=1
         AND text IS NOT NULL
         GROUP BY text
         UNION
-        SELECT text, 'alttitle', count(text)
-        FROM alttitles
-        WHERE dirty=1
-        AND text IS NOT NULL
-        UNION
-        SELECT text, 'alttitle', count(text)
+        SELECT text, 0, count(text), 0, 0
         FROM alttitles
         WHERE dirty=1
         AND text IS NOT NULL
         GROUP BY text
         UNION
-        SELECT title, 'title', count(title)
+        SELECT title, 0, 0, count(title), 0
         FROM records
         WHERE dirty=1
         AND title IS NOT NULL
         GROUP BY title
+        UNION
+        SELECT author,  0, 0, 0, count(author)
+        FROM records
+        WHERE dirty=1
+        AND author IS NOT NULL
+        GROUP BY author)
+        GROUP BY text
         """
         results = self.cursor.execute(sql)
         # self.reset_dirty_flags()

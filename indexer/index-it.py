@@ -16,7 +16,6 @@ from indexer.categorizer import Categorizer
 from indexer.elasticsearch_indexer import ElasticSearchIndexer
 from indexer.db import DB
 from indexer.record_store import RecordStore
-from indexer.oai_record import OAIRecord
 
 
 def main():
@@ -41,22 +40,24 @@ def reindex(args):
 def publish(args):
     records = get_record_store(args)
     shelf = shelve.open(args.shelf)
-    es = ElasticSearchIndexer(args.elasticsearch_host)
+    es = ElasticSearchIndexer(args.elasticsearch_host, cat_idx=args.cat_idx, auto_idx=args.auto_idx)
     for record in records:
         print(record.subjects)
 
 
 def autocomplete(args):
-    es = ElasticSearchIndexer(args.elasticsearch_host)
+    es = ElasticSearchIndexer(args.elasticsearch_host, cat_idx=args.cat_idx, auto_idx=args.auto_idx)
     db = DB(args.sqlite_path)
     for term in db.updated_terms():
-        es.add_autocomplete(term[0], term[1], term[2])
+        es.add_autocomplete(term[0], term[1], term[2], term[3], term[4])
 
 
 def get_arguments():
     parser = argparse.ArgumentParser(description='Manage the BC bento search ElasticSearch and SQLite stores')
     subparsers = parser.add_subparsers(help='Subcommands')
     parser.add_argument('--shelf', help='path to shelf file', default='shelf')
+    parser.add_argument('--auto_idx', help='ElasticSearch autocomplete index', default='autocomplete')
+    parser.add_argument('--cat_idx', help='ElastcSearch catalog index', default='catalog')
 
     index_parser = subparsers.add_parser('index', help='index new MARC records')
     index_parser.add_argument('source_dir', type=str, help='source directory')
@@ -94,7 +95,7 @@ def get_builder(args):
     lcc_map = os.path.join(os.path.dirname(__file__), 'categories/lcc_flat.json')
     records = get_record_store(args)
     shelf = shelve.open(args.shelf)
-    es = ElasticSearchIndexer(args.elasticsearch_host)
+    es = ElasticSearchIndexer(args.elasticsearch_host, cat_idx=args.cat_idx, auto_idx=args.auto_idx)
     return Builder(Categorizer(lcc_map), records, es, shelf)
 
 
