@@ -161,4 +161,4 @@ class Builder(object):
         index_record.tax2 = list(tax2)
         index_record.tax3 = list(tax3)
 
-        self.elasticsearch.add(oai_record)
+        self.elasticsearch.add_catalog_record(oai_record)

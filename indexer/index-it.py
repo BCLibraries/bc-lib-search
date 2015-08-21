@@ -49,7 +49,7 @@ def autocomplete(args):
     es = ElasticSearchIndexer(args.elasticsearch_host, cat_idx=args.cat_idx, auto_idx=args.auto_idx)
     db = DB(args.sqlite_path)
     for term in db.updated_terms():
-        es.add_autocomplete(term[0], term[1], term[2], term[3], term[4])
+        es.add_autocomplete_term(term[0], term[1], term[2], term[3], term[4])
 
 
 def get_arguments():
