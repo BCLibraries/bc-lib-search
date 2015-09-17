@@ -1,17 +1,21 @@
 {
-  "index": "autocomplete_v0",
   "settings": {
     "number_of_shards": 3,
     "number_of_replicas": 0
   },
   "mappings": {
     "term": {
+      "_all": {
+        "enabled": false
+      },
       "properties": {
         "text": {
           "type": "string"
         },
         "suggest": {
           "type": "completion",
+          "index_analyzer": "standard",
+          "search_analyzer": "standard",
           "payloads": true
         }
       }

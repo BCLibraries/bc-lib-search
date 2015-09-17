@@ -22,6 +22,7 @@ class ElasticSearchIndexer(object):
         self.bulk_size = bulk_size
         self.cat_idx = cat_idx
         self.auto_idx = auto_idx
+        self.autocomplete_trans_table = dict.fromkeys(map(ord, '[]'), None)
 
     def add_catalog_record(self, oai_record):
         """
@@ -61,6 +62,7 @@ class ElasticSearchIndexer(object):
         :param author_cnt: how many times the term appears as an author's name
         :type author_cnt: int
         """
+        text = text.translate(self.autocomplete_trans_table)
         weight = math.ceil(float(subject_cnt) / 10) + author_cnt + 2 * alttitle_cnt + 5 * title_cnt
         self._add_autocomplete_entry(text, [text], weight)
 
@@ -142,4 +144,4 @@ class ElasticSearchIndexer(object):
         helpers.bulk(self.es, self.actions)
         self.actions = []
         self.logger.info('Posted bulk')
-        time.sleep(1)
+        time.sleep(1.5)

@@ -15,39 +15,31 @@ class DB(object):
         sql = 'SELECT id,fulltext FROM records WHERE id > ? ORDER BY id LIMIT ' + str(offset)
         return self.cursor.execute(sql, (last_id,)).fetchall()
 
-    def insert_record(self, record_buffer, subject_buffer, alttitle_buffer):
+    def insert_records(self, record_buffer, subject_buffer, alttitle_buffer):
         self.cursor.executemany('INSERT OR IGNORE INTO records VALUES (?,?,?,?,1)', record_buffer)
         self.cursor.executemany('INSERT OR IGNORE INTO subjects VALUES(?,?,1)', subject_buffer)
         self.cursor.executemany('INSERT OR IGNORE INTO alttitles VALUES(?,?,1)', alttitle_buffer)
         self.connection.commit()
 
+    def insert_terms(self, term_buffer):
+        sql = """
+        INSERT OR REPLACE INTO terms (id, term, title_cnt, alt_cnt, subject_cnt, author_cnt, dirty)
+        VALUES (
+            :id,
+            :term,
+            COALESCE((SELECT title_cnt + :title_cnt FROM terms WHERE id = :id), :title_cnt),
+            COALESCE((SELECT alt_cnt + :alt_cnt FROM terms WHERE id = :id), :alt_cnt),
+            COALESCE((SELECT subject_cnt + :subject_cnt FROM terms WHERE id = :id), :subject_cnt),
+            COALESCE((SELECT author_cnt + :author_cnt FROM terms WHERE id = :id), :author_cnt),
+            1
+        );
+        """
+        self.cursor.executemany(sql, term_buffer)
+        self.connection.commit()
+
     def updated_terms(self):
-        sql = """SELECT text, SUM(subject_count), SUM(alt_count), SUM(title_count), SUM(auth_count)
-        FROM
-        (SELECT text as text, count(text) as subject_count, 0 as alt_count, 0 as title_count, 0 as auth_count
-        FROM subjects
-        WHERE dirty=1
-        AND text IS NOT NULL
-        GROUP BY text
-        UNION
-        SELECT text, 0, count(text), 0, 0
-        FROM alttitles
-        WHERE dirty=1
-        AND text IS NOT NULL
-        GROUP BY text
-        UNION
-        SELECT title, 0, 0, count(title), 0
-        FROM records
-        WHERE dirty=1
-        AND title IS NOT NULL
-        GROUP BY title
-        UNION
-        SELECT author,  0, 0, 0, count(author)
-        FROM records
-        WHERE dirty=1
-        AND author IS NOT NULL
-        GROUP BY author)
-        GROUP BY text
+        sql = """SELECT term, subject_cnt, alt_cnt, title_cnt, author_cnt
+        FROM terms
         """
         results = self.cursor.execute(sql)
         # self.reset_dirty_flags()

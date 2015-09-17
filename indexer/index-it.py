@@ -42,13 +42,20 @@ def publish(args):
     shelf = shelve.open(args.shelf)
     es = ElasticSearchIndexer(args.elasticsearch_host, cat_idx=args.cat_idx, auto_idx=args.auto_idx)
     for record in records:
-        print(record.subjects)
+
 
 
 def autocomplete(args):
+    print ("Building indexer...")
     es = ElasticSearchIndexer(args.elasticsearch_host, cat_idx=args.cat_idx, auto_idx=args.auto_idx)
+    print ("Connecting to DB...")
     db = DB(args.sqlite_path)
+    print("Starting indexing...")
+    counter = 0
     for term in db.updated_terms():
+        if counter % 100000 == 0:
+            print (counter)
+        counter += 1
         es.add_autocomplete_term(term[0], term[1], term[2], term[3], term[4])
 
 
