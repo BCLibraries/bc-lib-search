@@ -1,0 +1,32 @@
+[
+  {
+    "text": "Otters under water",
+    "suggest": {
+      "input": [
+        "Otters under water"
+      ],
+      "output": "Otters under water",
+      "weight": 5
+    }
+  },
+  {
+    "text": "Otters -- Folklore",
+    "suggest": {
+      "input": [
+        "Otters -- Folklore"
+      ],
+      "output": "Otters -- Folklore",
+      "weight": 1
+    }
+  },
+  {
+    "text": "A rumour of otters",
+    "suggest": {
+      "input": [
+        "A rumour of otters"
+      ],
+      "output": "A rumour of otters",
+      "weight": 5
+    }
+  }
+]

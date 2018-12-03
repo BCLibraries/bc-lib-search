@@ -1,0 +1,29 @@
+{
+  "email": "anonymous.librarian@bc.edu",
+  "first_name": "Anonymous",
+  "last_name": "Librarian",
+  "image": "anonymous-librarian.jpg",
+  "title": "Sr Research Librarian",
+  "subjects": [
+    "Art and Architecture",
+    "Film",
+    "Jewish Studies",
+    "Linguistics",
+    "Music",
+    "Slavic and Eastern Languages",
+    "Theatre & Dance"
+  ],
+  "taxonomy": [
+    "Architecture",
+    "Art and Design",
+    "Art History",
+    "Film and Video Studies",
+    "Dance",
+    "Middle Eastern, Near Eastern and North African Studies",
+    "Judaic Studies",
+    "Linguistics",
+    "Music",
+    "Slavic Languages and Literatures",
+    "Theatre and Drama"
+  ]
+}

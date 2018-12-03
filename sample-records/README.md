@@ -1,0 +1,1 @@
+This directory contains sample records used to build each index.

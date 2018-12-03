@@ -1,0 +1,123 @@
+[
+  {
+    "collections": [],
+    "restricted": false,
+    "issn": [],
+    "type": "book",
+    "notes": [
+      "Mr. Rabbit wonders if he will be able to get along with his new neighbors, who are otters, until he is reminded of the golden rule."
+    ],
+    "toc": [],
+    "isbn": "0805079963",
+    "alttitles": [],
+    "language": "English",
+    "title": "Do unto otters : a book about manners /",
+    "oai_string": null,
+    "callnum": [
+      "PZ7 .K281346 Do 2007"
+    ],
+    "subjects": [
+      "Golden rule -- Juvenile fiction",
+      "Neighborliness -- Juvenile fiction",
+      "Rabbits -- Juvenile fiction",
+      "Otters -- Juvenile fiction"
+    ],
+    "author": "Keller, Laurie.",
+    "id": [
+      "99110230720001021"
+    ],
+    "location": [
+      "ERC-STACK"
+    ],
+    "series": [],
+    "tax1": [
+      "Social Sciences"
+    ],
+    "tax2": [
+      "Education"
+    ],
+    "tax3": [
+      "ERC"
+    ]
+  },
+  {
+    "collections": [],
+    "restricted": false,
+    "issn": [],
+    "type": "book",
+    "notes": [
+      "Includes bibliographical references (p. 121-126)."
+    ],
+    "toc": [],
+    "isbn": "2831700132",
+    "alttitles": [],
+    "language": "English",
+    "title": "Otters : an action plan for their conservation /",
+    "oai_string": null,
+    "callnum": [
+      "QL737.C25 O88 1990"
+    ],
+    "subjects": [
+      "Otters",
+      "Wildlife conservation",
+      "Endangered species"
+    ],
+    "author": null,
+    "id": [
+      "99112059980001021"
+    ],
+    "location": [
+      "ONL-STACK"
+    ],
+    "series": [],
+    "tax1": [
+      "Science"
+    ],
+    "tax2": [
+      "Biology"
+    ],
+    "tax3": [
+      "Ecology and Evolutionary Biology",
+      "Zoology"
+    ]
+  },
+  {
+    "collections": [],
+    "restricted": false,
+    "issn": [],
+    "type": "book",
+    "notes": [
+      "Poems.",
+      "\"Colin Simms, selected bibliography\"--P. facing t.p."
+    ],
+    "toc": [],
+    "isbn": "0907562507",
+    "alttitles": [],
+    "language": "English",
+    "title": "Otters and martens /",
+    "oai_string": null,
+    "callnum": [
+      "PR6069 .I413 O78 2004"
+    ],
+    "subjects": [
+      "Otters -- Poetry",
+      "Martens -- Poetry"
+    ],
+    "author": "Simms, Colin, 1939-",
+    "id": [
+      "99106156350001021"
+    ],
+    "location": [
+      "ONL-STACK"
+    ],
+    "series": [],
+    "tax1": [
+      "Humanities"
+    ],
+    "tax2": [
+      "General and Comparative Literature",
+      "English Language and Literature"
+    ],
+    "tax3": []
+  }
+]
