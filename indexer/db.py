@@ -2,6 +2,12 @@ import sqlite3
 
 
 class DB(object):
+    """
+    Database of processed records
+
+    The DB stores processed MARC records in a lightly normalized format for easier access than directly fiddling with
+    the MARC records every time we need to run a new load.
+    """
     def __init__(self, db_name):
         self.connection = sqlite3.connect(db_name)
         self.connection.execute('PRAGMA foreign_keys = ON')

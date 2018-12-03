@@ -8,7 +8,18 @@ class Categorizer(object):
     """
     Converts normalized LCC call numbers to taxonomy categories
 
-    The categorizer is based on an interval tree (http://en.wikipedia.org/wiki/Interval_tree)
+    The Categorizer is an interval tree (http://en.wikipedia.org/wiki/Interval_tree) that maps normalized LC call
+    numbers to taxonomy terms. Taxonomic terms are applied across a range of call numbers, and those ranges can overlap.
+    For example, HN733 could map to both Chinese Studies (HN731 through HN755) and Social Work (HN100 through NH733.5).
+    A taxonomy term might be spread across multiple call number spans (e.g. Germanic Literature is found from
+    PD1-PD1350, PF0-PF9999, and under many other call number ranges). An interval tree can handle such complex mappings
+    quickly.
+
+    The mapping function can be short-circuited by a collection name, location, or language, in the event that these
+    metadata are more relevant for classifying the item than call number.
+
+    Args:
+        lcc_map (str): the path to the json file containing the taxonomy (i.e. lcc_flat.json)
     """
 
     def __init__(self, lcc_map):
@@ -18,6 +29,20 @@ class Categorizer(object):
         self.results = []
 
     def categorize(self, *, collections=None, locations=None, languages=None, lccs_norm=None):
+        """
+        Categorize an item from its metadata
+
+        This function takes metadata about an item and returns a list of applicable taxonomy terms. It evaluates each
+        argument in order and returns early if that argument produces any results. For example, an item that has a
+        collection that maps to a taxonomy entry will return that entry before checking against location, language, or
+        call number.
+
+        :param collections: list: a list of collection strings
+        :param locations: list: a list of location strings
+        :param languages: list: a list of languages
+        :param lccs_norm: list: a list of normalized LC call numbers
+        :return: list
+        """
         result = []
 
         for collection in collections or []:
@@ -41,6 +66,10 @@ class Categorizer(object):
 
     def build_category_list(self, cat_list):
         """
+        Build a list of category terms
+
+        Run from constructor to build a list of Category objects to use when constructing the interval tree.
+
         :param cat_list: a list of categories pulled from the JSON file
         :type cat_list: list
         :returns a list of categories in lower bound order
@@ -64,10 +93,18 @@ class Categorizer(object):
 
     def add_node(self, categories):
         """
-        :type categories: list
+        Insert a node into the interval tree
 
-        :returns an IntervalNode with categories and sub-nodes assigned
-        :rtype IntervalNode
+        Adds a node into the interval tree. Runs recursively and generates the entire subtree at this node.
+
+        Args:
+            categories (list): this list of categories to add
+
+        Returns:
+            an IntervalNode
+
+        :type categories: list
+        :rtype: IntervalNode
         """
         left_cats = []
         spanned_cats = []
@@ -102,6 +139,8 @@ class Categorizer(object):
         """
         Get taxonomy terms for an LC call number
 
+        A normalized LC call number goes in and a list of relevant results comes out.
+
         :type lcc_norm: str
         :param lcc_norm: a normalized LC call number
         :returns a list of relevant categories
@@ -115,6 +154,11 @@ class Categorizer(object):
 
     def find(self, node, lcc):
         """
+        Search for LC call number range match in this subtree
+
+        The find() method searches down the current subtree and appends the taxonomy term of any nodes that matches to
+        the Categorizer's result list.
+
         :type node: IntervalNode
         :type lcc: str
         """

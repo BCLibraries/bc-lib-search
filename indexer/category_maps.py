@@ -1,3 +1,10 @@
+"""
+Dictionaries mapping locations, collection names, languages and  to Taxonomy terms
+
+Sometimes a call number is not the best indicator of what bucket it belongs in. For example, a book about otters in the
+main library is the province of the Biology subject specialist, while a book about otters in the Educational Resource
+Center belongs to the education subject specialist. These dictionaries handle such special cases.
+"""
 ARCHIVES = {1: "General Information Sources", 2: "Archives and Manuscripts"}
 ERC = {1: "Social Sciences", 2: "Education", 3: "ERC"}
 IRISH_MUSIC = {1: "Arts", 2: "Music", 3: "Irish Music"}

@@ -8,6 +8,14 @@ from indexer import oai_reader
 
 
 class Builder(object):
+    """
+    Handles the entire build process
+
+
+
+    This is a bit of God object, which is unfortunate.
+    """
+
     def __init__(self, categorizer, records, elasticsearch, records_seen):
         """
         :type categorizer: indexer.categorizer.Categorizer
@@ -45,6 +53,13 @@ class Builder(object):
         self.records.close()
 
     def index(self, src_directory, since, until):
+        """
+
+        :param src_directory: the directory containing the source tarballs
+        :param since: index only records added after this date
+        :param until: index only records added beforet his date
+        :return:
+        """
         self.building = True
         os.chdir(src_directory)
         raw_file_list = os.listdir(src_directory)
@@ -69,15 +84,35 @@ class Builder(object):
             pass
 
     def read_oai(self, oai_string):
+        """
+        Reads a single OAI record
+
+        :param oai_string: str
+        :return: OAIRecord
+        """
         oai_record = oai_reader.read(oai_string)
         return oai_record
 
     def read_tarball(self, tarball_file):
+        """
+        Reads a tarball containing multiple OAI records
+
+        :param tarball_file: str
+        :return:
+        """
         tar = tarfile.open(tarball_file, 'r', encoding='utf-8')
         for tarinfo in tar:
             self.read_tarred_file(tar, tarball_file, tarinfo)
 
     def read_tarred_file(self, tar, tarball_file, tarinfo):
+        """
+        Reads a single file from within a tarfile, containing one OAI record
+
+        :param tar:
+        :param tarball_file:
+        :param tarinfo:
+        :return:
+        """
         self.current_oai = tarinfo.name
         try:
             (name, extension) = tarinfo.name.split('.')
@@ -118,6 +153,8 @@ class Builder(object):
 
     def _only_at_law(self, locations):
         """
+        Returns true if a record is Law Library-only
+
         :type locations: list
         :param locations: a list of locations
         :return:
@@ -131,6 +168,8 @@ class Builder(object):
 
     def _write_to_catalog_index(self, oai_record):
         """
+        Add a record to the catalog index
+
         :type oai_record: indexer.oai_record.OAIRecord
         :param oai_record:
         :return:

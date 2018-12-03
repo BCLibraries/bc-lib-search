@@ -1,3 +1,6 @@
+"""
+Handles normalizing Library of Congress call numbers
+"""
 import re
 
 __version__ = '0.1.0'
@@ -8,6 +11,10 @@ bottomspace = '~'
 topdigit = '0'
 bottomdigit = '9'
 weird_re = re.compile(r'^\s*[A-Z]+\s*\d+\.\d+\.\d+')
+
+"""
+Thanks to Bill Deuber for the original version of this long and strange regular expression
+"""
 lccn_re = re.compile(r'''^
          \s*
         (?:VIDEO-D)? # for video stuff
@@ -48,6 +55,13 @@ lccn_re = re.compile(r'''^
 
 
 def normalize(lc, bottom=False):
+    """
+    Normalize a Library of Congress Call Number
+
+    :param lc: LC: a Library of Congress call number
+    :param bottom: bool: is the number the lower bound of a call number range?
+    :return:
+    """
     if not lc:
         return None
     lc = lc.upper()
@@ -121,6 +135,10 @@ def normalize(lc, bottom=False):
 
 
 class LC(object):
+    """
+    A Library of Congress call number with a normalized and denormalized representation
+    """
+
     def __init__(self, callno):
         try:
             self.denormalized = callno.upper()

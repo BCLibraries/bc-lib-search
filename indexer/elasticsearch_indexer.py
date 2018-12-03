@@ -7,6 +7,9 @@ import math
 
 
 class ElasticSearchIndexer(object):
+    """
+    Adds records to ElasticSearch
+    """
     def __init__(self, host, cat_idx='catalog', auto_idx='autocomplete', bulk_size=1000):
         """
         Build the indexer

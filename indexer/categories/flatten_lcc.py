@@ -4,6 +4,38 @@ from callnumber import LC
 
 
 class LCCCatParse:
+    """
+    Flattens the UMich XML Taxonomy into a JSON document
+
+    UMich publishes their taxonomy as hierarchical XML, but it's easier to think in a flat format. This script reads
+    their XML document (lcc_categories.xml) and converts it to a JSON document (lcc_flat.json) containing a list of
+    objects representing category nodes with the format:
+
+        start:     the starting LC call number of a range
+        end:       the ending LC call number of a range
+        startNorm: the normalized starting LC call number of a range
+        endNorm:   the ending normalized LC call number of a range
+        1:         the top-level taxonomy term
+        2:         the second-level taxonomy term
+        3:         the third-level taxonomy term
+
+    E.g.
+
+        {
+            "start": "qk 0",
+            "end": "qk 9999.999",
+            "startNorm": "QK 0000",
+            "endNorm": "QK 9999999",
+            "1": "Science",
+            "2": "Biology",
+            "3": "Botany"
+        }
+
+    We only need to run this once, and we can re-use the produced lcc_flat.json.
+
+    Args:
+        xml (str): the path to the lcc_categories.xml file
+    """
     def __init__(self, xml):
         self.xml = xml
         self.table = []
