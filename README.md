@@ -1,3 +1,7 @@
+> [!IMPORTANT]
+> Archived May 2024. No longer used or open for changes.
+
+
 ## bc-lib-search
 
 Indexing support for the Boston College Libraries' "bento" search.
